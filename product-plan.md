@@ -105,6 +105,7 @@ BONUS:
   - Let's you add menu items if the restaurant doesn't have a menu.
   - Dietary restriction icons/warnings (if a dish is vegetarian or vegan or gluten free)
   - Rating of dishes (OR simple way of favoriting dishes--focusse on if a dish is really popular)
+  - Change single page app to multipage app?
 
 ## Name Brainstorm
 VisualMenu
