@@ -2,43 +2,38 @@
 
 var request = require('request');
 var env = require('node-env-file');
-// env('../../config/.env');
-console.log(env('config/.env'));
+env('config/.env');
 
-function takeThemSpacesOut(theString) {
+function replaceSpacesWithPlusSign(theString) {
   var anArray = theString.split(" ");
   var newString = anArray.join("+");
-  console.log(newString);
   return newString;
 };
 
 exports.apiController = {
-  // GET /api/search?name=X
+  // GET /api/search?name=xxx&location=xxx
   restaurantSearch: function(req, res) {
-    console.log(req.query)
     var rawName = req.query.name;
-    console.log("raw name", rawName);
-    var name = takeThemSpacesOut(rawName);
-    console.log("name", name)
+    var name = replaceSpacesWithPlusSign(rawName);
     var location = req.query.location;
-    var url = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" + name + "+" + location + "&types=food&key=" + process.env.GOOGLE_BROWSER_API_KEY;
+    var url =
+      "https://maps.googleapis.com/maps/api/place/textsearch/json?query=" +
+      name + "+" + location + "&types=food&key=" +
+      process.env.GOOGLE_BROWSER_API_KEY;
 
     request(url, function (error, response, body) {
-      console.log("Got here.")
       if (!error && response.statusCode == 200) {
         var bodyParsed = JSON.parse(body);
         var resultsUnformatted = bodyParsed.results;
-        var results = []
+        var results = [];
 
-        for (i = 0; i < resultsUnformatted.length; i++) {
-          result = {}
-          result["address"] = resultsUnformatted[i]["formatted_address"];
+        for (var i = 0; i < resultsUnformatted.length; i++) {
+          var result = {};
           result["name"] = resultsUnformatted[i]["name"];
+          result["address"] = resultsUnformatted[i]["formatted_address"];
           results.push(result);
         }
 
-        console.log(results);
-        // res.render(body.results);
         return res.status(200).json(results);
       }
     });
