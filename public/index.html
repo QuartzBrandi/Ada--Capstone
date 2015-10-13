@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html ng-app="visualMenu">
+  <head>
+  	<title>VisualMenu</title>
+
+    <script type="text/javascript" src="libs/angular/angular.min.js"></script>
+  	<script type="text/javascript" src="javascripts/controllers/main.js"></script>
+  </head>
+  <body ng-controller="restaurantController as restaurants">
+    <h1>TEST</h1>
+    <p ng-repeat="restaurant in restaurants.results">
+      {{restaurant.name}} at {{restaurant.address}}
+    </p>
+  </body>
+</html>

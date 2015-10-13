@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
   res.sendFile(root_dir.root + '/public/index.html');
 });
 
-// search for restaurant
+// search for restaurant (query "name" & "location")
 router.get('/api/search', function(req, res, next) {
   return api.apiController.restaurantSearch(req, res);
 });
