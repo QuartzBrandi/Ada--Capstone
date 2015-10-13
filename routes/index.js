@@ -1,21 +1,23 @@
 var express = require('express');
 var router = express.Router();
+var api = require('../app/controllers/api');
 
+// TODO: Is there a better way to do this?
+// (Get a string from the root directory.)
 var root_dir = require('../root_dir.js');
 
-var request = require('request');
-var env = require('node-env-file');
-env('./config/.env');
-
-// router.get('/', function(req, res, next) {
-//   res.render('index', { title: 'Express' });
-// });
-
-router.get('/', function(req, res) {
-  res.sendFile(root_dir.root + '/public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+// single page app (angular will change things on the front-end)
+router.get('/', function(req, res, next) {
+  res.sendFile(root_dir.root + '/public/index.html');
 });
 
-router.get('*', function(req, res) {
+// search for restaurant
+router.get('/api/search', function(req, res, next) {
+  return api.apiController.restaurantSearch(req, res);
+});
+
+// redirects if user tries to go anywhere else
+router.get('*', function(req, res, next) {
   res.redirect('/');
 });
 
