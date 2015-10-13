@@ -9,7 +9,24 @@
   <body ng-controller="restaurantController as restaurants">
     <h1>TEST</h1>
     <p ng-repeat="restaurant in restaurants.results">
-      {{restaurant.name}} at {{restaurant.address}}
+      a. {{restaurant.name}} at {{restaurant.address}}
     </p>
+
+           <form name="searchBox" ng-submit="restaurants.searchRestaurants()">
+
+             <!--  Live Preview -->
+             <blockquote >
+               <strong>Search for : {{restaurants.search}}</strong>
+             </blockquote>
+
+             <!--  Review Form -->
+             <h4>Submit a Review</h4>
+             <fieldset class="form-group">
+               <textarea ng-model="restaurants.search" class="form-control" placeholder="Write a short review of the product..." title="Review"></textarea>
+             </fieldset>
+             <fieldset class="form-group">
+               <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
+             </fieldset>
+           </form>
   </body>
 </html>
