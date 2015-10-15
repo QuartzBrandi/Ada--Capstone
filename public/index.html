@@ -8,25 +8,31 @@
   </head>
   <body ng-controller="restaurantController as restaurants">
     <h1>TEST</h1>
-    <p ng-repeat="restaurant in restaurants.results">
-      a. {{restaurant.name}} at {{restaurant.address}}
-    </p>
 
-           <form name="searchBox" ng-submit="restaurants.searchRestaurants()">
+    <ol>
+      <li ng-repeat="restaurant in restaurants.results">
+        {{restaurant.name}} at {{restaurant.address}}
+      </li>
+    </ol>
 
-             <!--  Live Preview -->
-             <blockquote >
-               <strong>Search for : {{restaurants.search}}</strong>
-             </blockquote>
+     <form name="searchBox" ng-submit="restaurants.searchRestaurants()">
+      <blockquote >
+       <strong>Searching for: {{restaurants.searchName}} @ {{restaurants.searchLocation}}</strong>
+      </blockquote>
 
-             <!--  Review Form -->
-             <h4>Submit a Review</h4>
-             <fieldset class="form-group">
-               <textarea ng-model="restaurants.search" class="form-control" placeholder="Write a short review of the product..." title="Review"></textarea>
-             </fieldset>
-             <fieldset class="form-group">
-               <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
-             </fieldset>
-           </form>
+      <h4>Search for a Restaurant</h4>
+      <fieldset class="form-group">
+       <textarea ng-model="restaurants.searchName" class="form-control" placeholder="Name" title="Restaurant"></textarea>
+      </fieldset>
+      <fieldset class="form-group">
+       <textarea ng-model="restaurants.searchLocation" class="form-control" placeholder="Location" title="Restaurant"></textarea>
+      </fieldset>
+      <fieldset class="form-group">
+       <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
+      </fieldset>
+    </form>
+
+    <div id="branding"  style="float: left;"></div><br />
+    <div id="content">Loading...</div>
   </body>
 </html>
