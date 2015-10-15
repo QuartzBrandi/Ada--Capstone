@@ -1,2 +1,2 @@
 var Restaurant = require('../app/models/restaurant');
-var Restaurant = require('../app/models/user');
+var User = require('../app/models/user');
