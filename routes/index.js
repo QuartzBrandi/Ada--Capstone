@@ -21,6 +21,10 @@ router.get('/api/images', function(req, res, next) {
   return api.apiController.imageSearch(req, res);
 });
 
+router.get('/api/select', function(req, res, next) {
+  return api.apiController.selectRestaurant(req, res);
+});
+
 // redirects if user tries to go anywhere else
 router.get('*', function(req, res, next) {
   res.redirect('/');

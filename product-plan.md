@@ -46,14 +46,16 @@ My app will be much more focused: only focusing on bringing pictures of menu ite
   - setup models & controllers
 
 **Package: API for searching for restaurants**
-  - use Google or Yelp search to find (restaurant) locations
+  - use Google to search to find (restaurant) locations
   - what to store in restaurant document?
     - name
-    - menu
-      - menu items
+    - address
 
 **Package: API for searching for menus**
   - use SinglePlatform or other menu app to find menus
+  - what to store in restaurant document?
+    - menu
+      - menu items
 
 **Package: API for searching for photos for menu items**
   - use Google or Foodspotting to find pictures of menu items

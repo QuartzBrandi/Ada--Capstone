@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html ng-app="visualMenu">
   <head>
-  	<title>VisualMenu</title>
+  	<title>Picto-Menu</title>
 
     <script type="text/javascript" src="libs/angular/angular.min.js"></script>
   	<script type="text/javascript" src="javascripts/controllers/main.js"></script>
   </head>
   <body ng-controller="restaurantController as restaurants">
-    <h1>TEST</h1>
+    <h1>Picto-Menu</h1>
 
     <ol>
       <li ng-repeat="restaurant in restaurants.results">
         {{restaurant.name}} at {{restaurant.address}}
+        <button type="button" ng-click="restaurants.selectRestaurant(restaurant)">Select</button>
       </li>
     </ol>
+
+    {{ restaurants.name }}
 
      <form name="searchBox" ng-submit="restaurants.searchRestaurants()">
       <blockquote >
@@ -31,8 +34,5 @@
        <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
       </fieldset>
     </form>
-
-    <div id="branding"  style="float: left;"></div><br />
-    <div id="content">Loading...</div>
   </body>
 </html>
