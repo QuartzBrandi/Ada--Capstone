@@ -112,3 +112,9 @@ My app will be much more focused: only focusing on bringing pictures of menu ite
 - VisualMenu
 - PhotoMenu
 - PictoMenu
+- PictureMenu
+- MenuWorth1000Words
+- TheVisualMenu
+- Picto-Menu
+- The-Visual-Menu
+- EatSee
