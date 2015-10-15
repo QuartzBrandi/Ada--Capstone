@@ -102,6 +102,10 @@ My app will be much more focused: only focusing on bringing pictures of menu ite
 **Package: restaurant accounts**
   - ability to add/edit/delete menu
 
+**Don't Forget: TESTS**
+  - Mocha
+  - Other?
+
 **BONUS:**
   - Let's you add menu items if the restaurant doesn't have a menu.
   - Dietary restriction icons/warnings (if a dish is vegetarian or vegan or gluten free)
