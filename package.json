@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "starto": "DEBUG=Ada--Capstone npm start"
+    "starto": "DEBUG=Ada--Capstone npm start",
+    "db:reset": "node ./db/seed.js"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
