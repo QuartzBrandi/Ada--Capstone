@@ -12,6 +12,8 @@ var restaurantSchema = new Schema({
       name: String,
       images: [{
         origin: String,
+        user: String,
+        user_id: String,
         url: String,
         date_created: Date,
         date_modified: Date
