@@ -9,6 +9,7 @@
 
     <link href="libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="stylesheets/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <script type="text/javascript" src="libs/angular/angular.min.js"></script>
   	<script type="text/javascript" src="javascripts/controllers/main.js"></script>
@@ -19,28 +20,27 @@
     </div>
     <div class="container">
 
-      <form name="searchBox" ng-submit="restaurants.search()">
-        <strong>Searching for: {{restaurants.searchName}} @ {{restaurants.searchLocation}}</strong>
-
-        <h4>Search for a Restaurant</h4>
-        <fieldset class="form-group">
-         <input type="text" ng-model="restaurants.searchName" class="form-control" placeholder="Name" title="Restaurant"></textarea>
-        </fieldset>
-        <fieldset class="form-group">
-         <input type="text" ng-model="restaurants.searchLocation" class="form-control" placeholder="Location" title="Restaurant"></textarea>
-        </fieldset>
-        <fieldset class="form-group">
-         <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
-        </fieldset>
+      <form class="form-inline text-center" name="searchBox" ng-submit="restaurants.search()" ng-show="restaurants.results.length == 0">
+        <div class="form-group">
+          <input type="text" ng-model="restaurants.searchName" class="form-control" placeholder="Restaurant" title="Restaurant"></textarea>
+        </div>
+        <div class="form-group">
+          <input type="text" ng-model="restaurants.searchLocation" class="form-control" placeholder="Location" title="City or State"></textarea>
+        </div>
+        <button type="submit" class="btn btn-default">Search</button>
       </form>
 
-      <h2 ng-show="restaurants.results.length > 0">Results</h2>
-      <ol>
-        <li ng-repeat="restaurant in restaurants.results">
-          {{restaurant.name}} at {{restaurant.address}}
-          <button type="button" ng-click="restaurants.select(restaurant)">Select</button>
-        </li>
-      </ol>
+      <div ng-show="restaurants.results.length > 0">
+        <ul>
+          <li ng-repeat="restaurant in restaurants.results">
+            <div class="curved-box" ng-click="restaurants.select(restaurant)">
+              <strong>{{restaurant.name}}</strong>
+              <p>{{restaurant.address}}</p>
+            </div>
+          </li>
+        </ul>
+        <i class="fa fa-arrow-circle-o-left fa-3x" ng-click="restaurants.results = []"></i>
+      </div>
 
       {{ restaurants.name }}
     </div>

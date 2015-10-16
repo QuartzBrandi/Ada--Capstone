@@ -1,8 +1,57 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+h1 {
+  margin: 0;
+}
+
+.jumbotron {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+h2 {
+  text-align: center;
+}
+
+input {
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.curved-box {
+  border-radius: 3px;
+  background: #8AC007;
+  padding: 3px;
+  margin: 3px;
+}
+
+.curved-box:active {
+  background: red;
+}
+
+::-webkit-input-placeholder {
+   text-align: center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   text-align: center;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center;
+}
+
+:-ms-input-placeholder {
+   text-align: center;
 }
