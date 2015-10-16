@@ -26,15 +26,9 @@
 
 		restaurant.selectRestaurant = function(selectedRestaurant) {
 			var url = uri + "select";
-			// console.log(url);
-			// $http.get(url, [params: selectedRestaurant])
-			console.log("stuff", selectedRestaurant)
-			// $http.get({url: url, params: selectedRestaurant})
-			$http.get(url)
+			$http({method: "GET", url: url, params: selectedRestaurant})
 				.success(function(data) {
-					console.log("YO TEST");
 					restaurant.results = [];
-					console.log(data);
 					restaurant.name = data.name;
 					restaurant.address = data.address;
 				});
