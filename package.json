@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "NODE_ENV=development nodemon ./bin/www",
     "starto": "DEBUG=Ada--Capstone npm start",
-    "db:reset": "node ./db/seed.js"
+    "db:reset": "node ./db/seed.js",
+    "production": "NODE_ENV=production node ./bin/www"
   },
   "dependencies": {
     "body-parser": "~1.13.2",

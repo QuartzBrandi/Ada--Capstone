@@ -1,22 +1,27 @@
 "use strict";
 
+// Simple HTTP requests.
 var request = require('request');
+
+// For environment files.
 var env = require('node-env-file');
 env('config/.env');
 
-
+// To help use MongoDB.
 var mongoose = require('mongoose');
 var Restaurant = require('../models/restaurant');
 
+// Used for Google API calls.
 function replaceSpacesWithPlusSign(theString) {
   var anArray = theString.split(" ");
   var newString = anArray.join("+");
   return newString;
 };
 
-exports.apiController = {
-  // GET /api/search?name=xxx&location=xxx
-  restaurantSearch: function(req, res) {
+exports.restaurantController = {
+  // GET /api/restaurants/search?name=xxx&location=xxx
+  // TODO: Should add own authentication so it's a private API.
+  search: function(req, res) {
     var rawName = req.query.name;
     var name = replaceSpacesWithPlusSign(rawName);
     var location = req.query.location;
@@ -43,8 +48,8 @@ exports.apiController = {
     });
   },
 
-  // GET /api/search?name=xxx&location=xxx
-  selectRestaurant: function(req, res) {
+  // GET /api/restaurants/select (also send query params for the restaurant object)
+  select: function(req, res) {
     // fetch the restaurant from mongodb
     // create the restaurant if it's not in the db
     var the_restaurant = req.query;
@@ -78,9 +83,12 @@ exports.apiController = {
     });
   },
 
-  // GET /api/menu?restaurant=xxx
+  // GET /api/restaurants/menu?name=xxx
+  menu: function(req, res) {
+    console.log("GOT HERE");
+  },
 
-  // GET /api/images?restaurant=xxx&menuitem=xxx
+  // GET /api/restaurants/menu/images?restaurant=xxx&menuitem=xxx
   imageSearch: function(req, res) {
     console.log('got here')
     console.log(req)

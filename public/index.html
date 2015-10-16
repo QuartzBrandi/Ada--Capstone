@@ -1,38 +1,48 @@
 <!DOCTYPE html>
 <html ng-app="visualMenu">
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
   	<title>Picto-Menu</title>
+
+    <link href="libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="stylesheets/style.css" rel="stylesheet">
 
     <script type="text/javascript" src="libs/angular/angular.min.js"></script>
   	<script type="text/javascript" src="javascripts/controllers/main.js"></script>
   </head>
   <body ng-controller="restaurantController as restaurants">
-    <h1>Picto-Menu</h1>
+    <div class="jumbotron text-center">
+      <h1>Picto-Menu</h1>
+    </div>
+    <div class="container">
 
-    <ol>
-      <li ng-repeat="restaurant in restaurants.results">
-        {{restaurant.name}} at {{restaurant.address}}
-        <button type="button" ng-click="restaurants.selectRestaurant(restaurant)">Select</button>
-      </li>
-    </ol>
+      <form name="searchBox" ng-submit="restaurants.search()">
+        <strong>Searching for: {{restaurants.searchName}} @ {{restaurants.searchLocation}}</strong>
 
-    {{ restaurants.name }}
+        <h4>Search for a Restaurant</h4>
+        <fieldset class="form-group">
+         <input type="text" ng-model="restaurants.searchName" class="form-control" placeholder="Name" title="Restaurant"></textarea>
+        </fieldset>
+        <fieldset class="form-group">
+         <input type="text" ng-model="restaurants.searchLocation" class="form-control" placeholder="Location" title="Restaurant"></textarea>
+        </fieldset>
+        <fieldset class="form-group">
+         <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
+        </fieldset>
+      </form>
 
-     <form name="searchBox" ng-submit="restaurants.searchRestaurants()">
-      <blockquote >
-       <strong>Searching for: {{restaurants.searchName}} @ {{restaurants.searchLocation}}</strong>
-      </blockquote>
+      <h2 ng-show="restaurants.results.length > 0">Results</h2>
+      <ol>
+        <li ng-repeat="restaurant in restaurants.results">
+          {{restaurant.name}} at {{restaurant.address}}
+          <button type="button" ng-click="restaurants.select(restaurant)">Select</button>
+        </li>
+      </ol>
 
-      <h4>Search for a Restaurant</h4>
-      <fieldset class="form-group">
-       <textarea ng-model="restaurants.searchName" class="form-control" placeholder="Name" title="Restaurant"></textarea>
-      </fieldset>
-      <fieldset class="form-group">
-       <textarea ng-model="restaurants.searchLocation" class="form-control" placeholder="Location" title="Restaurant"></textarea>
-      </fieldset>
-      <fieldset class="form-group">
-       <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
-      </fieldset>
-    </form>
+      {{ restaurants.name }}
+    </div>
   </body>
 </html>

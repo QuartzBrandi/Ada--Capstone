@@ -2,7 +2,9 @@
 	var app = angular.module('visualMenu', [])
 
 	app.controller('restaurantController', ['$http', function($http) {
-		var uri = "http://localhost:3000/api/";
+		// TODO: Figure out how to handle the environment in Angular.
+		// var uri = process.env.NODE_ENV == "production" ? "https://www.picto-menu.com/api/restaurants/" : "http://localhost:3000/api/restaurants/";
+		var uri = "http://localhost:3000/api/restaurants/";
 		var restaurant = this;
 		restaurant.searchName = "";
 		restaurant.searchLocation = "";
@@ -12,7 +14,7 @@
 
 		//TODO: Remove spaces if search has spaces???
 
-		restaurant.searchRestaurants = function() {
+		restaurant.search = function() {
 			restaurant.results = [];
 			var url = uri + "search?name=" + restaurant.searchName + "&location=" + restaurant.searchLocation;
 			console.log(url);
@@ -24,7 +26,7 @@
 			restaurant.searchLocation = "";
 		}
 
-		restaurant.selectRestaurant = function(selectedRestaurant) {
+		restaurant.select = function(selectedRestaurant) {
 			var url = uri + "select";
 			$http({method: "GET", url: url, params: selectedRestaurant})
 				.success(function(data) {

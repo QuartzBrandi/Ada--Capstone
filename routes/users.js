@@ -6,4 +6,9 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+// redirects if user tries to go anywhere else
+router.get('*', function(req, res, next) {
+  res.redirect('/');
+});
+
 module.exports = router;
