@@ -3,10 +3,7 @@ var Schema = mongoose.Schema;
 
 var restaurantSchema = new Schema({
   name: String,
-  location: {
-    address: String,
-    last_updated: Date
-  },
+  address: String,
   menu: {
     items: [{
       name: String,

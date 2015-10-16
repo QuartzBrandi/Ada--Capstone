@@ -56,10 +56,10 @@ exports.apiController = {
     db.on('error', console.error.bind(console, 'connection error:'));
     db.once('open', function (callback) {
       var the_name = the_restaurant.name;
-      Restaurant.findOne({ name: the_name }, function(err, restaurant) {
+      Restaurant.findOne({ name: the_name, address: the_restaurant.address }, function(err, restaurant) {
         var eat_place = new Restaurant;
         eat_place.name = the_restaurant.name;
-        eat_place.location.address = the_restaurant.address;
+        eat_place.address = the_restaurant.address;
 
         console.log("err", err);
         console.log("2", restaurant);
@@ -75,11 +75,6 @@ exports.apiController = {
           return res.status(200).json(the_restaurant);
         }
       });
-
-      // eat_place.save(function(err) {
-      //   db.close();
-      //   return res.status(200).json(the_restaurant);
-      // });
     });
   },
 
