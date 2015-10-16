@@ -6,7 +6,6 @@ env('config/.env');
 
 
 var mongoose = require('mongoose');
-
 var Restaurant = require('../models/restaurant');
 
 function replaceSpacesWithPlusSign(theString) {
@@ -56,53 +55,32 @@ exports.apiController = {
     var db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
     db.once('open', function (callback) {
-      // yay!
-      console.log("HERE");
-      var eat_place = new Restaurant;
-      console.log(eat_place);
-      eat_place.name = the_restaurant.name;
-      eat_place.location.address = the_restaurant.address;
-      console.log(eat_place);
-      console.log(typeof eat_place);
+      var the_name = the_restaurant.name;
+      Restaurant.findOne({ name: the_name }, function(err, restaurant) {
+        var eat_place = new Restaurant;
+        eat_place.name = the_restaurant.name;
+        eat_place.location.address = the_restaurant.address;
 
-      eat_place.save(function(err) {
-        console.log("got here");
-        db.close();
-        return res.status(200).json(the_restaurant);
+        console.log("err", err);
+        console.log("2", restaurant);
+        var test = restaurant;
+        if (!test) {
+          eat_place.save(function(err) {
+            db.close();
+            return res.status(200).json(the_restaurant);
+          });
+        }
+        else {
+          db.close();
+          return res.status(200).json(the_restaurant);
+        }
       });
 
+      // eat_place.save(function(err) {
+      //   db.close();
+      //   return res.status(200).json(the_restaurant);
+      // });
     });
-
-
-
-    // Restaurant.findByName(the_restaurant.name, function (err, restaurants) {
-    //   console.log(restaurants);
-    // });
-
-    var the_name = the_restaurant.name;
-
-    // eat_place.save(function(err) {
-    //   console.log("got here");
-    //   return res.status(200).json(the_restaurant);
-    // });
-
-    // Restaurant.restaurants.findOne({ name: "HELLO" }, function(err, restaurant) {
-    //   console.log("err", err);
-    //   console.log("2", restaurant);
-    //   // var test = restaurant;
-    //   // if (!test) {
-    //   //   eat_place.save(function(err) {
-    //   //     Restaurant.connection.close();
-    //   //     return res.status(200).json(the_restaurant);
-    //   //   });
-    //   // }
-    //   // else {
-    //   //   Restaurant.connection.close();
-    //   //   return res.status(200).json(the_restaurant);
-    //   // }
-    // });
-    console.log("ho")
-    // return res.status(200).json(the_restaurant);
   },
 
   // GET /api/menu?restaurant=xxx
