@@ -7,18 +7,18 @@ mongoose.connection.on('open', function(){
 
     var Restaurant = mongoose.model('restaurant', {
       name: String,
-      location: {
-        address: String,
-        last_updated: Date
-      },
+      address: String,
       menu: {
         items: [{
           name: String,
+          size: String,
           images: [{
             origin: String,
             url: String,
-            date_created: Date,
-            date_modified: Date
+            suborigin: String,
+            user: String,
+            user_id: String,
+            date_created: Date
           }],
           date_created: Date,
           date_modified: Date
@@ -30,9 +30,111 @@ mongoose.connection.on('open', function(){
     var restaurants = []
 
     restaurants.push({
-      name: "HELLO",
-      location: {
-        address: "555 HELLO ST. WA, Seattle"
+      name: "Helena's Hawaiian Food",
+      address: "1240 N School St, Honolulu, HI 96817, United States",
+      menu: {
+        items: [
+          {
+            name: "Poi",
+            images: [
+              {
+                origin: "Google",
+                suborigin: "",
+                url: "http://honolulumagazine-images.dashdigital.com/images/2012/Nov12/hawaiianPlate/hawaiianplate16.jpg?ver=1352494765",
+              },
+              {
+                origin: "Google",
+                suborigin: "",
+                url: "http://media-cdn.tripadvisor.com/media/photo-s/07/d6/41/d1/helena-s-hawaiian-food.jpg",
+              },
+              {
+                origin: "Google",
+                suborigin: "",
+                url: "http://www.eatthisny.com/wp-content/uploads/2013/04/IMG_7085.jpg",
+              }
+            ]
+          },
+          {
+            name: "Rice",
+            images: [
+              {
+                origin: "Google",
+                suborigin: "",
+                url: "https://c1.staticflickr.com/5/4078/4778840466_ca7ecf76a6.jpg",
+              }
+            ]
+          },
+          {
+            name: "Kalua Pig",
+            images: [
+              {
+                origin: "Google",
+                suborigin: "",
+                url: "https://c1.staticflickr.com/5/4140/4778205623_6dc2894c5e_b.jpg",
+              }
+            ]
+          },
+          {
+            name: "Kalua Pig & Cabbage",
+            images: [
+              {
+                origin: "Google",
+                suborigin: "",
+                url: "http://s3-media4.fl.yelpcdn.com/bphoto/dTU6_IQmYde3lXpFm1Ib0w/o.jpg",
+              }
+            ]
+          },
+          {
+            name: "Laulau",
+            images: [
+              {
+                origin: "Google",
+                suborigin: "",
+                url: "http://www.frolichawaii.com/wp-content/photos/best-of-nonstop-laulau/laulau-helenas_0.jpg",
+              }
+            ]
+          },
+          {
+            name: "Beef Stew",
+            images: [
+              {
+                origin: "Google",
+                suborigin: "",
+                url: "http://s3-media2.fl.yelpcdn.com/bphoto/7xLXqQl5sqnMCfwwNcefFQ/348s.jpg",
+              }
+            ]
+          },
+          {
+            name: "Tripe Stew",
+            images: [
+              {
+                origin: "Google",
+                suborigin: "",
+                url: "https://manfuel.files.wordpress.com/2015/02/man-fuel-food-blog-helenas-hawaiian-food-honolulu-hawaii-tripe-stew.jpg?w=1000",
+              }
+            ]
+          },
+          {
+            name: "Beef With Watercress",
+            images: [
+              {
+                origin: "Google",
+                suborigin: "",
+                url: "http://s3-media4.fl.yelpcdn.com/bphoto/yhaMl3oYMeDTci5oul9EJg/o.jpg",
+              }
+            ]
+          },
+          {
+            name: "Luau Squid",
+            images: [
+              {
+                origin: "Google",
+                suborigin: "",
+                url: "https://manfuel.files.wordpress.com/2015/02/man-fuel-food-blog-helenas-hawaiian-food-honolulu-hawaii-luau-squid.jpg?w=1000",
+              }
+            ]
+          },
+        ],
       }
     });
 

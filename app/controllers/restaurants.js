@@ -76,8 +76,9 @@ exports.restaurantController = {
           });
         }
         else {
+
           db.close();
-          return res.status(200).json(the_restaurant);
+          return res.status(200).json(restaurant);
         }
       });
     });
@@ -90,6 +91,8 @@ exports.restaurantController = {
 
   // GET /api/restaurants/menu/images?restaurant=xxx&menuitem=xxx
   imageSearch: function(req, res) {
+    var url =
+      "https://www.googleapis.com/customsearch/v1?q=";
     console.log('got here')
     console.log(req)
     googleImage(req.query.restaurant, req.query.menuitem);

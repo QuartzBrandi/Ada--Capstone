@@ -33,6 +33,7 @@
 					restaurant.results = [];
 					restaurant.name = data.name;
 					restaurant.address = data.address;
+					restaurant.menu = data.menu;
 				});
 			// get the restaurant info for the selected restaurant
 			// BUT if not in database, create (in which case I need to pass a body...)

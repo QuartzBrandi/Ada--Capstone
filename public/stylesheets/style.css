@@ -10,10 +10,19 @@ h1 {
   margin: 0;
 }
 
+p {
+  margin: 0;
+  text-align: center;
+}
+
 .jumbotron {
   padding-top: 1rem;
   padding-bottom: 1rem;
   margin-bottom: 1rem;
+}
+
+.container {
+  padding: 0;
 }
 
 h2 {
@@ -27,17 +36,22 @@ input {
 ul {
   list-style-type: none;
   padding-left: 0;
+  margin-bottom: 0;
+}
+
+.search {
+  margin: 0 5px;
 }
 
 .curved-box {
-  border-radius: 3px;
-  background: #8AC007;
-  padding: 3px;
-  margin: 3px;
+  border-width: 1px 0px 0px 0px;
+  border-style: solid none none none;
+  border-top-color: #B1B1B1;
+  padding: 5px;
 }
 
 .curved-box:active {
-  background: red;
+  background: #E6E6E6;
 }
 
 ::-webkit-input-placeholder {
@@ -54,4 +68,19 @@ ul {
 
 :-ms-input-placeholder {
    text-align: center;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.fit { /* set relative picture size */
+  max-width: 96%;
+  max-height: 96%;
+}
+
+.center {
+  display: block;
+  margin: auto;
 }
