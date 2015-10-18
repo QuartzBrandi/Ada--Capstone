@@ -108,6 +108,8 @@ My app will be much more focused: only focusing on bringing pictures of menu ite
   - Mocha
   - Other?
 
+**Package: UPLOAD TO THE INTERNET**
+
 **BONUS:**
   - Let's you add menu items if the restaurant doesn't have a menu.
   - Dietary restriction icons/warnings (if a dish is vegetarian or vegan or gluten free)
