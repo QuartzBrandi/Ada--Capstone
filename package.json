@@ -6,7 +6,8 @@
     "start": "NODE_ENV=development nodemon ./bin/www",
     "starto": "DEBUG=Ada--Capstone npm start",
     "db:reset": "node ./db/seed.js",
-    "production": "NODE_ENV=production node ./bin/www"
+    "production": "NODE_ENV=production node ./bin/www",
+    "test": "mocha --recursive;"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -17,8 +18,10 @@
     "jade": "~1.11.0",
     "mongoose": "^4.1.10",
     "morgan": "~1.6.1",
+    "nock": "^2.15.0",
     "node-env-file": "^0.1.7",
     "request": "^2.64.0",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "supertest": "^1.1.0"
   }
 }
