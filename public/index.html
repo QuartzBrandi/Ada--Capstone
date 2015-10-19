@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="">
+    <meta name="google-signin-client_id" content="337211153736-slevgpu3mvaqs6pu68n3k79t4lgo9iup.apps.googleusercontent.com">
   	<title>Picto-Menu</title>
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -34,25 +34,55 @@
     </div>
     <div class="container">
 
-      <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
- <script>
-      gapi.load('auth2', function() {
-        auth2 = gapi.auth2.init({
-          client_id: 'CLIENT_ID.apps.googleusercontent.com',
-          fetch_basic_profile: false,
-          scope: 'profile'
-        });
+      <script>
+        function onSignIn(googleUser) {
+           alert('onSignIn!');
+        }
 
-        // Sign the user in, and then retrieve their ID.
-        auth2.signIn().then(function() {
-          console.log(auth2.currentUser.get().getId());
-        });
-      });
+        function onLoad() {
+          gapi.load('auth2,signin2', function() {
+            gapi.auth2.init({
+              'client_id': '337211153736-slevgpu3mvaqs6pu68n3k79t4lgo9iup.apps.googleusercontent.com'
+            });
+            gapi.signin2.render('google_signin_button', {
+                'onsuccess': 'onSignIn',
+                'theme': 'dark'
+            });
+          });
+
+          // gapi.load('auth2', function() {
+          //   auth2 = gapi.auth2.init({
+          //     client_id: 'CLIENT_ID.apps.googleusercontent.com',
+          //     fetch_basic_profile: false,
+          //     scope: 'profile'
+          //   });
+          //
+          //   // Sign the user in, and then retrieve their ID.
+          //   auth2.signIn().then(function() {
+          //     console.log(auth2.currentUser.get().getId());
+          //   });
+          // });
+
+        }
       </script>
 
- <script>
-   function onSignIn(googleUser) {
+      <div id="google_signin_button"></div>
+
+      <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+
+
+      <div ng-controller="GoogleCtrl">
+          <div class="g-signin2" data-onsuccess="onSignIn"></div>
+      </div>
+
+
+  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+<script>
+  function onSignIn(googleUser) {
+    var id_token = googleUser.getAuthResponse().id_token;
+    console.log("yo")
      // Useful data for your client-side scripts:
      var profile = googleUser.getBasicProfile();
      console.log("ID: " + profile.getId()); // Don't send this directly to your server!
@@ -67,9 +97,12 @@
      var xhr = new XMLHttpRequest();
       xhr.open('POST', 'http://localhost:3000/api/users/login');
       xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      console.log("here");
       xhr.onload = function() {
+        console.log("not");
         console.log('Signed in as: ' + xhr.responseText);
       };
+      console.log("ya");
       xhr.send('idtoken=' + id_token);
    };
  </script>

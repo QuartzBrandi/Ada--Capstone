@@ -54,7 +54,67 @@
 		}
 	}]);
 
+	app.controller('GoogleCtrl', function() {
+  function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId());
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail());
+	}
+	console.log('WHYYY')
+  	window.onSignIn = onSignIn;
+	});
+
 	app.controller('userController', ['$http', function($http) {
 		var user = this;
+		console.log("yup");
+
+		user.test = function() {
+			console.log("hi!!");
+		}
+
+		user.onSignIn = function() {
+			console.log("hi")
+			var id_token = googleUser.getAuthResponse().id_token;
+
+			     // Useful data for your client-side scripts:
+			     var profile = googleUser.getBasicProfile();
+			     console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+			     console.log("Name: " + profile.getName());
+			     console.log("Image URL: " + profile.getImageUrl());
+			     console.log("Email: " + profile.getEmail());
+
+			     // The ID token you need to pass to your backend:
+			     var id_token = googleUser.getAuthResponse().id_token;
+			     console.log("ID Token: " + id_token);
+		}
+		// <script>
+		//   function onSignIn(googleUser) {
+		//     var id_token = googleUser.getAuthResponse().id_token;
+		//
+		//     //  // Useful data for your client-side scripts:
+		//     //  var profile = googleUser.getBasicProfile();
+		//     //  console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+		//     //  console.log("Name: " + profile.getName());
+		//     //  console.log("Image URL: " + profile.getImageUrl());
+		//     //  console.log("Email: " + profile.getEmail());
+		//      //
+		//     //  // The ID token you need to pass to your backend:
+		//     //  var id_token = googleUser.getAuthResponse().id_token;
+		//     //  console.log("ID Token: " + id_token);
+		//      //
+		//     //  var xhr = new XMLHttpRequest();
+		//     //   xhr.open('POST', 'http://localhost:3000/api/users/login');
+		//     //   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		//     //   console.log("here");
+		//     //   xhr.onload = function() {
+		//     //     console.log("not");
+		//     //     console.log('Signed in as: ' + xhr.responseText);
+		//     //   };
+		//     //   console.log("ya");
+		//     //   xhr.send('idtoken=' + id_token);
+		//    };
+		//  </script>
 	}]);
 })();
