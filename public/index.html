@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="">
   	<title>Picto-Menu</title>
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -18,16 +20,71 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
+    <script type="text/javascript" src="configFile.js"></script>
     <script type="text/javascript" src="libs/angular/angular.min.js"></script>
   	<script type="text/javascript" src="javascripts/controllers/main.js"></script>
     <script type="text/javascript" src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
 
+    <!-- GOOGLE OAUTH -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
   </head>
   <body ng-controller="restaurantController as restaurants">
     <div class="jumbotron text-center">
       <h1>Picto-Menu</h1>
     </div>
     <div class="container">
+
+      <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+ <script>
+      gapi.load('auth2', function() {
+        auth2 = gapi.auth2.init({
+          client_id: 'CLIENT_ID.apps.googleusercontent.com',
+          fetch_basic_profile: false,
+          scope: 'profile'
+        });
+
+        // Sign the user in, and then retrieve their ID.
+        auth2.signIn().then(function() {
+          console.log(auth2.currentUser.get().getId());
+        });
+      });
+      </script>
+
+ <script>
+   function onSignIn(googleUser) {
+     // Useful data for your client-side scripts:
+     var profile = googleUser.getBasicProfile();
+     console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+     console.log("Name: " + profile.getName());
+     console.log("Image URL: " + profile.getImageUrl());
+     console.log("Email: " + profile.getEmail());
+
+     // The ID token you need to pass to your backend:
+     var id_token = googleUser.getAuthResponse().id_token;
+     console.log("ID Token: " + id_token);
+
+     var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'http://localhost:3000/api/users/login');
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.onload = function() {
+        console.log('Signed in as: ' + xhr.responseText);
+      };
+      xhr.send('idtoken=' + id_token);
+   };
+ </script>
+
+
+
+ <a href="#" onclick="signOut();">Sign out</a>
+<script>
+  function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+</script>
 
       <form class="form-inline text-center search" name="searchBox" ng-submit="restaurants.search()" ng-show="restaurants.results.length == 0 && restaurants.name.length == 0">
         <div class="form-group">

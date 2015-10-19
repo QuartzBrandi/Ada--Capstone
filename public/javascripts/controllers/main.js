@@ -1,9 +1,11 @@
 (function() {
-	var app = angular.module('visualMenu', [])
+	// var app = angular.module('visualMenu', ['visualMenu.config'])
+	var app = angular.module('visualMenu', [ ])
 
 	app.controller('restaurantController', ['$http', function($http) {
 		// TODO: Figure out how to handle the environment in Angular.
 		// var uri = process.env.NODE_ENV == "production" ? "https://www.picto-menu.com/api/restaurants/" : "http://localhost:3000/api/restaurants/";
+			// console.log(GOOGLE_OAUTH_CLIENT_ID);
 		var uri = "http://localhost:3000/api/restaurants/";
 		var restaurant = this;
 		restaurant.searchName = "";
@@ -50,5 +52,9 @@
 			restaurant.searchName = "";
 			restaurant.searchLocation = "";
 		}
+	}]);
+
+	app.controller('userController', ['$http', function($http) {
+		var user = this;
 	}]);
 })();

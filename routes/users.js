@@ -1,14 +1,10 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+var api = require('../app/controllers/users');
 
-// redirects if user tries to go anywhere else
-router.get('*', function(req, res, next) {
-  res.redirect('/');
+router.post('/login', function(req, res, next) {
+  return api.userController.login(req, res);
 });
 
 module.exports = router;

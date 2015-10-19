@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
+  google_id_token: String,
   username: String,
   images: [{
     restaurant: String,
