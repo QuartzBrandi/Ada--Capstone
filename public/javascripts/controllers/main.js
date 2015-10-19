@@ -55,6 +55,10 @@
 	}]);
 
 	app.controller('GoogleCtrl', function() {
+		var thing = this;
+		// thing.stuff = "bow";
+		// console.log(thing.stuff);
+
 	  function onSignIn(googleUser) {
 	    var profile = googleUser.getBasicProfile();
 	    console.log('ID: ' + profile.getId());
@@ -64,8 +68,11 @@
 
 			var id_token = googleUser.getAuthResponse().id_token;
 			console.log("ID Token: " + id_token);
+			thing.stuff = "blahdaboo";
+			console.log("inside", thing.stuff);
 		}
-		console.log('WHYYY')
+		// console.log('WHYYY')
+		// console.log(thing.stuff);
 
 
   	window.onSignIn = onSignIn;

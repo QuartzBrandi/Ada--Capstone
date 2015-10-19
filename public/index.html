@@ -34,13 +34,10 @@
     </div>
     <div class="container">
 
-
-
-
-      <div ng-controller="GoogleCtrl">
-          <div class="g-signin2" data-onsuccess="onSignIn"></div>
-      </div>
-
+    <div ng-controller="GoogleCtrl as gg">
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        {{gg.stuff}}
+    </div>
 
  <a href="#" onclick="signOut();">Sign out</a>
 <script>
