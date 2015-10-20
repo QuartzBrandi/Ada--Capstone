@@ -37,3 +37,5 @@ config/.env
 public/libs
 
 config/configFile.js
+
+.DS_Store
