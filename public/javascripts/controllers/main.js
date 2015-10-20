@@ -54,29 +54,31 @@
 		}
 	}]);
 
-	app.controller('GoogleCtrl', function() {
+	app.controller('GoogleCtrl', ['$scope', function($scope)  {
 		var thing = this;
-		// thing.stuff = "bow";
+		thing.test = "bow";
 		// console.log(thing.stuff);
 
 	  function onSignIn(googleUser) {
 	    var profile = googleUser.getBasicProfile();
-	    console.log('ID: ' + profile.getId());
-	    console.log('Name: ' + profile.getName());
-	    console.log('Image URL: ' + profile.getImageUrl());
-	    console.log('Email: ' + profile.getEmail());
+	    // console.log('ID: ' + profile.getId());
+	    // console.log('Name: ' + profile.getName());
+	    // console.log('Image URL: ' + profile.getImageUrl());
+	    // console.log('Email: ' + profile.getEmail());
 
 			var id_token = googleUser.getAuthResponse().id_token;
 			console.log("ID Token: " + id_token);
-			thing.stuff = "blahdaboo";
-			console.log("inside", thing.stuff);
+			thing.test = "blahdaboo";
+			$scope.$digest();
+			// $scope.$apply();
+			// console.log("inside", thing.stuff);
 		}
 		// console.log('WHYYY')
 		// console.log(thing.stuff);
 
 
   	window.onSignIn = onSignIn;
-	});
+	}]);
 
 	app.controller('userController', ['$http', function($http) {
 		var user = this;

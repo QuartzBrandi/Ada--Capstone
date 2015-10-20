@@ -34,9 +34,16 @@
     </div>
     <div class="container">
 
-    <div ng-controller="GoogleCtrl as gg">
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
-        {{gg.stuff}}
+      <!-- USER PANEL -->
+      <div>
+
+      </div>
+
+
+
+    <div ng-controller="GoogleCtrl as GC">
+      <div class="g-signin2" data-onsuccess="onSignIn"></div>
+      {{GC.test}}
     </div>
 
  <a href="#" onclick="signOut();">Sign out</a>
