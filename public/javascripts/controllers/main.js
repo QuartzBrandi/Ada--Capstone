@@ -24,6 +24,21 @@
 
 		//TODO: Remove spaces if search has spaces???
 
+		restaurant.reset = function() {
+			restaurant.searchName = "";
+			restaurant.searchLocation = "";
+			restaurant.addMenuItem = "";
+			restaurant.addMenuType = "";
+			restaurant.addMenuSection = "";
+			restaurant.addMenuSubsection = "";
+			restaurant.addMenuImage = "";
+			restaurant.name = "";
+			restaurant.address = "";
+			restaurant.results = [];
+			restaurant.menus = [];
+			restaurant.menu_origin = "";
+		}
+
 		restaurant.search = function() {
 			restaurant.results = [];
 			var url = uri + "search?name=" + restaurant.searchName + "&location=" + restaurant.searchLocation;
@@ -40,17 +55,14 @@
 			var url = uri + "select";
 			$http({method: "GET", url: url, params: selectedRestaurant})
 				.success(function(data) {
-					console.log(data);
-					console.log(data.name);
-					console.log(data.address);
 					restaurant.results = [];
 					restaurant.name = data.name;
 					restaurant.address = data.address;
-					console.log(data.menus);
 					restaurant.menus = data.menus || [];
 					restaurant.menu_origin = data.menu_origin;
 					// restaurant.allItems();
-					console.log(restaurants.menus[0].sections[0].subsections[0].items);
+					console.log(restaurant.menus[0]);
+					console.log(restaurant.menus[0].sections[0].subsections[0].items);
 				});
 			// get the restaurant info for the selected restaurant
 			// BUT if not in database, create (in which case I need to pass a body...)
@@ -83,8 +95,14 @@
 		var user = this;
 		var uri = "http://localhost:3000/api/users/";
 		user.name = "";
-		user.logged_in = "";
+		user.logged_in = false;
 		user.information = {};
+
+		user.reset = function() {
+			user.name = "";
+			user.logged_in = false;
+			user.information = {};
+		}
 
 		// For Google OAuth:
 		function onSignIn(googleUser) {
@@ -114,6 +132,14 @@
 
 		user.test = function() {
 			console.log("hi!!");
+		}
+	}]);
+
+	app.controller('omegaController', ['restaurantController', 'userController', function(restaurantCtrl, userCtrl) {
+		this.refresh = function() {
+			console.log("got here");
+			restaurantCtrl.reset();
+			userCtrl.reset();
 		}
 	}]);
 })();

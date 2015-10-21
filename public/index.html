@@ -35,22 +35,18 @@
     <!-- GOOGLE OAUTH -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
   </head>
-  <body ng-controller="userController as user">
+  <body ng-controller="omegaController as omega">
+    <div ng-controller="userController as user">
 
     <!-- HEADER -->
     <div class="jumbotron text-center">
-      <h1>Picto-Menu</h1>
+      <h1 ng-click="omega.refresh()">Picto-Menu</h1>
       <div class="options">
         <i ng-click=" " class="fa fa-cog fa-2x"></i>
       </div>
     </div>
 
     <div class="container" ng-controller="restaurantController as restaurants">
-
-      <!-- NOT LOGGED IN-->
-      <div class="login-container" ng-show="user.logged_in == false">
-        <div class="g-signin2" data-onsuccess="onSignIn"></div>
-      </div>
 
       <!-- USER OPTIONS PANEL -->
       <div id="panel-user" ng-show="false">
@@ -126,7 +122,7 @@
           <ul>
             <li ng-repeat="menuitem in restaurants.menus[0].sections[0].subsections[0].items">
               <!-- IMAGE CAROUSEL -->
-              <div class="carousel menuCarousel{{$index}}" class="carousel slide" data-ride="carousel" ng-swipe-left="" ng-swipe-right="">
+              <div ng-show="menuitem.images.length > 0" class="carousel menuCarousel{{$index}}" class="carousel slide" data-ride="carousel" ng-swipe-left="" ng-swipe-right="">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
                   <li data-target=".menuCarousel{{$index}}" data-slide-to="0" class="active"></li>
@@ -154,13 +150,17 @@
                   <span class="sr-only">Next</span>
                 </a>
               </div>
-              <p>{{menuitem.name}}</p>
+              <p>{{menuitem.item}}</p>
             </li>
           </ul>
           <a ng-show="restaurants.menu_origin == 'LOCU'" href="http://locu.com"><img height="25" width="155" src="http://locu.com/static/images/dev/poweredby-color@2x.png" alt="Powered by Locu" /></a>
         </div>
       </div>
 
+      <!-- NOT LOGGED IN-->
+      <div class="login-container" ng-show="user.logged_in == false">
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+      </div>
     </div>
 
     <script>
@@ -179,6 +179,8 @@
         set_body_height();
       });
     </script>
+
+    </div>
 
   </body>
 </html>
