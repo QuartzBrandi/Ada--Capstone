@@ -1,9 +1,22 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #FFC68D;
+}
+
+h4 {
+  margin: auto;
+}
+
+login-container {
+  margin-top: 25%;
 }
 
 .abcRioButton {
   margin: auto;
+}
+
+.carousel-control {
+  background-image: none;
 }
 
 a {
@@ -29,42 +42,37 @@ p {
   position: relative;
   /*vertical-align:*/
   /*display: table-cell;*/
+  background-color: #FFC68D;
+  border-bottom-width: thin;
+  border-bottom-color: #FF9933;
+  border-bottom-style: solid;
 }
 
-h1 {
+.username {
+  text-align: right;
+}
+
+.jumbotron h1 {
+  color: #1A0000;
   display: inline-block;
+  font-family: 'Permanent Marker', cursive;
 }
-
-
 
 .options {
   display: inline-block;
-  /*position: absolute;*/
-/*top: 50%;*/
-/*left: 50%;*/
-/*height: 30%;*/
-/*width: 50%;*/
-/*margin: -1% 0 0 0;*/
-/*}*/
-  display: inline-block;
   float: right;
-  /*padding: 10% 0;*/
-
-  /*padding-top: 2rem;*/
-  /*padding: 0.5rem;*/
-  /*position: absolute;*/
-  /*bottom: 0;
-  right: 0;*/
-  /*width: 100%;*/
-
+  padding: 1rem;
   height: auto;
   margin: 0 auto;
-  padding: 5px;
   position: relative;
 }
 
 .container {
   padding: 0;
+}
+
+.login-container {
+  padding: 1rem;
 }
 
 h2 {

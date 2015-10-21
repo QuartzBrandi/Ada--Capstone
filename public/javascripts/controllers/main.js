@@ -13,6 +13,11 @@
 		var restaurant = this;
 		restaurant.searchName = "";
 		restaurant.searchLocation = "";
+		restaurant.addMenuItem = "";
+		restaurant.addMenuType = "";
+		restaurant.addMenuSection = "";
+		restaurant.addMenuSubsection = "";
+		restaurant.addMenuImage = "";
 		restaurant.name = "";
 		restaurant.address = "";
 		restaurant.results = [];
@@ -35,14 +40,31 @@
 			var url = uri + "select";
 			$http({method: "GET", url: url, params: selectedRestaurant})
 				.success(function(data) {
+					console.log(data);
+					console.log(data.name);
+					console.log(data.address);
 					restaurant.results = [];
 					restaurant.name = data.name;
 					restaurant.address = data.address;
-					restaurant.menu = data.menu;
+					console.log(data.menus);
+					restaurant.menus = data.menus || [];
+					restaurant.menu_origin = data.menu_origin;
+					// restaurant.allItems();
+					console.log(restaurants.menus[0].sections[0].subsections[0].items);
 				});
 			// get the restaurant info for the selected restaurant
 			// BUT if not in database, create (in which case I need to pass a body...)
 		}
+
+		restaurant.allItems = function() {
+			restaurant.items = [];
+			// for (var i = 0; i < restaurant.menus; i++)
+			restaurant.items = restaurant.menus[0].sections[0].subsections[0].items;
+		}
+
+		// restaurant.carouselImages = function(menuitem) {
+		// 	return menuitem.images[1..-1];
+		// }
 
 		restaurant.searchImages = function() {
 			restaurant.results = [];
@@ -57,81 +79,41 @@
 		}
 	}]);
 
-	app.controller('GoogleCtrl', ['$scope', function($scope)  {
-		var thing = this;
-		thing.test = "bow";
-		// console.log(thing.stuff);
-
-	  function onSignIn(googleUser) {
-	    var profile = googleUser.getBasicProfile();
-	    // console.log('ID: ' + profile.getId());
-	    // console.log('Name: ' + profile.getName());
-	    // console.log('Image URL: ' + profile.getImageUrl());
-	    // console.log('Email: ' + profile.getEmail());
-
-			var id_token = googleUser.getAuthResponse().id_token;
-			console.log("ID Token: " + id_token);
-			thing.test = "blahdaboo";
-			$scope.$digest();
-			// $scope.$apply();
-			// console.log("inside", thing.stuff);
-		}
-		// console.log('WHYYY')
-		// console.log(thing.stuff);
-
-
-  	window.onSignIn = onSignIn;
-	}]);
-
-	app.controller('userController', ['$http', function($http) {
+	app.controller('userController', ['$http', '$scope', function($http, $scope) {
 		var user = this;
-		console.log("yup");
+		var uri = "http://localhost:3000/api/users/";
+		user.name = "";
+		user.logged_in = "";
+		user.information = {};
+
+		// For Google OAuth:
+		function onSignIn(googleUser) {
+			var name = googleUser.getBasicProfile().getName();
+			var email = googleUser.getBasicProfile().getEmail();
+			var id_token = googleUser.getAuthResponse().id_token;
+			console.log(id_token);
+			console.log(typeof(id_token));
+			user.name = name;
+			var url = uri + "login";
+			$http({method: "GET", url: url, params: {
+				id_token: id_token,
+				name: name,
+				email: email
+			}})
+				.success(function(data) {
+					user.information = data;
+					user.logged_in = true;
+				});
+
+			$scope.$digest(); // refreshes two-way-biding? (without this there was a delay to update)
+			// OR USE...
+			// $scope.$apply();
+			// TODO: Figure out what the difference is between digest & apply.
+		}
+		window.onSignIn = onSignIn;
 
 		user.test = function() {
 			console.log("hi!!");
 		}
-
-		user.onSignIn = function() {
-			console.log("hi")
-			var id_token = googleUser.getAuthResponse().id_token;
-
-			     // Useful data for your client-side scripts:
-			     var profile = googleUser.getBasicProfile();
-			     console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-			     console.log("Name: " + profile.getName());
-			     console.log("Image URL: " + profile.getImageUrl());
-			     console.log("Email: " + profile.getEmail());
-
-			     // The ID token you need to pass to your backend:
-			     var id_token = googleUser.getAuthResponse().id_token;
-			     console.log("ID Token: " + id_token);
-		}
-		// <script>
-		//   function onSignIn(googleUser) {
-		//     var id_token = googleUser.getAuthResponse().id_token;
-		//
-		//     //  // Useful data for your client-side scripts:
-		//     //  var profile = googleUser.getBasicProfile();
-		//     //  console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-		//     //  console.log("Name: " + profile.getName());
-		//     //  console.log("Image URL: " + profile.getImageUrl());
-		//     //  console.log("Email: " + profile.getEmail());
-		//      //
-		//     //  // The ID token you need to pass to your backend:
-		//     //  var id_token = googleUser.getAuthResponse().id_token;
-		//     //  console.log("ID Token: " + id_token);
-		//      //
-		//     //  var xhr = new XMLHttpRequest();
-		//     //   xhr.open('POST', 'http://localhost:3000/api/users/login');
-		//     //   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		//     //   console.log("here");
-		//     //   xhr.onload = function() {
-		//     //     console.log("not");
-		//     //     console.log('Signed in as: ' + xhr.responseText);
-		//     //   };
-		//     //   console.log("ya");
-		//     //   xhr.send('idtoken=' + id_token);
-		//    };
-		//  </script>
 	}]);
 })();

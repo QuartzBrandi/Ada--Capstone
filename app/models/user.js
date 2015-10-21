@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-  google_id_token: String,
+  email: String,
   username: String,
   images: [{
     restaurant: String,
@@ -11,4 +11,4 @@ var userSchema = new Schema({
   }]
 })
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('user', userSchema);

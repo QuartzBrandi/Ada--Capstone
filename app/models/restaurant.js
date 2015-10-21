@@ -3,23 +3,36 @@ var Schema = mongoose.Schema;
 
 var restaurantSchema = new Schema({
   name: String,
-  address: String,
-  menu: {
-    items: [{
-      name: String,
-      images: [{
-        origin: String,
-        user: String,
-        user_id: String,
-        url: String,
-        date_created: Date,
-        date_modified: Date
-      }],
-      date_created: Date,
-      date_modified: Date
-    }],
-    last_updated: Date
-  }
+  address: {
+    street_address: String,
+    city: String,
+    state: String,
+    zip_code: String,
+    country: String
+  },
+  menus: [{
+    menu_name: String,
+    sections: [{
+      section_name: String,
+      subsections: [{
+        subsection_name: String,
+        items: [{
+          item: String,
+          images: [{
+            origin: String,
+            suborigin: String,
+            user: String,
+            user_id: String,
+            url: String,
+            date_created: Date,
+            date_modified: Date
+          }]
+        }]
+      }]
+    }]
+  }],
+  menu_origin: String,
+  last_updated: Date
 });
 
-module.exports = mongoose.model('Restaurant', restaurantSchema);
+module.exports = mongoose.model('restaurant', restaurantSchema);
