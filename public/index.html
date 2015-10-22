@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html ng-app="visualMenu">
   <head>
+    <!-- TODO: Organize the head. It's kinda crazy up here. -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- GOOGLE OAUTH -->
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="337211153736-slevgpu3mvaqs6pu68n3k79t4lgo9iup.apps.googleusercontent.com">
-  	<title>Picto-Menu</title>
+
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -28,29 +30,56 @@
     <script type="text/javascript" src="javascripts/services/menus.js"></script>
     <script type="text/javascript" src="javascripts/core.js"></script>
 
+    <!-- GOOGLE FONTS -->
     <link href='https://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
 
+    <!-- BOOTSTRAP -->
+    <!-- TODO: Why is it when I import directly it works but but the local files not working... -->
     <script type="text/javascript" src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
-
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
-    <!-- GOOGLE OAUTH -->
+    <!-- GOOGLE OAUTH: PLATFORM LIBRARY -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <title>Picto-Menu</title>
   </head>
   <body>
     <div ng-controller="userController as user">
       <div ng-controller="restaurantController as restaurants">
-        <!-- HEADER -->
-        <div class="jumbotron text-center header-things">
-          <h1><a href="#about" ng-click="restaurants.reset()">Picto-Menu</a></h1>
+
+
+
+        <div class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown">Menu
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li class="dropdown-header">Lunch</li>
+            <li><a href="#">Appitizers</a></li>
+            <!-- <li class="dropdown-header">Entrees</li> -->
+            <li><a href="#">Entrees</a></li>
+            <!-- <ul> -->
+              <li><a class="to-indent" href="#">Pasta</a></li>
+              <li><a class="to-indent" href="#">Burgers and everything that doesn't fint agagagagaga</a></li>
+            <!-- </ul> -->
+            <li class="divider"></li>
+            <li class="dropdown-header">Dinner</li>
+            <li><a href="#">Omlets</a></li>
+            <li><a href="#">Pancakes</a></li>
+          </ul>
+        </div>
+
+        <!-- JUMBOTRON -->
+        <div class="jumbotron header-things">
+          <h1><a href="#" ng-click="restaurants.reset()">Picto-Menu</a></h1>
           <div class="dropdown options">
-            <!-- <a href="" ng-click="user.config()"><i class="dropdown-toggle fa fa-cog fa-2x" data-toggle="dropdown"></i></a> -->
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            <!-- TODO Change to button but style like a link? Does this need to be a button? -->
+            <a class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-cog fa-2x"></i>
-            </button>
+            </a>
             <ul class="dropdown-menu dropdown-menu-right">
-              <li><a href="">Profile</a></li>
-              <li><a href="">JavaScript</a></li>
+              <li><a href="#profile">Profile</a></li>
+              <li ng-show="false"><a href="#about">About</a></li>
+              <li ng-show="false"><a href="#contact">Contact</a></li>
               <li class="divider" ng-show="user.logged_in"></li>
               <!-- SIGN OUT -->
               <li>
@@ -66,33 +95,17 @@
               </li>
             </ul>
           </div>
-
         </div>
 
+        <!-- CONTAINER -->
         <div class="container">
 
-          <h1>RIGHT HERE:</h1>
-          <a href="#about">about</a>
-          <a href="#contact">contact</a>
-          <a href="#home">home</a>
+          <!-- OTHER PAGES -->
           <div ng-view></div>
 
           <!-- USER OPTIONS PANEL -->
           <div id="panel-user" ng-show="false">
 
-          </div>
-
-          <!-- RESTAURANT SEARCH FORM -->
-          <div id="panel-search" ng-show="restaurants.results.length == 0 && restaurants.name.length == 0">
-            <form class="form-inline text-center search" name="searchBox" ng-submit="restaurants.search()">
-              <div class="form-group">
-                <input type="text" ng-model="restaurants.searchName" class="form-control" placeholder="Restaurant" title="Restaurant"></textarea>
-              </div>
-              <div class="form-group">
-                <input type="text" ng-model="restaurants.searchLocation" class="form-control" placeholder="Location" title="City or State"></textarea>
-              </div>
-              <button type="submit" class="btn btn-default">Find</button>
-            </form>
           </div>
 
           <!-- RESTAURANT SERACH RESULTS -->
@@ -184,6 +197,7 @@
       </div>
     </div>
 
+    <!-- SCRIPTS -->
     <script>
       $('.carousel').carousel({
        interval: 10000

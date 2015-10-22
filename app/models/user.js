@@ -6,7 +6,11 @@ var userSchema = new Schema({
   username: String,
   images: [{
     restaurant: String,
-    menuitem: String,
+    restaurant_id: String,
+    menu: String,
+    menu_section: String,
+    menu_subsection: String,
+    menu_item: String,
     url: String
   }]
 })
