@@ -42,7 +42,7 @@
       <div ng-controller="restaurantController as restaurants">
         <!-- HEADER -->
         <div class="jumbotron text-center header-things">
-          <h1><a href="" ng-click="restaurants.reset()">Picto-Menu</a></h1>
+          <h1><a href="#about" ng-click="restaurants.reset()">Picto-Menu</a></h1>
           <div class="dropdown options">
             <!-- <a href="" ng-click="user.config()"><i class="dropdown-toggle fa fa-cog fa-2x" data-toggle="dropdown"></i></a> -->
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
@@ -54,7 +54,7 @@
               <li class="divider" ng-show="user.logged_in"></li>
               <!-- SIGN OUT -->
               <li>
-                <a href="" onclick="signOut();" ng-show="user.logged_in">Sign Out</a>
+                <a href="#" onclick="signOut();" ng-show="user.logged_in">Sign Out</a>
                 <script>
                   function signOut() {
                     var auth2 = gapi.auth2.getAuthInstance();
@@ -70,6 +70,12 @@
         </div>
 
         <div class="container">
+
+          <h1>RIGHT HERE:</h1>
+          <a href="#about">about</a>
+          <a href="#contact">contact</a>
+          <a href="#home">home</a>
+          <div ng-view></div>
 
           <!-- USER OPTIONS PANEL -->
           <div id="panel-user" ng-show="false">
