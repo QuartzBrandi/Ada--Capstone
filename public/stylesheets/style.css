@@ -1,7 +1,11 @@
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #FFC68D;
+  background-color: white;
+  background-image: url('../images/lightpaperfibers.png');
+  background-repeat: repeat;
+  position: relative;
 }
+/* Background pattern from subtlepatterns.com */
 
 h4 {
   margin: auto;
@@ -23,10 +27,64 @@ a {
   color: #00B7FF;
 }
 
+a i.fa {
+  color: #1A1A1A;
+}
+
+#panel-search {
+  padding: 20% 2rem 0 2rem;
+}
+
+.login-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin: auto;
+  padding: 1rem 0;
+}
+
+a:hover i.fa:hover {
+  color: #5A0000;
+  text-decoration: none;
+}
+
+a:active i.fa:active {
+  color: #594C40;
+}
+
+a:visited i.fa:visited {
+  color: #1A1A1A;
+}
+
 h1 {
+  padding: 0 5px 0 10px;
   margin: 0;
   text-align: left;
   display: inline-block;
+}
+h1 a {
+  color: #1A1A1A;
+}
+
+h1:hover a:hover {
+  color: #5A0000;
+  text-decoration: none;
+}
+
+h1:active a:active {
+  color: #594C40;
+}
+
+h1 a:visited {
+  color: #1A1A1A;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:focus {
+  text-decoration: none;
 }
 
 p {
@@ -42,10 +100,10 @@ p {
   position: relative;
   /*vertical-align:*/
   /*display: table-cell;*/
-  background-color: #FFC68D;
-  border-bottom-width: thin;
+  background-color: transparent;
+  /*border-bottom-width: thin;
   border-bottom-color: #FF9933;
-  border-bottom-style: solid;
+  border-bottom-style: solid;*/
 }
 
 .username {
@@ -53,7 +111,6 @@ p {
 }
 
 .jumbotron h1 {
-  color: #1A0000;
   display: inline-block;
   font-family: 'Permanent Marker', cursive;
 }
@@ -71,9 +128,6 @@ p {
   padding: 0;
 }
 
-.login-container {
-  padding: 1rem;
-}
 
 h2 {
   text-align: center;
@@ -100,8 +154,19 @@ ul {
   padding: 5px;
 }
 
-.curved-box:active {
+.search_results {
+  border-width: 1px 0px 0px 0px;
+  border-style: solid none none none;
+  border-top-color: #B1B1B1;
+  padding: 5px;
+}
+
+.search_results:active {
   background: #E6E6E6;
+}
+
+.search_results.back:active {
+  background: transparent;
 }
 
 ::-webkit-input-placeholder {

@@ -1,7 +1,29 @@
 (function() {
 	// var app = angular.module('visualMenuControllers', ['config'])
 	// var app = angular.module('visualMenuControllers', [ ])
-	var app = angular.module('visualMenu', [])
+	var app = angular.module('visualMenu', ['ngRoute'])
+
+	scotchApp.config(function($routeProvider) {
+			$routeProvider
+
+					// route for the home page
+					.when('/', {
+							templateUrl : 'pages/home.html',
+							controller  : 'mainController'
+					})
+
+					// route for the about page
+					.when('/about', {
+							templateUrl : 'pages/about.html',
+							controller  : 'aboutController'
+					})
+
+					// route for the contact page
+					.when('/contact', {
+							templateUrl : 'pages/contact.html',
+							controller  : 'contactController'
+					});
+	});
 
 	// app.controller('restaurantController', ['$http', function($http, config) {
 	app.controller('restaurantController', ['$http', function($http) {
@@ -97,6 +119,7 @@
 		user.name = "";
 		user.logged_in = false;
 		user.information = {};
+		user.profile = false;
 
 		user.reset = function() {
 			user.name = "";
@@ -130,16 +153,8 @@
 		}
 		window.onSignIn = onSignIn;
 
-		user.test = function() {
+		user.config = function() {
 			console.log("hi!!");
-		}
-	}]);
-
-	app.controller('omegaController', ['restaurantController', 'userController', function(restaurantCtrl, userCtrl) {
-		this.refresh = function() {
-			console.log("got here");
-			restaurantCtrl.reset();
-			userCtrl.reset();
 		}
 	}]);
 })();
