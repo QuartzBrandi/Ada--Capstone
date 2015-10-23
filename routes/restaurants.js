@@ -22,7 +22,6 @@ router.get('/menu/update', function(req, res, next) {
 });
 
 router.get('/menuitem', function(req, res, next) {
-  console.log("got here")
   return api.restaurantController.menuitems(req, res);
 })
 

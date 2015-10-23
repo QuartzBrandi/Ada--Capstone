@@ -184,9 +184,7 @@ exports.restaurantController = {
   },
 
   menuitems: function(req, res) {
-    // console.log("got here 2");
     var menu = parseInt(req.query.menu);
-    // console.log("menu is", typeof(menu));
     var section = parseInt(req.query.section);
     var subsection = parseInt(req.query.subsection);
     var item = parseInt(req.query.item);
@@ -204,7 +202,6 @@ exports.restaurantController = {
             return res.status(200).json({"error": "no restaurant"});
           } else {
             var theItem = restaurant.menus[menu].sections[section].subsections[subsection].items[item];
-            // console.log("item", theItem);
             var url = "http://localhost:3000" +
               "/api/restaurants/menu/images?" +
               "restaurant=" + restaurantName +
@@ -216,9 +213,8 @@ exports.restaurantController = {
                   theItem.images.push(itemsArray[i]);
                 }
                 restaurant.save(function(err) {
-                  console.log("success");
                   db.close();
-                  return res.status(200).json(restaurant);
+                  return res.status(200).json(theItem);
                 });
               }
             });

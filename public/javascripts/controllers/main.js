@@ -129,12 +129,9 @@
 			"&subsection=" + subsection +
 			"&item=" + item +
 			"&restaurant=" + restaurant.name;
-			console.log(url);
 			$http.get(url)
 				.success(function(data) {
-					console.log("yo");
-					console.log(restaurant.menus);
-					// restaurant.menus[menu].sections[section].subsections[subsection].items[item] = 
+					restaurant.menus[menu].sections[section].subsections[subsection].items[item] = data;
 				});
 		}
 
