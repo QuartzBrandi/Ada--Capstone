@@ -3,8 +3,11 @@
 	// var app = angular.module('visualMenuControllers', [ ])
 	var app = angular.module('visualMenu', ['ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap'])
 
+	var uriSite = "http://localhost:3000/"
+
 	// TODO: Get rid of the little # in the URL...?
 	app.config(function($routeProvider) {
+		console.log("hy");
 			$routeProvider
 
 					// route for the home page
@@ -13,8 +16,9 @@
 							// controller  : 'mainController'
 					})
 
-					.when('/menu', {
-						templateUrl: 'pages/menu.html'
+					.when('/menu/:name/:address', {
+						templateUrl: 'pages/menu.html',
+						controller: 'theRestaurantController'
 					})
 
 					.when('/profile', {
@@ -55,13 +59,41 @@
 	  }
 	});
 
+	app.controller("testController", function() {
+		this.dog = "testing dog";
+	})
+
+	app.controller('theRestaurantController', ['$http', '$scope', '$route', function($http, $scope, $route) {
+		$scope.loading = true;
+		var uriRoute = "api/restaurants/";
+		var name    = $route.current.params.name;
+		var address = $route.current.params.address;
+		select(name, address);
+
+		function select(name, address) {
+			// get the restaurant info for the selected restaurant
+			// but, if not in database, create the restaurant
+			var url = uriSite + uriRoute + "select";
+			var selected = {"name": name, "address": address};
+			$http({method: "GET", url: url, params: selected})
+				.success(function(data) {
+					$scope.loading      = false;
+					$scope.name         = data.name;
+					$scope.address      = data.address;
+					$scope.addressFull  = data.address_full;
+					$scope.menus        = data.menus;
+					$scope.menuOrigin   = data.menu_origin;
+				});
+		}
+	}]);
+
 	// app.controller('restaurantController', ['$http', function($http, config) {
 	app.controller('restaurantController', ['$http', function($http) {
 
 		// TODO: Figure out how to handle the environment in Angular.
 		// var uri = process.env.NODE_ENV == "production" ? "https://www.picto-menu.com/api/restaurants/" : "http://localhost:3000/api/restaurants/";
 			// console.log(GOOGLE_OAUTH_CLIENT_ID);
-		var uri = "http://localhost:3000/api/restaurants/";
+		var uriRoute = "api/restaurants/";
 		var restaurant = this;
 		restaurant.searchName = "";
 		restaurant.searchLocation = "";
@@ -93,7 +125,7 @@
 
 		restaurant.search = function() {
 			restaurant.results = [];
-			var url = uri + "search?name=" + restaurant.searchName + "&location=" + restaurant.searchLocation;
+			var url = uriSite + uriRoute + "search?name=" + restaurant.searchName + "&location=" + restaurant.searchLocation;
 			console.log(url);
 			$http.get(url)
 				.success(function(data) {
@@ -104,7 +136,7 @@
 		}
 
 		restaurant.select = function(selectedRestaurant) {
-			var url = uri + "select";
+			var url = uriSite + uriRoute + "select";
 			$http({method: "GET", url: url, params: selectedRestaurant})
 				.success(function(data) {
 					restaurant.results = [];
@@ -132,7 +164,7 @@
 
 		restaurant.searchImages = function() {
 			restaurant.results = [];
-			var url = uri + "menuitem?restaurant=" + restaurant.searchName + "&menuitem=kalua+pork";
+			var url = uriSite + uriRoute + "menuitem?restaurant=" + restaurant.searchName + "&menuitem=kalua+pork";
 			console.log(url);
 			$http.get(url)
 				.success(function(data) {
@@ -144,7 +176,7 @@
 
 		restaurant.imageUpdate = function(menu, section, subsection, item) {
 			// indexes
-			var url = uri + "menuitem" +
+			var url = uriSite + uriRoute + "menuitem" +
 			"?menu=" + menu +
 			"&section=" + section +
 			"&subsection=" + subsection +
@@ -167,7 +199,7 @@
 
 	app.controller('userController', ['$http', '$scope', function($http, $scope) {
 		var user = this;
-		var uri = "http://localhost:3000/api/users/";
+		var uriRoute = "api/users/";
 		user.name = "";
 		user.logged_in = false;
 		user.information = {};
@@ -187,7 +219,7 @@
 			console.log(id_token);
 			console.log(typeof(id_token));
 			user.name = name;
-			var url = uri + "login";
+			var url = uriSite + uriRoute + "login";
 			$http({method: "GET", url: url, params: {
 				id_token: id_token,
 				name: name,

@@ -10,6 +10,7 @@ var restaurantSchema = new Schema({
     zip_code: String,
     country: String
   },
+  address_full: String,
   menus: [{
     menu_name: String,
     sections: [{

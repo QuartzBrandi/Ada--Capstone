@@ -150,8 +150,9 @@ exports.restaurantController = {
     // fetch the restaurant from mongodb
     // create the restaurant if it's not in the db
     var selectedRestaurant = req.query;
-    var name    = selectedRestaurant.name;
-    var address = createAddressObject(selectedRestaurant.address);
+    var name           = selectedRestaurant.name;
+    var address_string = selectedRestaurant.address;
+    var address_object = createAddressObject(address_string);
 
     mongoose.connect('mongodb://localhost/visualmenu');
     var db = mongoose.connection;
@@ -160,14 +161,15 @@ exports.restaurantController = {
       Restaurant.findOne(
         {
           'name': name,
-          'address.city': address.city
+          'address.city': address_object.city
         },
         function(err, restaurant) {
           if (!restaurant) {
             // create new restaurant & return restaurant
             var new_restaurant = new Restaurant;
-            new_restaurant.name    = name;
-            new_restaurant.address = address;
+            new_restaurant.name         = name;
+            new_restaurant.address      = address_object;
+            new_restaurant.address_full = address_string;
             findMenu(new_restaurant, function(restaurant) {
               db.close();
               return res.status(200).json(restaurant);

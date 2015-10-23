@@ -15,7 +15,8 @@
 <div id="panel-search-results" ng-show="restaurants.results.length > 0">
   <ul>
     <li ng-repeat="restaurant in restaurants.results">
-      <a href="#/menu">
+      <a ng-href="#/menu/{{restaurant.name}}/{{restaurant.address}}">
+        <!-- TODO: Bug if restaurant or address has a slash...? -->
         <!-- <div class="search-results results" ng-click="restaurants.select(restaurant)"> -->
         <div class="search-results results">
           <strong>{{restaurant.name}}</strong>
