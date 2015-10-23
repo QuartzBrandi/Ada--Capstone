@@ -183,6 +183,51 @@ exports.restaurantController = {
     });
   },
 
+  menuitems: function(req, res) {
+    // console.log("got here 2");
+    var menu = parseInt(req.query.menu);
+    // console.log("menu is", typeof(menu));
+    var section = parseInt(req.query.section);
+    var subsection = parseInt(req.query.subsection);
+    var item = parseInt(req.query.item);
+    var restaurantName = req.query.restaurant;
+
+    mongoose.connect('mongodb://localhost/visualmenu');
+    var db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'Connection Error:'));
+    db.once('open', function (callback) {
+      Restaurant.findOne(
+        { 'name': restaurantName },
+        function(err, restaurant) {
+          if (!restaurant) {
+            db.close();
+            return res.status(200).json({"error": "no restaurant"});
+          } else {
+            var theItem = restaurant.menus[menu].sections[section].subsections[subsection].items[item];
+            // console.log("item", theItem);
+            var url = "http://localhost:3000" +
+              "/api/restaurants/menu/images?" +
+              "restaurant=" + restaurantName +
+              "&menuitem=" + theItem.item;
+            request(url, function (error, response, body) {
+              if (!error && response.statusCode == 200) {
+                var itemsArray = JSON.parse(body);
+                for (var i = 0; i < itemsArray.length; i++) {
+                  theItem.images.push(itemsArray[i]);
+                }
+                restaurant.save(function(err) {
+                  console.log("success");
+                  db.close();
+                  return res.status(200).json(restaurant);
+                });
+              }
+            });
+          }
+        }
+      );
+    });
+  },
+
   // GET /api/restaurants/menu?name=xxx&address=xxx
   menu: function(req, res) {
     var selectedRestaurant = req.query;
@@ -191,8 +236,6 @@ exports.restaurantController = {
 
     mongoose.connect('mongodb://localhost/visualmenu');
     var db = mongoose.connection;
-    db.close();
-
     db.on('error', console.error.bind(console, 'Connection Error:'));
     db.once('open', function (callback) {
       // return res.status(200).json({"no": "yes"})

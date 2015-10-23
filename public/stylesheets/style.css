@@ -282,3 +282,7 @@ ul {
   display: block;
   margin: auto;
 }
+
+.powered-by {
+  float: right;
+}

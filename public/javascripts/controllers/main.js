@@ -111,7 +111,7 @@
 
 		restaurant.searchImages = function() {
 			restaurant.results = [];
-			var url = uri + "images?restaurant=" + restaurant.searchName + "&menuitem=kalua+pork";
+			var url = uri + "menuitem?restaurant=" + restaurant.searchName + "&menuitem=kalua+pork";
 			console.log(url);
 			$http.get(url)
 				.success(function(data) {
@@ -119,6 +119,23 @@
 				});
 			restaurant.searchName = "";
 			restaurant.searchLocation = "";
+		}
+
+		restaurant.imageUpdate = function(menu, section, subsection, item) {
+			// indexes
+			var url = uri + "menuitem" +
+			"?menu=" + menu +
+			"&section=" + section +
+			"&subsection=" + subsection +
+			"&item=" + item +
+			"&restaurant=" + restaurant.name;
+			console.log(url);
+			$http.get(url)
+				.success(function(data) {
+					console.log("yo");
+					console.log(restaurant.menus);
+					// restaurant.menus[menu].sections[section].subsections[subsection].items[item] = 
+				});
 		}
 
 		restaurant.noImageMessages = [
