@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html ng-app="visualMenu">
   <head>
-    <!-- TODO: Organize the head. It's kinda crazy up here. -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,45 +9,47 @@
     <meta name="google-signin-scope" content="profile email">
     <meta name="google-signin-client_id" content="337211153736-slevgpu3mvaqs6pu68n3k79t4lgo9iup.apps.googleusercontent.com">
 
-
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <!-- I DON'T UNDERSTAND WHY THIS TOP IS WORKING BUT THE BOTTOM CODE DOES NOT -->
-
-    <link href="libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="stylesheets/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-    <script type="text/javascript" src="configFile.js"></script>
-    <script type="text/javascript" src="libs/angular/angular.js"></script>
-    <script src="libs/angular-route/angular-route.js"></script>
-
-  	<script type="text/javascript" src="javascripts/controllers/main.js"></script>
-    <script type="text/javascript" src="javascripts/services/menus.js"></script>
-    <script type="text/javascript" src="javascripts/core.js"></script>
-
-    <!-- GOOGLE FONTS -->
-    <link href='https://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
-
-    <!-- BOOTSTRAP -->
-    <!-- TODO: Why is it when I import directly it works but but the local files not working... -->
-    <script type="text/javascript" src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
     <!-- GOOGLE OAUTH: PLATFORM LIBRARY -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
 
+    <!-- ANGULAR -->
+    <script type="text/javascript" src="libs/angular/angular.js"></script>
+    <script type="text/javascript" src="libs/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="libs/angular-touch/angular-touch.js"></script>
+    <script type="text/javascript" src="libs/angular-animate/angular-animate.js"></script>
+
+    <!-- ENV? -->
+    <!-- <script type="text/javascript" src="configFile.js"></script> -->
+
+    <!-- BOOTSTRAP (MUST BE LOADED AFTER ANGULAR) -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.js"></script> -->
+    <script type="text/javascript" src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.2.js"></script>
+
+    <!-- ANGULAR FILES -->
+    <!-- <script type="text/javascript" src="javascripts/core.js"></script> -->
+  	<script type="text/javascript" src="javascripts/controllers/main.js"></script>
+    <!-- <script type="text/javascript" src="javascripts/services/menus.js"></script> -->
+
+    <!-- BOOTSTRAP (MUST BE LOADED AFTER ANGULAR) -->
+    <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+    <!-- GOOGLE FONTS -->
+    <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Permanent+Marker'>
+
+    <!-- CSS -->
+    <link href="stylesheets/style.css" rel="stylesheet">
+
+    <!-- APP -->
     <title>Picto-Menu</title>
   </head>
   <body>
     <div ng-controller="userController as user">
       <div ng-controller="restaurantController as restaurants">
 
-
-
+        <!-- DROPDOWN MENU (ONLY VIEWABLE WHEN MENU IS AVAILABLE) -->
         <div ng-show="restaurants.name" class="dropdown thing">
           <a class="dropdown-toggle" data-toggle="dropdown">Menu
           <span class="caret"></span></a>
@@ -71,6 +72,7 @@
         <!-- JUMBOTRON -->
         <div class="jumbotron header-things">
           <h1><a href="#/" ng-click="restaurants.reset()">Picto-Menu</a></h1>
+          <!-- OPTIONS DROPDOWN MENU -->
           <div class="dropdown options">
             <!-- TODO Change to button but style like a link? Does this need to be a button? -->
             <a class="dropdown-toggle" data-toggle="dropdown">
@@ -97,108 +99,11 @@
           </div>
         </div>
 
-        <!-- CONTAINER -->
+        <!-- CONTENTS -->
         <div class="container">
-
-          <!-- OTHER PAGES -->
           <div ng-view></div>
-
-          <!-- USER OPTIONS PANEL -->
-          <div id="panel-user" ng-show="false">
-
-          </div>
-
-          <!-- RESTAURANT SERACH RESULTS -->
-          <div id="panel-search-results" ng-show="restaurants.results.length > 0">
-            <ul>
-              <li ng-repeat="restaurant in restaurants.results">
-                <div class="search_results" ng-click="restaurants.select(restaurant)">
-                  <strong>{{restaurant.name}}</strong>
-                  <p>{{restaurant.address}}</p>
-                </div>
-              </li>
-            </ul>
-            <div class="search_results back">
-              <a href="" ng-click="restaurants.results = []"><i class="fa fa-arrow-circle-o-left fa-3x"></i></a>
-            </div>
-            <img class="powered-by" src="images/powered_by_google_on_white.png">
-          </div>
-
-          <!-- RESTUARANT PICTURES & OPTIONS TO ADD TO THE RESTAURANT -->
-          <div id="panel-menu" ng-show="restaurants.name.length > 0">
-            <h2>{{ restaurants.name }}</h2>
-            <button ng-show="restaurants.menus.length > 0" ng-click="restaurants.imageUpdate(0, 0, 0, 1)" class="btn btn-default">UPDATE MEEE</button>
-            <!-- NO MENU AVAILABLE -->
-            <div ng-show="restaurants.menus.length == 0">
-              <p>Unfortunately, there are no menus available for this restaurant.</p>
-              <p>Feel free to add an item yourself!</p>
-              <form class="form-inline text-center search" name="addMenuBox" ng-submit="restaurants.addMenuItem()">
-                <div class="form-group">
-                  <input type="text" ng-model="restaurants.addMenuItem" class="form-control" placeholder="Signature Burger" title="Menu Item"></textarea>
-                </div>
-                <form id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post">
-                  <input type="file" name="photoupload">
-                  <input type="submit" value="Upload Image" name="submit">
-                </form>
-                <div class="form-group">
-                  <input type="text" ng-model="restaurants.addMenuType" class="form-control" placeholder="Lunch (OPTIONAL)" title="Type of Menu"></textarea>
-                </div>
-                <div class="form-group">
-                  <input type="text" ng-model="restaurants.addMenuSection" class="form-control" placeholder="Entrees (OPTIONAL)" title="Menu Section"></textarea>
-                </div>
-                <div class="form-group">
-                  <input type="text" ng-model="restaurants.addMenuSubsection" class="form-control" placeholder="Burgers & Sandwiches (OPTIONAL)" title="Menu Subsection"></textarea>
-                </div>
-                <button type="submit" class="btn btn-default">Find</button>
-              </form>
-            </div>
-            <!-- MENU -->
-            <div class="line-divider"></div>
-            <div>
-                  <h3>{{restaurants.menus[0].menu_name}}</h3>
-                  <h4>{{restaurants.menus[0].sections[0].section_name}}</h4>
-                  <h5>{{restaurants.menus[0].sections[0].subsections[0].subsection_name}}</h5>
-                  <div class="line-divider"></div>
-
-              <ul class="menuitems">
-                <li class="menuitems" ng-repeat="menuitem in restaurants.menus[0].sections[0].subsections[0].items">
-                  <p><span class="caret itemname"></span>{{menuitem.item}}<span class="caret itemname"></span></p>
-                  <!-- IMAGE CAROUSEL -->
-                  <div ng-show="menuitem.images.length > 0" class="carousel menuCarousel{{$index}}" class="carousel slide" data-ride="carousel" ng-swipe-left="" ng-swipe-right="">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                      <li data-target=".menuCarousel{{$index}}" data-slide-to="0" class="active"></li>
-                      <li data-target=".menuCarousel{{$parent.$index}}" data-slide-to="{{$index}}" ng-repeat="image in menuitem.images"></li>
-                    </ol>
-
-                    <!-- Wrapper for Slides -->
-                    <div class="carousel-inner" role="listbox">
-                      <div class="item active">
-                        <img class="center fit" ng-src="{{menuitem.images[0].url}}" alt="Description" alt="{{menuitem.name}}" width="460" height="345">
-                      </div>
-
-                      <div class="item" ng-repeat="image in menuitem.images">
-                        <img class="center fit" ng-src="{{image.url}}" alt="Description" alt="{{menuitem.name}}" width="460" height="345">
-                      </div>
-                    </div>
-
-                    <!-- Left and Right Controls -->
-                    <a class="left carousel-control" href=".menuCarousel{{$index}}" role="button" data-slide="prev">
-                      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" href=".menuCarousel{{$index}}" role="button" data-slide="next">
-                      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  </div>
-                  <p ng-show="menuitem.images.length == 0">{{restaurants.noImageMessages[restaurants.random]}}</p>
-                </li>
-              </ul>
-              <a ng-show="restaurants.menu_origin == 'LOCU'" href="http://locu.com"><img class="powered-by" height="25" width="155" src="http://locu.com/static/images/dev/poweredby-color@2x.png" alt="Powered by Locu" /></a>
-            </div>
-          </div>
         </div>
+
         <!-- NOT LOGGED IN-->
         <div class="bottomthing" ng-show="user.logged_in == false"></div>
         <div class="login-container" ng-show="user.logged_in == false">

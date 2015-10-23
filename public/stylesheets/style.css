@@ -44,6 +44,10 @@ a i.fa {
   color: #1A1A1A;
 }
 
+a i.fa-cog {
+  cursor: pointer;
+}
+
 #panel-search {
   padding: 20% 2rem 0 2rem;
 }
@@ -237,18 +241,22 @@ ul {
   padding: 5px;
 }
 
-.search_results {
+.search-results {
   border-width: 1px 0px 0px 0px;
   border-style: solid none none none;
   border-top-color: #B1B1B1;
   padding: 5px;
 }
 
-.search_results:active {
+.search-results.results:hover {
+  cursor: pointer;
+}
+
+.search-results.results:active {
   background: #E6E6E6;
 }
 
-.search_results.back:active {
+.search-results.back:active {
   background: transparent;
 }
 

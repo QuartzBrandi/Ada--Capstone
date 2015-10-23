@@ -10,3 +10,22 @@
     <button type="submit" class="btn btn-default">Find</button>
   </form>
 </div>
+
+<!-- RESTAURANT SERACH RESULTS -->
+<div id="panel-search-results" ng-show="restaurants.results.length > 0">
+  <ul>
+    <li ng-repeat="restaurant in restaurants.results">
+      <a href="#/menu">
+        <!-- <div class="search-results results" ng-click="restaurants.select(restaurant)"> -->
+        <div class="search-results results">
+          <strong>{{restaurant.name}}</strong>
+          <p>{{restaurant.address}}</p>
+        </div>
+      </a>
+    </li>
+  </ul>
+  <div class="search-results back">
+    <a href="" ng-click="restaurants.results = []"><i class="fa fa-arrow-circle-o-left fa-3x"></i></a>
+  </div>
+  <img class="powered-by" src="images/powered_by_google_on_white.png">
+</div>

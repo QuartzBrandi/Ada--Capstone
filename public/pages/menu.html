@@ -1,0 +1,73 @@
+<!-- RESTUARANT PICTURES & OPTIONS TO ADD TO THE RESTAURANT -->
+<div id="panel-menu" ng-show="restaurants.name.length > 0">
+  <h2>{{ restaurants.name }}</h2>
+  <button ng-show="false && restaurants.menus.length > 0" ng-click="restaurants.imageUpdate(0, 0, 0, 1)" class="btn btn-default">UPDATE MEEE</button>
+  <!-- NO MENU AVAILABLE -->
+  <div ng-show="restaurants.menus.length == 0">
+    <p>Unfortunately, there are no menus available for this restaurant.</p>
+    <p>Feel free to add an item yourself!</p>
+    <form class="form-inline text-center search" name="addMenuBox" ng-submit="restaurants.addMenuItem()">
+      <div class="form-group">
+        <input type="text" ng-model="restaurants.addMenuItem" class="form-control" placeholder="Signature Burger" title="Menu Item"></textarea>
+      </div>
+      <form id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post">
+        <input type="file" name="photoupload">
+        <input type="submit" value="Upload Image" name="submit">
+      </form>
+      <div class="form-group">
+        <input type="text" ng-model="restaurants.addMenuType" class="form-control" placeholder="Lunch (OPTIONAL)" title="Type of Menu"></textarea>
+      </div>
+      <div class="form-group">
+        <input type="text" ng-model="restaurants.addMenuSection" class="form-control" placeholder="Entrees (OPTIONAL)" title="Menu Section"></textarea>
+      </div>
+      <div class="form-group">
+        <input type="text" ng-model="restaurants.addMenuSubsection" class="form-control" placeholder="Burgers & Sandwiches (OPTIONAL)" title="Menu Subsection"></textarea>
+      </div>
+      <button type="submit" class="btn btn-default">Find</button>
+    </form>
+  </div>
+  <!-- MENU -->
+
+  <div class="line-divider"></div>
+  <div>
+        <h3>{{restaurants.menus[0].menu_name}}</h3>
+        <h4>{{restaurants.menus[0].sections[0].section_name}}</h4>
+        <h5>{{restaurants.menus[0].sections[0].subsections[0].subsection_name}}</h5>
+        <div class="line-divider"></div>
+
+    <div ng-controller="CarouselDemoCtrl">
+      <div style="height: 305px">
+        <uib-carousel interval="myInterval" no-wrap="noWrapSlides">
+          <uib-slide ng-repeat="slide in slides" active="slide.active">
+            <img ng-src="{{slide.image}}" style="margin:auto;">
+            <div class="carousel-caption">
+              <h4>Slide {{$index}}</h4>
+              <p>{{slide.text}}</p>
+            </div>
+          </uib-slide>
+        </uib-carousel>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <button type="button" class="btn btn-info" ng-click="addSlide()">Add Slide</button>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" ng-model="noWrapSlides">
+              Disable Slide Looping
+            </label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          Interval, in milliseconds: <input type="number" class="form-control" ng-model="myInterval">
+          <br />Enter a negative number or 0 to stop the interval.
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <a ng-show="restaurants.menu_origin == 'LOCU'" href="http://locu.com"><img class="powered-by" height="25" width="155" src="http://locu.com/static/images/dev/poweredby-color@2x.png" alt="Powered by Locu" /></a>
+  </div>
+</div>

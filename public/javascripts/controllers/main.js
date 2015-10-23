@@ -1,7 +1,7 @@
 (function() {
 	// var app = angular.module('visualMenuControllers', ['config'])
 	// var app = angular.module('visualMenuControllers', [ ])
-	var app = angular.module('visualMenu', ['ngRoute'])
+	var app = angular.module('visualMenu', ['ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap'])
 
 	// TODO: Get rid of the little # in the URL...?
 	app.config(function($routeProvider) {
@@ -11,6 +11,10 @@
 					.when('/', {
 							templateUrl : 'pages/home.html'
 							// controller  : 'mainController'
+					})
+
+					.when('/menu', {
+						templateUrl: 'pages/menu.html'
 					})
 
 					.when('/profile', {
@@ -32,6 +36,23 @@
 					.otherwise({
 						redirectTo: '/'
 					});
+	});
+
+	app.controller('CarouselDemoCtrl', function ($scope) {
+	  $scope.myInterval = 5000;
+	  $scope.noWrapSlides = false;
+	  var slides = $scope.slides = [];
+	  $scope.addSlide = function() {
+	    var newWidth = 600 + slides.length + 1;
+	    slides.push({
+	      image: '//placekitten.com/' + newWidth + '/300',
+	      text: ['More','Extra','Lots of','Surplus'][slides.length % 4] + ' ' +
+	        ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
+	    });
+	  };
+	  for (var i=0; i<4; i++) {
+	    $scope.addSlide();
+	  }
 	});
 
 	// app.controller('restaurantController', ['$http', function($http, config) {
