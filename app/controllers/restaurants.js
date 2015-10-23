@@ -185,59 +185,101 @@ exports.restaurantController = {
 
   // GET /api/restaurants/menu?name=xxx&address=xxx
   menu: function(req, res) {
-    var name = req.query.name;
-    var address = req.query.address;
-    var url = "https://api.locu.com/v2/venue/search/"
-      // "https://api.locu.com/v2/venue/search/" +
-      // "?name=" + name +
-      // "&locality=" + address.city +
-      // "&api_key=" + process.env.LOCU_API_KEY;
-    var body = {
-        "api_key": process.env.LOCU_API_KEY,
-        "fields": [
-          "name",
-          "location",
-          "menus"
-        ],
-        "venue_queries": [
-          {
-            "name": name,
-            "location": {
-              "locality": address.city,
-              "postal_code": address.zip_code
+    var selectedRestaurant = req.query;
+    var name    = selectedRestaurant.name;
+    var location = selectedRestaurant.location;
+
+    mongoose.connect('mongodb://localhost/visualmenu');
+    var db = mongoose.connection;
+    db.close();
+
+    db.on('error', console.error.bind(console, 'Connection Error:'));
+    db.once('open', function (callback) {
+      // return res.status(200).json({"no": "yes"})
+
+      Restaurant.findOne(
+        {
+          'name': name,
+          'address.city': location
+        },
+        function(err, restaurant) {
+          if (!restaurant) {
+            db.close();
+            return res.status(200).json({"error": "no restaurant"});
+          }
+          else {
+            for (var m = 0; m < restaurant.menus.length; m++) {
+              var menu = restaurant.menus[m];
+              for (var s = 0; s < menu.sections.length; s++) {
+                var section = menu.sections[s];
+                for (var ss = 0; ss < section.subsections.length; ss++) {
+                  var subsection = section.subsections[ss];
+                  for (var c = 0; c < subsection.items.length; c++) {
+                    var item = subsection.items[c];
+                    var url = "http://localhost:3000" +
+                      "/api/restaurants/menu/images?" +
+                      "restaurant=" + name +
+                      "&menuitem=" + item.item;
+                    request(url, function (error, response, body) {
+                      if (!error && response.statusCode == 200) {
+                        var itemsArray = JSON.parse(body);
+                        for (var i = 0; i < itemsArray.length; i++) {
+                          item.images.push(itemsArray[i]);
+                          restaurant.save(function(err) {
+                            console.log("success");
+                            db.close();
+                            return res.status(200).json({"done": "done"});
+                          });
+                        }
+                      }
+                    });
+                  }
+                }
+              }
             }
           }
-        ]
-      }
-
-    // request.post({url: url, body: body}, function (error, response, body) {
-    request.post(url, function (error, response, body) {
-      console.log("1");
-      if (!error && response.statusCode == 200) {
-        console.log("2");
-        // var bodyParsed = JSON.parse(body);
-        // var resultsUnformatted = bodyParsed.results;
-        // var results = [];
-        //
-        // for (var i = 0; i < resultsUnformatted.length; i++) {
-        //   var result = {};
-        //   result["name"] = resultsUnformatted[i]["name"];
-        //   result["address"] = resultsUnformatted[i]["formatted_address"];
-        //   results.push(result);
-        // }
-
-        return res.status(200).json({"done":"done"});
-      }
-      console.log("3");
+        }
+      );
     });
   },
 
   // GET /api/restaurants/menu/images?restaurant=xxx&menuitem=xxx
   imageSearch: function(req, res) {
+    var rawRestaurant = req.query.restaurant;
+    var restaurant = replaceSpacesWithPlusSign(rawRestaurant);
+    var rawItem = req.query.menuitem;
+    var item = replaceSpacesWithPlusSign(rawItem);
     var url =
-      "https://www.googleapis.com/customsearch/v1?q=";
-    console.log('got here')
-    console.log(req)
-    googleImage(req.query.restaurant, req.query.menuitem);
+    "https://www.googleapis.com/customsearch/v1?" +
+    "q=" + restaurant + "+" + item +
+    "&cx=" + process.env.GOOGLE_CX +
+    "&num=3" +
+    "&searchType=image" +
+    // "&fields=items(cacheId%2CdisplayLink%2CfileFormat%2CformattedUrl%2ChtmlFormattedUrl%2ChtmlSnippet%2ChtmlTitle%2Cimage%2Clabels%2Clink%2Cmime%2Cpagemap%2Csnippet%2Ctitle)" +
+    "&key=" + process.env.GOOGLE_BROWSER_API_KEY;
+
+    request(url, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        var bodyParsed = JSON.parse(body);
+        var itemsArray = bodyParsed.items;
+        var threeImages = [];
+        for (var i = 0; i < itemsArray.length; i++) {
+          var itemObject = itemsArray[i]
+          var result = {};
+          // result["title"] = itemObject.title
+          // itemObject.htmlTitle
+          result["url"] = itemObject.link;
+          // result[""] = itemObject.displayLink //suborigin
+          result["origin"] = "Google";
+          result["suborigin"] = itemObject.image.contextLink; //suborigin
+          threeImages.push(result);
+        }
+        console.log("inside", threeImages);
+
+        return res.status(200).json(threeImages);
+      }
+    });
+
+    // googleImage(req.query.restaurant, req.query.menuitem);
   }
 };

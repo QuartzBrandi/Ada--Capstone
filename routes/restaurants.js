@@ -17,6 +17,10 @@ router.get('/select', function(req, res, next) {
   return api.restaurantController.select(req, res);
 });
 
+router.get('/menu/update', function(req, res, next) {
+  return api.restaurantController.menu(req, res);
+});
+
 // search for images (query "name" & "location")
 // queries database & Google API(?)
 // returns...

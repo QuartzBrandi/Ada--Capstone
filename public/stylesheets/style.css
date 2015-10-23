@@ -7,6 +7,19 @@ body {
 }
 /* Background pattern from subtlepatterns.com */
 
+div.thing {
+  position: fixed;
+  width: 100%
+  top: 0px;
+  left: 5px;
+  height: 1rem;
+  z-index: 1;
+}
+
+li.menuitems {
+  padding-bottom: 5px;
+}
+
 h4 {
   margin: auto;
 }
@@ -36,7 +49,7 @@ a i.fa {
 }
 
 .login-container {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   margin: auto;
@@ -92,10 +105,18 @@ p {
   text-align: center;
 }
 
+span.caret.itemname {
+  margin: 0 5px;
+}
+
+.bottomthing {
+  height: 70px;
+}
+
 .jumbotron {
   padding-top: 1rem;
   padding-bottom: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   text-align: left;
   position: relative;
   /*vertical-align:*/
@@ -131,11 +152,68 @@ li a.to-indent {
 
 .container {
   padding: 0;
+  /*margin: 0 1%;
+  border-style: double;
+  border-color: black;
+  border-radius: 3px;*/
 }
 
 
 h2 {
+  margin-top: 0;
   text-align: center;
+  font-family: 'Permanent Marker', cursive;
+  /*border-bottom-style: groove;
+  border-bottom-color: black;*/
+  /*border-color: black;
+  border-style: double;
+  border-radius: 3px;*/
+  margin-bottom: 5px;
+  /*display: inline-block;*/
+}
+
+#panel-search-results {
+  margin-top: 1rem;
+}
+
+h3 {
+  text-align: center;
+  font-family: 'Permanent Marker', cursive;
+  margin: 0;
+}
+
+h4 {
+  text-align: center;
+  font-family: 'Permanent Marker', cursive;
+  margin: 0 0 3px 0;
+}
+
+h5 {
+  text-align: center;
+  font-family: 'Permanent Marker', cursive;
+  margin: 0 0 5px 0;
+}
+
+ul.menuitems {
+  margin-top: 5px;
+}
+
+.line-divider {
+  border-color: black;
+  border-width: 1px 0;
+  border-radius: 3px;
+  /*border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;*/
+  width: 75%;
+  display:block; /* for use on default inline elements like span */
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+  border-style: solid none;
+  text-align: center;
+  margin: auto;
 }
 
 input {

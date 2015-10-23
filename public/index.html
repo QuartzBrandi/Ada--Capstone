@@ -49,7 +49,7 @@
 
 
 
-        <div class="dropdown">
+        <div ng-show="restaurants.name" class="dropdown thing">
           <a class="dropdown-toggle" data-toggle="dropdown">Menu
           <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -70,7 +70,7 @@
 
         <!-- JUMBOTRON -->
         <div class="jumbotron header-things">
-          <h1><a href="#" ng-click="restaurants.reset()">Picto-Menu</a></h1>
+          <h1><a href="#/" ng-click="restaurants.reset()">Picto-Menu</a></h1>
           <div class="dropdown options">
             <!-- TODO Change to button but style like a link? Does this need to be a button? -->
             <a class="dropdown-toggle" data-toggle="dropdown">
@@ -151,9 +151,16 @@
               </form>
             </div>
             <!-- MENU -->
+            <div class="line-divider"></div>
             <div>
-              <ul>
-                <li ng-repeat="menuitem in restaurants.menus[0].sections[0].subsections[0].items">
+                  <h3>{{restaurants.menus[0].menu_name}}</h3>
+                  <h4>{{restaurants.menus[0].sections[0].section_name}}</h4>
+                  <h5>{{restaurants.menus[0].sections[0].subsections[0].subsection_name}}</h5>
+                  <div class="line-divider"></div>
+
+              <ul class="menuitems">
+                <li class="menuitems" ng-repeat="menuitem in restaurants.menus[0].sections[0].subsections[0].items">
+                  <p><span class="caret itemname"></span>{{menuitem.item}}<span class="caret itemname"></span></p>
                   <!-- IMAGE CAROUSEL -->
                   <div ng-show="menuitem.images.length > 0" class="carousel menuCarousel{{$index}}" class="carousel slide" data-ride="carousel" ng-swipe-left="" ng-swipe-right="">
                     <!-- Indicators -->
@@ -183,7 +190,7 @@
                       <span class="sr-only">Next</span>
                     </a>
                   </div>
-                  <p>{{menuitem.item}}</p>
+                  <p ng-show="menuitem.images.length == 0">{{restaurants.noImageMessages[restaurants.random]}}</p>
                 </li>
               </ul>
               <a ng-show="restaurants.menu_origin == 'LOCU'" href="http://locu.com"><img height="25" width="155" src="http://locu.com/static/images/dev/poweredby-color@2x.png" alt="Powered by Locu" /></a>
@@ -191,6 +198,7 @@
           </div>
         </div>
         <!-- NOT LOGGED IN-->
+        <div class="bottomthing" ng-show="user.logged_in == false"></div>
         <div class="login-container" ng-show="user.logged_in == false">
           <div class="g-signin2" data-onsuccess="onSignIn"></div>
         </div>

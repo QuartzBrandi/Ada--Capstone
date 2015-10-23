@@ -31,7 +31,7 @@ mongoose.connection.on('open', function(){
                   subsection_name: "",
                   items: [
                     {
-                      name: "Poi",
+                      item: "Poi",
                       images: [
                         {
                           origin: "Google",
@@ -51,7 +51,7 @@ mongoose.connection.on('open', function(){
                       ]
                     },
                     {
-                      name: "Rice",
+                      item: "Rice",
                       images: [
                         {
                           origin: "Google",
@@ -61,7 +61,7 @@ mongoose.connection.on('open', function(){
                       ]
                     },
                     {
-                      name: "Kalua Pig",
+                      item: "Kalua Pig",
                       images: [
                         {
                           origin: "Google",
@@ -71,7 +71,7 @@ mongoose.connection.on('open', function(){
                       ]
                     },
                     {
-                      name: "Kalua Pig & Cabbage",
+                      item: "Kalua Pig & Cabbage",
                       images: [
                         {
                           origin: "Google",
@@ -81,7 +81,7 @@ mongoose.connection.on('open', function(){
                       ]
                     },
                     {
-                      name: "Laulau",
+                      item: "Laulau",
                       images: [
                         {
                           origin: "Google",
@@ -91,7 +91,7 @@ mongoose.connection.on('open', function(){
                       ]
                     },
                     {
-                      name: "Beef Stew",
+                      item: "Beef Stew",
                       images: [
                         {
                           origin: "Google",
@@ -101,7 +101,7 @@ mongoose.connection.on('open', function(){
                       ]
                     },
                     {
-                      name: "Tripe Stew",
+                      item: "Tripe Stew",
                       images: [
                         {
                           origin: "Google",
@@ -111,7 +111,7 @@ mongoose.connection.on('open', function(){
                       ]
                     },
                     {
-                      name: "Beef With Watercress",
+                      item: "Beef With Watercress",
                       images: [
                         {
                           origin: "Google",
@@ -121,7 +121,7 @@ mongoose.connection.on('open', function(){
                       ]
                     },
                     {
-                      name: "Luau Squid",
+                      item: "Luau Squid",
                       images: [
                         {
                           origin: "Google",

@@ -3,6 +3,7 @@
 	// var app = angular.module('visualMenuControllers', [ ])
 	var app = angular.module('visualMenu', ['ngRoute'])
 
+	// TODO: Get rid of the little # in the URL...?
 	app.config(function($routeProvider) {
 			$routeProvider
 
@@ -119,6 +120,14 @@
 			restaurant.searchName = "";
 			restaurant.searchLocation = "";
 		}
+
+		restaurant.noImageMessages = [
+			"Sorry, there are no images for this menu item!",
+			"There are no images for this menu item!\n If you buy me please pay it forward and take a picture of your meal and post it here.",
+			"Sorry, there are no images available for this item. Take a picture change that!"
+		];
+
+		restaurant.random = Math.floor(Math.random()*restaurant.noImageMessages.length);
 	}]);
 
 	app.controller('userController', ['$http', '$scope', function($http, $scope) {
