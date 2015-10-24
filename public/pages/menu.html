@@ -4,9 +4,6 @@
 <!-- <div id="panel-menu" ng-show="restaurants.name.length > 0"> -->
 <div id="panel-menu">
   <h2>{{ name }}</h2>
-  <div ng-controller='testController as tst'>
-    <h3>{{ tst.dog }}</h3>
-  </div>
   <div class="line-divider"></div>
   <!-- <button ng-show="restaurants.menus.length > 0" ng-click="restaurants.imageUpdate(0, 0, 0, 1)" class="btn btn-default">UPDATE MEEE</button> -->
   <!-- NO MENU AVAILABLE -->
@@ -35,45 +32,75 @@
   </div>
 
   <!-- MENU -->
-  <h3>{{menus[0].menu_name}}</h3>
-  <h4>{{menus[0].sections[0].section_name}}</h4>
-  <h5>{{menus[0].sections[0].subsections[0].subsection_name}}</h5>
-  <div class="line-divider"></div>
-  <div>
-
-    <div ng-controller="CarouselDemoCtrl">
-      <div style="height: 305px">
-        <uib-carousel interval="myInterval" no-wrap="noWrapSlides">
-          <uib-slide ng-repeat="slide in slides" active="slide.active">
-            <img ng-src="{{slide.image}}" style="margin:auto;">
-            <div class="carousel-caption">
-              <h4>Slide {{$index}}</h4>
-              <p>{{slide.text}}</p>
-            </div>
-          </uib-slide>
-        </uib-carousel>
+  <div ng-controller="menuController as menuCtrl">
+    <!-- MENU DROPDOWN -->
+    <div class="outside">
+      <div ng-show="menus.length > 0" class="dropdown menu-dropdowns">
+        <a class="dropdown-toggle" data-toggle="dropdown">
+          <h3>{{menus[menuCtrl.menu].menu_name}}<span class="caret"></span></h3>
+        </a>
+        <ul class="dropdown-menu">
+          <li ng-repeat="menu in menus" ng-click="menuCtrl.changeMenu($index)">{{menu.menu_name}}</li>
+        </ul>
       </div>
-      <div class="row">
-        <div class="col-md-6">
-          <button type="button" class="btn btn-info" ng-click="addSlide()">Add Slide</button>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" ng-model="noWrapSlides">
-              Disable Slide Looping
-            </label>
-          </div>
+    </div>
+
+    <div class="outside">
+      <div ng-show="menus[menuCtrl.menu].sections.length > 0" class="dropdown menu-dropdowns">
+        <a class="dropdown-toggle" data-toggle="dropdown">
+          <h4>{{menus[menuCtrl.menu].sections[menuCtrl.section].section_name}}<span class="caret"></span></h4>
+        </a>
+        <ul class="dropdown-menu">
+          <li ng-repeat="section in menus[menuCtrl.menu].sections" ng-click="menuCtrl.changeSection($index)">{{section.section_name}}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="outside">
+      <div ng-show="menus[menuCtrl.menu].sections[menuCtrl.section].subsections.length > 1 || menus[menuCtrl.menu].sections[menuCtrl.section].subsections[0].subsection_name != ''" class="dropdown menu-dropdowns">
+        <a class="dropdown-toggle" data-toggle="dropdown">
+          <h5>{{menus[menuCtrl.menu].sections[menuCtrl.section].subsections[menuCtrl.subsection].subsection_name}}<span class="caret"></span></h5>
+        </a>
+        <ul class="dropdown-menu">
+          <li ng-repeat="subsection in menus[menuCtrl.menu].sections[menuCtrl.section].subsections" ng-click="menuCtrl.changeSubsection($index)">{{subsection.subsection_name}}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="line-divider"></div>
+
+    <div ng-repeat="item in menus[menuCtrl.menu].sections[menuCtrl.section].subsections[menuCtrl.subsection].items">
+      <p><span class="caret itemname"></span>{{item.item}}<span class="caret itemname"></span></p>
+      <div ng-controller="CarouselDemoCtrl" ng-init="carouselMenus(menus)">
+        <!-- <div style="height: 305px"> -->
+        <!-- TODO: HOW DO I GET RID OF THE INDICATORS?? -->
+        <div>
+          <uib-carousel style="height:500px; width:100%;" interval="myInterval" no-wrap="noWrapSlides">
+            <uib-slide style="height:500px; width:100%;" ng-repeat="image in item.images" active="image.active">
+              <img style="width:auto; height:auto; margin:auto;" ng-src="{{image.url}}" style="margin:auto;">
+              <div class="carousel-caption">
+                <h4>{{item.item}}</h4>
+                <p>{{image.origin}}</p>
+              </div>
+            </uib-slide>
+          </uib-carousel>
         </div>
-        <div class="col-md-6">
-          Interval, in milliseconds: <input type="number" class="form-control" ng-model="myInterval">
-          <br />Enter a negative number or 0 to stop the interval.
-        </div>
+      </div>
+
+      <div class="no-image">
+        <p ng-show="item.images.length == 0">{{restaurants.noImageMessages[restaurants.random]}}</p>
+        <form id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post">
+          <input type="file" name="photoupload">
+          <input type="submit" value="Upload Image" name="submit">
+        </form>
       </div>
     </div>
 
 
+  </div>
 
 
 
-    <a ng-show="menu_origin == 'LOCU'" href="http://locu.com"><img class="powered-by" height="25" width="155" src="http://locu.com/static/images/dev/poweredby-color@2x.png" alt="Powered by Locu" /></a>
+    <a ng-show="menuOrigin == 'LOCU'" href="http://locu.com"><img class="powered-by" height="25" width="155" src="http://locu.com/static/images/dev/poweredby-color@2x.png" alt="Powered by Locu" /></a>
   </div>
 </div>

@@ -186,6 +186,11 @@ h3 {
   margin: 0;
 }
 
+.carousel.ng-isolate-scope {
+  height: 300px;
+  width: 100%;
+}
+
 h4 {
   text-align: center;
   font-family: 'Permanent Marker', cursive;
@@ -197,6 +202,26 @@ h5 {
   font-family: 'Permanent Marker', cursive;
   margin: 0 0 5px 0;
 }
+
+.outside {
+  text-align: center;
+}
+
+.menu-dropdowns {
+  text-align: center;
+  display: inline-block;
+}
+
+.item.ng-isolate-scope {
+  width: auto;
+  height: auto;
+}
+
+/*.dropdown-menu {
+  left: -50%;
+  right: -50%;
+  text-align: center;
+}*/
 
 ul.menuitems {
   margin-top: 5px;

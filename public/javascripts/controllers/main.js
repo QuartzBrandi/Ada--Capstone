@@ -43,25 +43,50 @@
 	});
 
 	app.controller('CarouselDemoCtrl', function ($scope) {
+
+		$scope.carouselMenus = function(menus) {
+			console.log("hi")
+		}
+
+		// console.log("hi")
 	  $scope.myInterval = 5000;
 	  $scope.noWrapSlides = false;
-	  var slides = $scope.slides = [];
-	  $scope.addSlide = function() {
-	    var newWidth = 600 + slides.length + 1;
-	    slides.push({
-	      image: '//placekitten.com/' + newWidth + '/300',
-	      text: ['More','Extra','Lots of','Surplus'][slides.length % 4] + ' ' +
-	        ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
-	    });
-	  };
-	  for (var i=0; i<4; i++) {
-	    $scope.addSlide();
-	  }
+	  // var slides = $scope.slides = [];
+	  // $scope.addSlide = function() {
+	  //   var newWidth = 600 + slides.length + 1;
+	  //   slides.push({
+	  //     image: '//placekitten.com/' + newWidth + '/300',
+	  //     text: ['More','Extra','Lots of','Surplus'][slides.length % 4] + ' ' +
+	  //       ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
+	  //   });
+	  // };
+	  // for (var i=0; i<4; i++) {
+	  //   $scope.addSlide();
+	  // }
 	});
 
 	app.controller("testController", function() {
 		this.dog = "testing dog";
 	})
+
+	app.controller('menuController', function() {
+		var ctrl = this;
+		ctrl.menu = 0;
+		ctrl.section = 0;
+		ctrl.subsection = 0;
+
+		ctrl.changeMenu = function(index) {
+			ctrl.menu = index;
+		}
+
+		ctrl.changeSection = function(index) {
+			ctrl.section = index;
+		}
+
+		ctrl.changeSubsection = function(index) {
+			ctrl.subsection = index;
+		}
+	});
 
 	app.controller('theRestaurantController', ['$http', '$scope', '$route', function($http, $scope, $route) {
 		$scope.loading = true;
@@ -82,6 +107,7 @@
 					$scope.address      = data.address;
 					$scope.addressFull  = data.address_full;
 					$scope.menus        = data.menus;
+					console.log($scope.menus);
 					$scope.menuOrigin   = data.menu_origin;
 				});
 		}
