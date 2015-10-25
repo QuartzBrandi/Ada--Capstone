@@ -12,6 +12,7 @@ var User = require('./app/models/user');
 var routes = require('./routes/index');
 var restaurants = require('./routes/restaurants');
 var users = require('./routes/users');
+var otherRoutes = require('./routes/other');
 
 var multer = require('multer');
 
@@ -32,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/api/restaurants', restaurants);
 app.use('/api/users', users);
-
+app.use('/', otherRoutes); // for redirecting to homepage
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
