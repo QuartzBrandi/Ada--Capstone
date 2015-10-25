@@ -73,8 +73,16 @@
         <!-- JUMBOTRON -->
         <div class="jumbotron header-things">
 
+          <p>first div</p>
           <div ng-controller='testController as tst'>
-            {{tst.dog}}
+            Dog: {{tst.dog}}
+            <button ng-click='tst.change("first dog")'>txt</button>
+          </div>
+
+          <p>second div</p>
+          <div ng-controller='testController as tsst'>
+            Dog: {{tsst.dog}}
+            <button ng-click='tsst.change("second dog")'>text</button>
           </div>
 
           <h1><a href="#/">Picto-Menu</a></h1>

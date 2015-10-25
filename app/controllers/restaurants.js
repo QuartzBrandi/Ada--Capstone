@@ -200,7 +200,11 @@ exports.restaurantController = {
 
     mongoose.connect('mongodb://localhost/visualmenu');
     var db = mongoose.connection;
-    db.on('error', console.error.bind(console, 'Connection Error:'));
+    db.on('error', function() {
+      console.error.bind(console, 'Connection Error:');
+      db.close();
+      return res.status(500).json({});
+    });
     db.once('open', function (callback) {
       Restaurant.findOne(
         { 'name': restaurantName },
@@ -298,7 +302,7 @@ exports.restaurantController = {
     var item = replaceSpacesWithPlusSign(rawItem);
     var url =
     "https://www.googleapis.com/customsearch/v1?" +
-    "q=" + prepareString(item) + "+" + restaurant +
+    "q=" + "%22" + prepareString(item) + "%22" + "+" + restaurant +
     "&cx=" + process.env.GOOGLE_CX +
     "&num=3" +
     "&searchType=image" +

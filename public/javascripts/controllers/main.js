@@ -67,6 +67,12 @@
 
 	app.controller("testController", function() {
 		this.dog = "testing stuff";
+
+		var hi = this;
+
+		this.change = function(name) {
+			hi.dog = name;
+		}
 	})
 
 	app.controller('menuController', function() {
@@ -92,13 +98,12 @@
 	});
 
 	app.controller('theRestaurantController', ['$http', '$scope', '$route', function($http, $scope, $route) {
-		$scope.loading = true;
+		$scope.loading = false;
+		$scope.loadingImage = false;
 		var uriRoute = "api/restaurants/";
 		var name    = $route.current.params.name;
 		var address = $route.current.params.address;
 		select(name, address);
-
-		$scope.loadingImage = false;
 
 		function select(name, address) {
 			// get the restaurant info for the selected restaurant
@@ -107,12 +112,14 @@
 			var selected = {"name": name, "address": address};
 			$http({method: "GET", url: url, params: selected})
 				.success(function(data) {
-					$scope.loading      = false;
+					// $scope.loading      = false;
 					$scope.name         = data.name;
 					$scope.address      = data.address;
 					$scope.addressFull  = data.address_full;
 					$scope.menus        = data.menus;
 					$scope.menuOrigin   = data.menu_origin;
+					$scope.restaurantID = data._id;
+					console.log(data);
 				});
 		}
 

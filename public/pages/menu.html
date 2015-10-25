@@ -48,7 +48,7 @@
       <div ng-show="menus[menuCtrl.menu].sections.length > 0" class="dropdown menu-dropdowns">
         <a class="dropdown-toggle" data-toggle="dropdown">
           <h4 ng-show="menus[menuCtrl.menu].sections[menuCtrl.section].section_name.length > 0">{{menus[menuCtrl.menu].sections[menuCtrl.section].section_name}}<span class="caret"></span></h4>
-          <h4 ng-show="menus[menuCtrl.menu].sections[menuCtrl.section].section_name.length == 0 && menus[menuCtrl.menu].sections.length > 1">{{menus[menuCtrl.menu].menu_name}}<span class="caret"></span></h4>
+          <!-- <h4 ng-show="menus[menuCtrl.menu].sections[menuCtrl.section].section_name.length == 0 && menus[menuCtrl.menu].sections.length > 1">{{menus[menuCtrl.menu].menu_name}}<span class="caret"></span></h4> -->
         </a>
         <ul class="dropdown-menu">
           <li ng-repeat="section in menus[menuCtrl.menu].sections" ng-click="menuCtrl.changeSection($index)">{{section.section_name}}</li>
@@ -60,8 +60,8 @@
       <div ng-show="menus[menuCtrl.menu].sections[menuCtrl.section].subsections.length > 1 || menus[menuCtrl.menu].sections[menuCtrl.section].subsections[0].subsection_name != ''" class="dropdown menu-dropdowns">
         <a class="dropdown-toggle" data-toggle="dropdown">
           <h5 ng-show="menus[menuCtrl.menu].sections[menuCtrl.section].subsections[menuCtrl.subsection].subsection_name.length > 0">{{menus[menuCtrl.menu].sections[menuCtrl.section].subsections[menuCtrl.subsection].subsection_name}}<span class="caret"></span></h5>
-          <h5 ng-show="menus[menuCtrl.menu].sections[menuCtrl.section].subsections[menuCtrl.subsection].subsection_name.length == 0 && menus[menuCtrl.menu].sections[menuCtrl.section].section_name.length > 0 && menus[menuCtrl.menu].sections[menuCtrl.section].subsections.length > 1">{{menus[menuCtrl.menu].sections[menuCtrl.section].section_name}}<span class="caret"></span></h5>
-          <h5 ng-show="menus[menuCtrl.menu].sections[menuCtrl.section].subsections[menuCtrl.subsection].subsection_name.length == 0 && menus[menuCtrl.menu].sections[menuCtrl.section].section_name.length == 0 && menus[menuCtrl.menu].sections[menuCtrl.section].subsections.length > 1">{{menus[menuCtrl.menu].menu_name}}<span class="caret"></span></h5>
+          <!-- <h5 ng-show="menus[menuCtrl.menu].sections[menuCtrl.section].subsections[menuCtrl.subsection].subsection_name.length == 0 && menus[menuCtrl.menu].sections[menuCtrl.section].section_name.length > 0 && menus[menuCtrl.menu].sections[menuCtrl.section].subsections.length > 1">{{menus[menuCtrl.menu].sections[menuCtrl.section].section_name}}<span class="caret"></span></h5> -->
+          <!-- <h5 ng-show="menus[menuCtrl.menu].sections[menuCtrl.section].subsections[menuCtrl.subsection].subsection_name.length == 0 && menus[menuCtrl.menu].sections[menuCtrl.section].section_name.length == 0 && menus[menuCtrl.menu].sections[menuCtrl.section].subsections.length > 1">{{menus[menuCtrl.menu].menu_name}}<span class="caret"></span></h5> -->
         </a>
         <ul class="dropdown-menu">
           <li ng-repeat="subsection in menus[menuCtrl.menu].sections[menuCtrl.section].subsections" ng-click="menuCtrl.changeSubsection($index)">{{subsection.subsection_name}}</li>
@@ -82,7 +82,7 @@
               <img ng-src="{{image.url}}" style="margin:auto;">
               <div class="carousel-caption">
                 <h4>{{item.item}}</h4>
-                <p>{{image.origin}}</p>
+                <p ng-show="image.origin == 'Google'"><i class="fa fa-google"></i></p>
               </div>
             </uib-slide>
           </uib-carousel>
