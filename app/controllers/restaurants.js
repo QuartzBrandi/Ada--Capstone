@@ -12,11 +12,17 @@ var mongoose = require('mongoose');
 var Restaurant = require('../models/restaurant');
 
 // Used for Google API calls.
+// function replaceSpacesWithPlusSign(theString) {
 function replaceSpacesWithPlusSign(theString) {
   var anArray = theString.split(" ");
   var newString = anArray.join("+");
   return newString;
 };
+
+function prepareString(theString) {
+  var result = theString.replace("&", "%26");
+  return result;
+}
 
 function createAddressObject(addressString) {
   // TODO: Doing a lot of assuming in this function!
@@ -207,7 +213,7 @@ exports.restaurantController = {
             var url = "http://localhost:3000" +
               "/api/restaurants/menu/images?" +
               "restaurant=" + restaurantName +
-              "&menuitem=" + theItem.item;
+              "&menuitem=" + prepareString(theItem.item);
             request(url, function (error, response, body) {
               if (!error && response.statusCode == 200) {
                 var itemsArray = JSON.parse(body);
@@ -292,7 +298,7 @@ exports.restaurantController = {
     var item = replaceSpacesWithPlusSign(rawItem);
     var url =
     "https://www.googleapis.com/customsearch/v1?" +
-    "q=" + restaurant + "+" + item +
+    "q=" + prepareString(item) + "+" + restaurant +
     "&cx=" + process.env.GOOGLE_CX +
     "&num=3" +
     "&searchType=image" +
@@ -315,7 +321,6 @@ exports.restaurantController = {
           result["suborigin"] = itemObject.image.contextLink; //suborigin
           threeImages.push(result);
         }
-        console.log("inside", threeImages);
 
         return res.status(200).json(threeImages);
       }

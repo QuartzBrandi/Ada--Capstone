@@ -49,7 +49,7 @@
 		}
 
 		// console.log("hi")
-	  $scope.myInterval = 5000;
+	  $scope.myInterval = -1;
 	  $scope.noWrapSlides = false;
 	  // var slides = $scope.slides = [];
 	  // $scope.addSlide = function() {
@@ -66,7 +66,7 @@
 	});
 
 	app.controller("testController", function() {
-		this.dog = "testing dog";
+		this.dog = "testing stuff";
 	})
 
 	app.controller('menuController', function() {
@@ -77,10 +77,13 @@
 
 		ctrl.changeMenu = function(index) {
 			ctrl.menu = index;
+			ctrl.section = 0;
+			ctrl.subsection = 0;
 		}
 
 		ctrl.changeSection = function(index) {
 			ctrl.section = index;
+			ctrl.subsection = 0;
 		}
 
 		ctrl.changeSubsection = function(index) {
@@ -95,6 +98,8 @@
 		var address = $route.current.params.address;
 		select(name, address);
 
+		$scope.loadingImage = false;
+
 		function select(name, address) {
 			// get the restaurant info for the selected restaurant
 			// but, if not in database, create the restaurant
@@ -107,8 +112,23 @@
 					$scope.address      = data.address;
 					$scope.addressFull  = data.address_full;
 					$scope.menus        = data.menus;
-					console.log($scope.menus);
 					$scope.menuOrigin   = data.menu_origin;
+				});
+		}
+
+		$scope.imageUpdate = function(menuIndex, sectionIndex, subsectionIndex, itemIndex) {
+			$scope.loadingImage = true;
+			$scope.loadingIndex = itemIndex;
+			var url = uriSite + uriRoute + "menuitem" +
+			"?menu=" + menuIndex +
+			"&section=" + sectionIndex +
+			"&subsection=" + subsectionIndex +
+			"&item=" + itemIndex +
+			"&restaurant=" + $scope.name;
+			$http.get(url)
+				.success(function(data) {
+					$scope.menus[menuIndex].sections[sectionIndex].subsections[subsectionIndex].items[itemIndex] = data;
+					$scope.loadingImage = false;
 				});
 		}
 	}]);
