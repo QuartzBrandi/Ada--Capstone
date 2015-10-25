@@ -1,7 +1,7 @@
 (function() {
 	// var app = angular.module('visualMenuControllers', ['config'])
 	// var app = angular.module('visualMenuControllers', [ ])
-	var app = angular.module('visualMenu', ['ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap'])
+	var app = angular.module('visualMenuControllers', ['ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap'])
 
 	var uriSite = "http://localhost:3000/"
 
@@ -64,16 +64,6 @@
 	  //   $scope.addSlide();
 	  // }
 	});
-
-	app.controller("testController", function() {
-		this.dog = "testing stuff";
-
-		var hi = this;
-
-		this.change = function(name) {
-			hi.dog = name;
-		}
-	})
 
 	app.controller('menuController', function() {
 		var ctrl = this;
@@ -253,7 +243,7 @@
 	app.controller('userController', ['$http', '$scope', function($http, $scope) {
 		var user = this;
 		var uriRoute = "api/users/";
-		user.name = "";
+		user.name = "hi";
 		user.logged_in = false;
 		user.information = {};
 		user.profile = false;
