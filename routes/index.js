@@ -26,12 +26,12 @@ router.post('/api/photo', function (req, res) {
     if (err) {
       // an error occurred when uploading
       console.log("ERROR", err)
-      console.log("req", req)
+      // console.log("req", req)
       return
     } else {
 
     console.log("req", req)
-    console.log("res", res)
+    // console.log("res", res)
     console.log("NO ERROR")
     return res.json({ a: 1 });
     // Everything went fine

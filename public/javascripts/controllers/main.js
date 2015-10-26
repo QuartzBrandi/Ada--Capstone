@@ -94,16 +94,36 @@
 		}
 	});
 
-	app.controller('photoUploadController', function() {
-		var photoCtrl = this;
-		photoCtrl.showUpload = false;
+	// app.controller('photoUploadController', function() {
+	// 	var photoCtrl = this;
+	// 	photoCtrl.showUpload = false;
+	//
+	// 	photoCtrl.showAddPhotos = function() {
+	// 		console.log("HIELL?")
+	// 		photoCtrl.showUpload = true;
+	// 		// $scope.$digest;
+	// 	};
+	//
+	// 	photoCtrl.addPhoto = function() {
+	//
+	// 	};
+	// })
 
-		photoCtrl.showAddPhotos = function() {
+	app.controller('photoUploadController', ['$scope', function($scope) {
+		$scope.showUpload = false;
+		$scope.filePhoto = {};
+
+		$scope.showAddPhotos = function() {
 			console.log("HIELL?")
-			photoCtrl.showUpload = true;
+			$scope.showUpload = true;
 			// $scope.$digest;
 		};
-	})
+
+		$scope.addPhoto = function() {
+			console.log("GOT HERE");
+			console.log($scope.filePhoto);
+		};
+	}])
 
 	app.controller('carouselController', function ($scope) {
 

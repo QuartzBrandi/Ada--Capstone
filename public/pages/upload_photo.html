@@ -2,10 +2,11 @@
   <!-- <button class="btn btn-default" ng-click="photoCtrl.showAddPhoto()">Add Photo?</button> -->
 <div class="row">
   <div class="col-xs-12 col-md-6 col-md-offset-3">
-    <form id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post">
+    <!-- <form id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post"> -->
+    <form id="uploadForm" enctype="multipart/form-data" ng-submit="addPhoto()" method="post">
       <div class="form-group photouploading">
         <!-- <label for="photoUpload">Add Photo</label> -->
-        <input type="file" name="photoupload" id="photoUpload">
+        <input type="file" ng-model="filePhoto" name="photoupload" id="photoUpload">
         <!-- <input type="submit" value="Submit" name="submit"> -->
         <button type="submit upload-button" class="btn btn-default"><i class='fa fa-upload'></i></button>
         <!-- <p class="help-block">Help us improve Picto-Menu!</p> -->
