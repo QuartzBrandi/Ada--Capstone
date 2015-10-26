@@ -4,8 +4,8 @@
 var request = require('request');
 
 // For environment files.
-var env = require('node-env-file');
-env('./.env');
+// var env = require('node-env-file');
+// env('./.env');
 
 // To help use MongoDB.
 var mongoose = require('mongoose');
