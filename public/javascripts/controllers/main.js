@@ -94,11 +94,22 @@
 		}
 	});
 
+	app.controller('photoUploadController', function() {
+		var photoCtrl = this;
+		photoCtrl.showUpload = false;
+
+		photoCtrl.showAddPhotos = function() {
+			console.log("HIELL?")
+			photoCtrl.showUpload = true;
+			// $scope.$digest;
+		};
+	})
+
 	app.controller('carouselController', function ($scope) {
 
 		$scope.carouselMenus = function(menus) {
 			console.log("Test");
-		}
+		};
 
 	  $scope.myInterval = -1;
 	  $scope.noWrapSlides = false;
@@ -160,19 +171,6 @@
 			restaurant.results = [];
 			restaurant.menus = [];
 			restaurant.menu_origin = "";
-		}
-
-		restaurant.search = function() {
-			restaurant.results = [];
-			var url = uriSite + uriRoute + "search?name=" + restaurant.searchName + "&location=" + restaurant.searchLocation;
-			console.log(url);
-			$http.get(url)
-				.success(function(data) {
-					console.log("success");
-					restaurant.results = data;
-				});
-			restaurant.searchName = "";
-			restaurant.searchLocation = "";
 		}
 	}]);
 

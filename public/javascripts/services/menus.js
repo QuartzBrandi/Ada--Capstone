@@ -7,4 +7,12 @@
       templateUrl: "pages/search_box.html"
     };
   });
+
+  app.directive("addPhoto", function() {
+    return {
+      restrict: 'E',
+      templateUrl: "pages/upload_photo.html"
+      // controller: 'photoUploadController'
+    };
+  });
 })();

@@ -43,6 +43,18 @@
     <!-- CSS -->
     <link href="stylesheets/style.css" rel="stylesheet">
 
+    <script>
+      $(document).ready(function(){
+          $("#addPhoto").click(function(){
+              $("#p").append(" <b>Appended text</b>.");
+          });
+
+          $("#btn2").click(function(){
+              $("ol").append("<li>Appended item</li>");
+          });
+      });
+    </script>
+
     <!-- APP -->
     <title>Picto-Menu</title>
   </head>

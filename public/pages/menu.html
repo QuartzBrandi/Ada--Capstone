@@ -91,12 +91,10 @@
 
       <div ng-controller="noCarouselController" class="no-image">
         <p ng-show="item.images.length == 0">{{noImageMessage}}</p>
-        <form id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post">
-          <input type="file" name="photoupload">
-          <input type="submit" value="Upload Image" name="submit">
-        </form>
+        <!-- <button ng-click="showAddPhoto()">Add Photo?</button> -->
+        <add-photo></add-photo>
       </div>
-      <button ng-show="item.images.length == 0" ng-click="imageUpdate(menuCtrl.menu, menuCtrl.section, menuCtrl.subsection, $index)" class="btn btn-default">Call the Google</button>
+      <!-- <button ng-show="item.images.length == 0" ng-click="imageUpdate(menuCtrl.menu, menuCtrl.section, menuCtrl.subsection, $index)" class="btn btn-default">Call the Google</button> -->
       <div ng-show="loadingImage && $index == loadingIndex" class="fa fa-spinner fa-spin fa-3x"></div>
     </div>
 

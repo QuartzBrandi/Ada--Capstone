@@ -353,3 +353,7 @@ div.themResults {
 .no-results {
   padding-top: 15px;
 }
+
+#photoUpload {
+  display: inline;
+}
