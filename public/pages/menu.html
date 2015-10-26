@@ -31,7 +31,7 @@
   </div>
 
   <!-- MENU -->
-  <div ng-controller="menuController as menuCtrl">
+  <div ng-controller="menuIndexController as menuCtrl">
     <!-- MENU DROPDOWN -->
     <div class="outside">
       <div ng-show="menus.length > 0" class="dropdown menu-dropdowns">
@@ -73,7 +73,7 @@
 
     <div ng-repeat="item in menus[menuCtrl.menu].sections[menuCtrl.section].subsections[menuCtrl.subsection].items">
       <p><span class="caret itemname"></span>{{item.item}}<span class="caret itemname"></span></p>
-      <div ng-controller="CarouselDemoCtrl" ng-init="carouselMenus(menus)">
+      <div ng-controller="carouselController" ng-init="carouselMenus(menus)">
         <!-- <div style="height: 305px"> -->
         <!-- TODO: HOW DO I GET RID OF THE INDICATORS?? -->
         <div>
@@ -89,8 +89,8 @@
         </div>
       </div>
 
-      <div class="no-image">
-        <p ng-show="item.images.length == 0">{{restaurants.noImageMessages[restaurants.random]}}</p>
+      <div ng-controller="noCarouselController" class="no-image">
+        <p ng-show="item.images.length == 0">{{noImageMessage}}</p>
         <form id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post">
           <input type="file" name="photoupload">
           <input type="submit" value="Upload Image" name="submit">

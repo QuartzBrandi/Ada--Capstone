@@ -1,50 +1,42 @@
-// angular.module('config', [])
-//   .constant("greeting", "https://www.picto-menu.com/api/restaurants/");
-// angular.module('myApp.config', [])
-//     .constant('APP_NAME','My Angular App!')
-//     .constant('APP_VERSION','0.3');
-
 (function() {
-	// var app = angular.module('visualMenuControllers', ['config'])
-	// var app = angular.module('visualMenuControllers', [ ])
-	var app = angular.module('visualMenuConfig', ['ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap'])
-
-	var uriSite = "http://localhost:3000/"
+	var app = angular.module('visualMenuConfig', ['ngRoute'])
 
 	// TODO: Get rid of the little # in the URL...?
 	app.config(function($routeProvider) {
-		console.log("hy");
-			$routeProvider
+		$routeProvider
 
-					// route for the home page
-					.when('/', {
-							templateUrl : 'pages/home.html'
-							// controller  : 'mainController'
-					})
+			// route for the home page
+			.when('/', {
+				templateUrl: 'pages/home.html',
+				controller: 'searchController'
+			})
 
-					.when('/menu/:name/:address', {
-						templateUrl: 'pages/menu.html',
-						controller: 'theRestaurantController'
-					})
+      // TODO: Give an error or redirect if not in database.
+			// TODO: What if a name or address has a slash in it?
+      // route for a specific restaurant page
+			.when('/menu/:name/:address', {
+				templateUrl: 'pages/menu.html',
+				controller: 'theRestaurantController'
+			})
 
-					.when('/profile', {
-						templateUrl: 'pages/profile.html'
-					})
+      // route for the user profile page
+			.when('/profile', {
+				templateUrl: 'pages/profile.html'
+			})
 
-					// route for the about page
-					.when('/about', {
-							templateUrl : 'pages/about.html'
-							// controller  : 'aboutController'
-					})
+			// route for the visual menu about page
+			.when('/about', {
+				templateUrl: 'pages/about.html'
+			})
 
-					// route for the contact page
-					.when('/contact', {
-							templateUrl : 'pages/contact.html'
-							// controller  : 'contactController'
-					})
+			// route for the visual menu contact page
+			.when('/contact', {
+				templateUrl: 'pages/contact.html'
+			})
 
-					.otherwise({
-						redirectTo: '/'
-					});
+      // if doesn't match the above, redirect
+			.otherwise({
+				redirectTo: '/'
+			});
 	});
 })();

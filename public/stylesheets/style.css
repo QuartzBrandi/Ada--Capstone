@@ -76,7 +76,7 @@ a:visited i.fa:visited {
 h1 {
   padding: 0 5px 0 10px;
   margin: 0;
-  text-align: left;
+  text-align: center;
   display: inline-block;
 }
 h1 a {
@@ -109,6 +109,10 @@ p {
   text-align: center;
 }
 
+p {
+  padding-top: 5px;
+}
+
 span.caret.itemname {
   margin: 0 5px;
 }
@@ -117,11 +121,15 @@ span.caret.itemname {
   height: 70px;
 }
 
+.find-button {
+  display: block;
+}
+
 .jumbotron {
   padding-top: 1rem;
   padding-bottom: 1rem;
   margin-bottom: 0;
-  text-align: left;
+  text-align: center;
   position: relative;
   /*vertical-align:*/
   /*display: table-cell;*/

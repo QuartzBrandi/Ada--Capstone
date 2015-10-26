@@ -1,20 +1,16 @@
 <!-- RESTAURANT SEARCH FORM -->
-<div id="panel-search" ng-show="restaurants.results.length == 0 && restaurants.name.length == 0">
-  <form class="form-inline text-center search" name="searchBox" ng-submit="restaurants.search()">
-    <div class="form-group">
-      <input type="text" ng-model="restaurants.searchName" class="form-control" placeholder="Restaurant" title="Restaurant"></textarea>
-    </div>
-    <div class="form-group">
-      <input type="text" ng-model="restaurants.searchLocation" class="form-control" placeholder="Location" title="City or State"></textarea>
-    </div>
-    <button type="submit" class="btn btn-default">Find</button>
-  </form>
+<div id="panel-search" ng-show="results.length == 0">
+  <search-box></search-box>
+  <div ng-show="noResults">
+    <p>Sorry, there seems to be no restaurant by that name or in that location.</p>
+    <p>Make sure the restaurant is spelled correctly and the location is correct.</p>
+  </div>
 </div>
 
 <!-- RESTAURANT SERACH RESULTS -->
-<div id="panel-search-results" ng-show="restaurants.results.length > 0">
+<div id="panel-search-results" ng-show="results.length > 0">
   <ul>
-    <li ng-repeat="restaurant in restaurants.results">
+    <li ng-repeat="restaurant in results">
       <a ng-href="#/menu/{{restaurant.name}}/{{restaurant.address}}">
         <!-- TODO: Bug if restaurant or address has a slash...? -->
         <!-- <div class="search-results results" ng-click="restaurants.select(restaurant)"> -->
@@ -26,7 +22,10 @@
     </li>
   </ul>
   <div class="search-results back">
-    <a href="" ng-click="restaurants.results = []"><i class="fa fa-arrow-circle-o-left fa-3x"></i></a>
+    <p>Didn't find what you were looking for?</p>
+    <p><small>Make sure the restaurant is spelled correctly,<br>and the location is correct.<br>Else, we appologize for not being able to find your request.</small></p>
+    <search-box></search-box>
+    <!-- <a href="" ng-click="results = []"><i class="fa fa-arrow-circle-o-left fa-3x"></i></a> -->
   </div>
   <img class="powered-by" src="images/powered_by_google_on_white.png">
 </div>
