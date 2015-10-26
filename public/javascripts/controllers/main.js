@@ -22,6 +22,7 @@
 					if (data.length == 0) {
 						$scope.noResults = true;
 					}
+					console.log($scope.results.length);
 					// $scope.searchName = "";
 					// $scope.searchLocation = "";
 				});

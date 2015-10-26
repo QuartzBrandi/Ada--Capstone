@@ -21,7 +21,8 @@
     </li>
   </ul>
   <div class="search-results back">
-    <p>Didn't find what you were looking for?<br>Try a more specific location.</p>
+    <p>Didn't find what you were looking for?</p>
+    <p ng-hide="results.length < 20">Try a more specific location.</p>
     <div class="row themResults">
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
         <search-box></search-box>
