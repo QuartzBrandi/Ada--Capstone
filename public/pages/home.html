@@ -1,9 +1,9 @@
 <!-- RESTAURANT SEARCH FORM -->
 <div id="panel-search" ng-show="results.length == 0">
   <search-box></search-box>
-  <div ng-show="noResults">
-    <p>Sorry, there seems to be no restaurant by that name or in that location.</p>
-    <p>Make sure the restaurant is spelled correctly and the location is correct.</p>
+  <div class="no-results" ng-show="noResults">
+    <p>No results were found.</p>
+    <p>Make sure the restaurant is spelled correctly and the location is valid.</p>
   </div>
 </div>
 
