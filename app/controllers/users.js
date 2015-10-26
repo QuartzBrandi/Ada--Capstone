@@ -5,7 +5,7 @@ var request = require('request');
 
 // For environment files.
 var env = require('node-env-file');
-env('config/.env');
+env('./.env');
 // For environemnt variables/constants. TODO: Figure out how to actually do this.
 var config = require('../../config');
 
