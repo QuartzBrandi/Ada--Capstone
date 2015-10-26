@@ -341,6 +341,15 @@ div.carousel p {
   text-shadow: 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black;
 }*/
 
+div.themResults {
+  margin-top: 10px;
+}
+
+/*.form-group.searchBox {
+  width: auto;
+  margin: auto auto 5px auto;
+}*/
+
 .no-results {
-  padding-top: 10px;
+  padding-top: 15px;
 }

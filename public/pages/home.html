@@ -3,7 +3,6 @@
   <search-box></search-box>
   <div class="no-results" ng-show="noResults">
     <p>No results were found.</p>
-    <p>Make sure the restaurant is spelled correctly and the location is valid.</p>
   </div>
 </div>
 
@@ -22,9 +21,12 @@
     </li>
   </ul>
   <div class="search-results back">
-    <p>Didn't find what you were looking for?</p>
-    <p><small>Make sure the restaurant is spelled correctly,<br>and the location is correct.<br>Else, we appologize for not being able to find your request.</small></p>
-    <search-box></search-box>
+    <p>Didn't find what you were looking for?<br>Try a more specific location.</p>
+    <div class="row themResults">
+      <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
+        <search-box></search-box>
+      </div>
+    </div>
     <!-- <a href="" ng-click="results = []"><i class="fa fa-arrow-circle-o-left fa-3x"></i></a> -->
   </div>
   <img class="powered-by" src="images/powered_by_google_on_white.png">

@@ -11,6 +11,10 @@
 				controller: 'searchController'
 			})
 
+			.when('/home', {
+				redirectTo: '/'
+			})
+
       // TODO: Give an error or redirect if not in database.
 			// TODO: What if a name or address has a slash in it?
       // route for a specific restaurant page
