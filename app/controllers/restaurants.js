@@ -13,6 +13,8 @@ if (process.env.NODE_ENV != "production") {
 var database = require('../../database_config.js');
 var databaseLocation = process.env.NODE_ENV == "production" ? database.production.database : database.development.database;
 
+console.log(databaseLocation)
+
 var mongoose = require('mongoose');
 var Restaurant = require('../models/restaurant');
 
