@@ -6,8 +6,7 @@ if (process.env.NODE_ENV != "production") {
 
 module.exports = {
   development: {
-    // database: "mongodb://localhost/visualmenu"
-    database: "mongodb://" + process.env.MONGO_USER + ":" + process.env.MONGO_PASS + "@ds045644.mongolab.com:45644/capstone-project"
+    database: "mongodb://localhost/visualmenu"
   },
   production: {
     database: "mongodb://" + process.env.MONGO_USER + ":" + process.env.MONGO_PASS + "@ds045644.mongolab.com:45644/capstone-project"
