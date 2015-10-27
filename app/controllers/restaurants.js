@@ -303,7 +303,7 @@ exports.restaurantController = {
     var url =
     "https://www.googleapis.com/customsearch/v1?" +
     "q=" + "%22" + prepareString(item) + "%22" + "+" + restaurant +
-    "&cx=" + process.env.GOOGLE_CX +
+    "&cx=" + process.env.GOOGLE_CX1.slice(1) + "%3A" + process.env.GOOGLE_CX2 +
     "&num=3" +
     "&searchType=image" +
     // "&fields=items(cacheId%2CdisplayLink%2CfileFormat%2CformattedUrl%2ChtmlFormattedUrl%2ChtmlSnippet%2ChtmlTitle%2Cimage%2Clabels%2Clink%2Cmime%2Cpagemap%2Csnippet%2Ctitle)" +
