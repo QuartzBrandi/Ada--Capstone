@@ -357,3 +357,11 @@ div.themResults {
 #photoUpload {
   display: inline;
 }
+
+.spinny-thing {
+  text-align: center;
+}
+
+.fa-spinner {
+  margin: auto;
+}

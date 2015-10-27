@@ -4,7 +4,7 @@
 <!-- <div id="panel-menu" ng-show="restaurants.name.length > 0"> -->
 <div id="panel-menu">
   <h2>{{ name }}</h2>
-  <div class="line-divider"></div>
+  <div ng-show="name" class="line-divider"></div>
   <!-- NO MENU AVAILABLE -->
   <div ng-show="menus.length == 0">
     <p>Unfortunately, there are no menus available for this restaurant.</p>
@@ -69,7 +69,7 @@
       </div>
     </div>
 
-    <div class="line-divider"></div>
+    <div ng-show="menus[menuCtrl.menu].menu_name" class="line-divider"></div>
 
     <div ng-repeat="item in menus[menuCtrl.menu].sections[menuCtrl.section].subsections[menuCtrl.subsection].items">
       <p><span class="caret itemname"></span>{{item.item}}<span class="caret itemname"></span></p>
