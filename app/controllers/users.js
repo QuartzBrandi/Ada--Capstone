@@ -10,6 +10,9 @@ var request = require('request');
 var config = require('../../config');
 
 // To use MongoDB.
+var database = require('../database_config.js');
+var databaseLocation = process.env.NODE_ENV == "production" ? database.production.database : database.development.database;
+
 var mongoose = require('mongoose');
 var User = require('../models/user');
 
@@ -71,7 +74,7 @@ exports.userController = {
     delete the_restaurant['$$hashKey'];
     console.log("1", the_restaurant);
 
-    mongoose.connect('mongodb://localhost/visualmenu');
+    mongoose.connect(databaseLocation);
     var db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
     db.once('open', function (callback) {

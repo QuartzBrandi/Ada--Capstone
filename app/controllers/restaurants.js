@@ -8,8 +8,13 @@ var request = require('request');
 // env('./.env');
 
 // To help use MongoDB.
+var database = require('../database_config.js');
+var databaseLocation = process.env.NODE_ENV == "production" ? database.production.database : database.development.database;
+
 var mongoose = require('mongoose');
 var Restaurant = require('../models/restaurant');
+
+var uri = process.env.NODE_ENV == "production" ? "http://ada-capstone-production.elasticbeanstalk.com/" : "http://localhost:3000";
 
 // Used for Google API calls.
 // function replaceSpacesWithPlusSign(theString) {
@@ -160,7 +165,7 @@ exports.restaurantController = {
     var address_string = selectedRestaurant.address;
     var address_object = createAddressObject(address_string);
 
-    mongoose.connect('mongodb://localhost/visualmenu');
+    mongoose.connect(databaseLocation);
     var db = mongoose.connection;
     db.on('error', console.error.bind(console, 'connection error:'));
     db.once('open', function (callback) {
@@ -198,7 +203,7 @@ exports.restaurantController = {
     var item = parseInt(req.query.item);
     var restaurantName = req.query.restaurant;
 
-    mongoose.connect('mongodb://localhost/visualmenu');
+    mongoose.connect(databaseLocation);
     var db = mongoose.connection;
     db.on('error', function() {
       console.error.bind(console, 'Connection Error:');
@@ -214,7 +219,7 @@ exports.restaurantController = {
             return res.status(200).json({"error": "no restaurant"});
           } else {
             var theItem = restaurant.menus[menu].sections[section].subsections[subsection].items[item];
-            var url = "http://localhost:3000" +
+            var url = uri +
               "/api/restaurants/menu/images?" +
               "restaurant=" + restaurantName +
               "&menuitem=" + prepareString(theItem.item);
@@ -242,7 +247,7 @@ exports.restaurantController = {
     var name    = selectedRestaurant.name;
     var location = selectedRestaurant.location;
 
-    mongoose.connect('mongodb://localhost/visualmenu');
+    mongoose.connect(databaseLocation);
     var db = mongoose.connection;
     db.on('error', console.error.bind(console, 'Connection Error:'));
     db.once('open', function (callback) {
@@ -267,7 +272,7 @@ exports.restaurantController = {
                   var subsection = section.subsections[ss];
                   for (var c = 0; c < subsection.items.length; c++) {
                     var item = subsection.items[c];
-                    var url = "http://localhost:3000" +
+                    var url = uri +
                       "/api/restaurants/menu/images?" +
                       "restaurant=" + name +
                       "&menuitem=" + item.item;
