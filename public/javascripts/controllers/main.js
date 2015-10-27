@@ -7,7 +7,8 @@
 	var app = angular.module('visualMenuControllers', ['ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap'])
 
 	// var uriSite = process.env.NODE_ENV == "production" ? "http://ada-capstone-production.elasticbeanstalk.com/" : "http://localhost:3000/"
-	var uriSite = "http://ada-capstone-production.elasticbeanstalk.com/";
+	// var uriSite = "http://ada-capstone-production.elasticbeanstalk.com/";
+	var uriSite = "http://www.picto-menu.com/";
 	// var uriSite = "http://localhost:3000/";
 
 	app.controller('searchController', ['$scope', '$http', function($scope, $http) {

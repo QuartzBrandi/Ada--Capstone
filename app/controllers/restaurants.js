@@ -10,13 +10,13 @@ if (process.env.NODE_ENV != "production") {
 }
 
 // To help use MongoDB.
-var database = require('../../database_config.js');
+var database = require('../../paths_config.js');
 var databaseLocation = process.env.NODE_ENV == "production" ? database.production.database : database.development.database;
 
 var mongoose = require('mongoose');
 var Restaurant = require('../models/restaurant');
 
-var uri = process.env.NODE_ENV == "production" ? "http://ada-capstone-production.elasticbeanstalk.com/" : "http://localhost:3000";
+var uri = process.env.NODE_ENV == "production" ? database.production.website : database.development.website;
 
 // Used for Google API calls.
 // function replaceSpacesWithPlusSign(theString) {
@@ -222,7 +222,7 @@ exports.restaurantController = {
           } else {
             var theItem = restaurant.menus[menu].sections[section].subsections[subsection].items[item];
             var url = uri +
-              "/api/restaurants/menu/images?" +
+              "api/restaurants/menu/images?" +
               "restaurant=" + restaurantName +
               "&menuitem=" + prepareString(theItem.item);
             request(url, function (error, response, body) {
@@ -275,7 +275,7 @@ exports.restaurantController = {
                   for (var c = 0; c < subsection.items.length; c++) {
                     var item = subsection.items[c];
                     var url = uri +
-                      "/api/restaurants/menu/images?" +
+                      "api/restaurants/menu/images?" +
                       "restaurant=" + name +
                       "&menuitem=" + item.item;
                     request(url, function (error, response, body) {

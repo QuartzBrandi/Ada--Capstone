@@ -1,4 +1,4 @@
-var database = require('../database_config.js');
+var database = require('../paths_config.js');
 var databaseLocation = process.env.NODE_ENV == "production" ? database.production.database : database.development.database;
 
 var mongoose = require('mongoose');
