@@ -7,7 +7,7 @@ var request = require('request');
 // var env = require('node-env-file');
 // env('./.env');
 // For environemnt variables/constants. TODO: Figure out how to actually do this.
-var config = require('../../config');
+// var config = require('../../config');
 
 // To use MongoDB.
 var database = require('../../database_config.js');
@@ -18,8 +18,9 @@ var User = require('../models/user');
 
 
 function checkUser(res, id_token, email) {
-  var environment = process.env.NODE_ENV == "production" ? config.production : config.development;
-  mongoose.connect(environment.database);
+  // var environment = process.env.NODE_ENV == "production" ? config.production : config.development;
+  // mongoose.connect(environment.database);
+  mongoose.connect(databaseLocation);
   var db = mongoose.connection;
   console.log(id_token);
   db.on('error', console.error.bind(console, 'connection error:'));
