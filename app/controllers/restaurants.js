@@ -4,8 +4,10 @@
 var request = require('request');
 
 // For environment files.
-// var env = require('node-env-file');
-// env('./.env');
+if (process.env.NODE_ENV != "production") {
+  var env = require('node-env-file');
+  env('./.env');
+}
 
 // To help use MongoDB.
 var database = require('../../database_config.js');
