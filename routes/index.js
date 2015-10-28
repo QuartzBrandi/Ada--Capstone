@@ -51,6 +51,7 @@ router.post('/api/photo', function (req, res) {
 
 console.log("got here 4.5")
 
+  console.log("req", req.file)
 
   upload(req, res, function (err) {
     console.log("GOT HERE 5")
