@@ -42,36 +42,36 @@ var root_dir = require('../root_dir.js');
     }
   });
 
-  var upload = multer({ storage: storage }).single('file');
+  var upload = multer({ storage: storage });
 
-router.post('/api/photo', function (req, res) {
+router.post('/api/photo', upload.single('file'), function (req, res, next) {
   // console.log("THIS IS IT", req);
   console.log("GOT HERE 4")
   console.log('req', req)
 
 console.log("got here 4.5")
 
-  console.log("stack", req.route.stack)
-
   console.log("req", req.file)
 
-  upload(req, res, function (err) {
-    console.log("GOT HERE 5")
-    if (err) {
-      // an error occurred when uploading
-      console.log("ERROR", err)
-      console.log("ERROR")
-      return
-    } else {
+  return res.json(req.file);
 
-    // console.log("req", req)
-    // console.log("res", res)
-    console.log("NO ERROR")
-    // console.log("the thing", req.file.filename)
-    return res.json(req.file);
-    // Everything went fine
-    }
-  })
+  // upload(req, res, function (err) {
+  //   console.log("GOT HERE 5")
+  //   if (err) {
+  //     // an error occurred when uploading
+  //     console.log("ERROR", err)
+  //     console.log("ERROR")
+  //     return
+  //   } else {
+  //
+  //   // console.log("req", req)
+  //   // console.log("res", res)
+  //   console.log("NO ERROR")
+  //   // console.log("the thing", req.file.filename)
+  //   return res.json(req.file);
+  //   // Everything went fine
+  //   }
+  // })
 })
 
 // var multer = require('multer');
