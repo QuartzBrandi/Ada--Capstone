@@ -15,24 +15,43 @@ var root_dir = require('../root_dir.js');
 // });
 
 
-var multer = require('multer');
-var mime = require('mime');
-
-// TODO: Whitelist certain extensions (jpg, png).
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/images/uploads/')
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + '.' + mime.extension(file.mimetype))
-  }
-});
-
-var upload = multer({ storage: storage }).single('file');
+// var multer = require('multer');
+// var mime = require('mime');
+//
+// // TODO: Whitelist certain extensions (jpg, png).
+// var storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, './public/images/uploads/')
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, file.fieldname + '-' + Date.now() + '.' + mime.extension(file.mimetype))
+//   }
+// });
+//
+// var upload = multer({ storage: storage }).single('file');
 
 router.post('/api/photo', function (req, res) {
   // console.log("THIS IS IT", req);
   console.log("GOT HERE 4")
+
+  var multer = require('multer');
+  var mime = require('mime');
+
+  // TODO: Whitelist certain extensions (jpg, png).
+  var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './public/images/uploads/')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now() + '.' + mime.extension(file.mimetype))
+    }
+  });
+
+  var upload = multer({ storage: storage }).single('file');
+
+console.log("got here 4.5")
+
+
   upload(req, res, function (err) {
     console.log("GOT HERE 5")
     if (err) {
