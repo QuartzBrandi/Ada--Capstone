@@ -5,6 +5,16 @@ var router = express.Router();
 // (Get a string of the project root directory.)
 var root_dir = require('../root_dir.js');
 
+//
+// var multer = require('multer');
+// var upload = multer({ dest: './public/images/uploads'});
+//
+// router.post('/uploads', upload.single('file'), function(req,res,next){
+//   console.log("Server: got file ");
+//   return res.json({ a: 1 });
+// });
+
+
 var multer = require('multer');
 var mime = require('mime');
 
@@ -14,11 +24,12 @@ var storage = multer.diskStorage({
     cb(null, './public/images/uploads/')
   },
   filename: function (req, file, cb) {
+    console.log(file.mimetype)
     cb(null, file.fieldname + '-' + Date.now() + '.' + mime.extension(file.mimetype))
   }
 });
 
-var upload = multer({ storage: storage }).single('photoupload');
+var upload = multer({ storage: storage }).single('file');
 
 router.post('/api/photo', function (req, res) {
   console.log("THIS IS IT", req);
@@ -26,7 +37,6 @@ router.post('/api/photo', function (req, res) {
     if (err) {
       // an error occurred when uploading
       console.log("ERROR", err)
-      // console.log("req", req)
       return
     } else {
 
@@ -38,6 +48,40 @@ router.post('/api/photo', function (req, res) {
     }
   })
 })
+
+// var multer = require('multer');
+// var mime = require('mime');
+//
+// // TODO: Whitelist certain extensions (jpg, png).
+// var storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, './public/images/uploads/')
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, file.fieldname + '-' + Date.now() + '.' + mime.extension(file.mimetype))
+//   }
+// });
+//
+// var upload = multer({ storage: storage }).single('photoupload');
+//
+// router.post('/api/photo', function (req, res) {
+//   console.log("THIS IS IT", req);
+//   upload(req, res, function (err) {
+//     if (err) {
+//       // an error occurred when uploading
+//       console.log("ERROR", err)
+//       // console.log("req", req)
+//       return
+//     } else {
+//
+//     console.log("req", req)
+//     // console.log("res", res)
+//     console.log("NO ERROR")
+//     return res.json({ a: 1 });
+//     // Everything went fine
+//     }
+//   })
+// })
 
 // single page app
 // note-to-self: angular will add /#/ for its routes

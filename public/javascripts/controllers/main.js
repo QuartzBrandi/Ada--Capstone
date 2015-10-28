@@ -4,12 +4,12 @@
 	//   env('./.env');
 	// }
 
-	var app = angular.module('visualMenuControllers', ['ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap'])
+	var app = angular.module('visualMenuControllers', ['ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'ngFileUpload'])
 
 	// var uriSite = process.env.NODE_ENV == "production" ? "http://ada-capstone-production.elasticbeanstalk.com/" : "http://localhost:3000/"
 	// var uriSite = "http://ada-capstone-production.elasticbeanstalk.com/";
-	var uriSite = "http://www.picto-menu.com/";
-	// var uriSite = "http://localhost:3000/";
+	// var uriSite = "http://www.picto-menu.com/";
+	var uriSite = "http://localhost:3000/";
 
 	app.controller('searchController', ['$scope', '$http', function($scope, $http) {
 		$scope.searchName = "";
@@ -117,20 +117,74 @@
 	// 	};
 	// })
 
-	app.controller('photoUploadController', ['$scope', function($scope) {
-		$scope.showUpload = false;
-		$scope.filePhoto = {};
+	app.controller('photoUploadController', ['$scope', 'Upload', '$timeout', function($scope, Upload, $timeout) {
+		// $scope.showUpload = false;
+		// $scope.filePhoto = {};
+		//
+		// $scope.showAddPhotos = function() {
+		// 	console.log("HIELL?")
+		// 	$scope.showUpload = true;
+		// 	// $scope.$digest;
+		// };
+		//
+		// $scope.addPhoto = function() {
+		// 	console.log("GOT HERE");
+		// 	console.log($scope.filePhoto);
+		// };
+		$scope.username = "NOMAN";
+		$scope.picFile = null;
 
-		$scope.showAddPhotos = function() {
-			console.log("HIELL?")
-			$scope.showUpload = true;
-			// $scope.$digest;
-		};
+		// $scope.uploadPic = function (file) {
+    //     Upload.upload({
+    //         url: '/uploads',
+    //         data: {file: file, 'username': $scope.username}
+    //     }).then(function (resp) {
+    //         console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+    //     }, function (resp) {
+    //         console.log('Error status: ' + resp.status);
+    //     }, function (evt) {
+    //         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+    //         console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+    //     });
+    // };
+								//
+		$scope.uploadPic = function (file) {
+console.log("DAFILE", file)
+			file.upload = Upload.upload({
+					url: '/api/photo',
+					method: 'POST',
+					fields: {
+							username: $scope.username
+					},
+					file: file,
+					fileFormDataName: 'photo'
+			});
 
-		$scope.addPhoto = function() {
-			console.log("GOT HERE");
-			console.log($scope.filePhoto);
-		};
+			file.upload.then(function (response) {
+					console.log("Postcontroller: upload then ");
+					$timeout(function () {
+							file.result = response.data;
+					});
+			}, function (response) {
+					if (response.status > 0)
+							$scope.errorMsg = response.status + ': ' + response.data;
+			});
+
+			file.upload.progress(function (evt) {
+				console.log("ping?")
+					// Math.min is to fix IE which reports 200% sometimes
+					file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+					console.log("PostController: upload progress " + file.progress);
+			});
+
+			file.upload.success(function (data, status, headers, config) {
+				console.log("DONETOTALLY")
+				console.log("user", $scope.username)
+					// file is uploaded successfully
+					console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
+					// $scope.picFile = null;
+			});
+		}
 	}])
 
 	app.controller('carouselController', function ($scope) {

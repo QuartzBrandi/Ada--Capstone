@@ -365,3 +365,57 @@ div.themResults {
 .fa-spinner {
   margin: auto;
 }
+
+.thumb {
+  width: 100%;
+  height: auto;
+}
+
+.remove-col-padding {
+  padding: 0;
+}
+
+.why-give-negative-margin {
+  margin: 0;
+}
+
+/*.fa-upload {
+  display: inline;
+}*/
+
+.inline-stuff {
+  display: inline;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+input.form-control.file-input-field {
+  width: 50%;
+}
+
+.input-group {
+  position: relative;
+}
+
+.submitphoto {
+  padding-left: 10px;
+}

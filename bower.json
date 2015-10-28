@@ -7,6 +7,8 @@
     "angular-route": "~1.4.7",
     "angular-touch": "~1.4.7",
     "angular-animate": "~1.4.7",
-    "angular-loading-bar": "~0.8.0"
+    "angular-loading-bar": "~0.8.0",
+    "ng-file-upload": "~9.1.1",
+    "ng-file-upload-shim": "~9.1.1"
   }
 }

@@ -1,17 +1,45 @@
 <!-- <div ng-controller="photoUploadController as photoCtrl"> -->
   <!-- <button class="btn btn-default" ng-click="photoCtrl.showAddPhoto()">Add Photo?</button> -->
-<div class="row">
-  <div class="col-xs-12 col-md-6 col-md-offset-3">
+<div class="row why-give-negative-margin">
+  <div class="col-xs-12 col-md-6 col-md-offset-3 remove-col-padding">
+    <div ng-controller="photoUploadController">
+      <form accept-charset="UTF-8" ng-submit="uploadPic(picFile)" name="uploadPhotoForm">
+        <div class="input-group">
+          <span class="input-group-btn">
+            <span class="btn btn-primary btn-file">
+              Browse&hellip; <input class="inline-stuff" type="file" ngf-select ng-model="picFile" ngf-multiple="false" name="file" accept="image/*" ngf-max-size="2MB" required>
+            </span>
+          </span>
+          <input type="text" value="{{picFile.name}}" class="form-control file-input-field" readonly>
+          <!-- <span class="btn-file"> -->
+            <button class="btn btn-info inline-stuff submitphoto" type="submit">Upload <i class='fa fa-upload'></i></button>
+          <!-- </span> -->
+        </div>
+
+
+
+        <i ng-show="uploadPhotoForm.file.$error.maxSize">File too large {{picFile.size / 1000000|number:1}}MB: max {{picFile.$errorParam}}</i>
+
+        <img ng-show="uploadPhotoForm.file.$valid" ngf-src="!picFile.$error && picFile" class="thumb">
+
+        <span class="progress" ng-show="picFile.progress >= 0">
+          <div style="width:{{picFile.progress}}%" ng-bind="picFile.progress + '%'" class="ng-binding"></div>
+        </span>
+        <span ng-show="picFile.result">Upload Successful</span>
+      </form>
+    </div>
+
+
     <!-- <form id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post"> -->
-    <form id="uploadForm" enctype="multipart/form-data" ng-submit="addPhoto()" method="post">
-      <div class="form-group photouploading">
+    <!-- <form id="uploadForm" enctype="multipart/form-data" ng-submit="addPhoto()" method="post"> -->
+      <!-- <div class="form-group photouploading"> -->
         <!-- <label for="photoUpload">Add Photo</label> -->
-        <input type="file" ng-model="filePhoto" name="photoupload" id="photoUpload">
+        <!-- <input type="file" ng-model="filePhoto" name="photoupload" id="photoUpload"> -->
         <!-- <input type="submit" value="Submit" name="submit"> -->
-        <button type="submit upload-button" class="btn btn-default"><i class='fa fa-upload'></i></button>
+        <!-- <button type="submit upload-button" class="btn btn-default"><i class='fa fa-upload'></i></button> -->
         <!-- <p class="help-block">Help us improve Picto-Menu!</p> -->
-      </div>
-    </form>
+      <!-- </div> -->
+    <!-- </form> -->
   </div>
 </div>
 <!-- </div> -->

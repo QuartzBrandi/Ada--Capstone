@@ -19,6 +19,8 @@
     <script type="text/javascript" src="libs/angular-animate/angular-animate.js"></script>
     <script type="text/javascript" src="libs/angular-loading-bar/build/loading-bar.min.js"></script>
     <link rel="stylesheet" href="libs/angular-loading-bar/build/loading-bar.min.css" type='text/css' media='all' />
+    <script src="libs/ng-file-upload-shim/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
+    <script src="libs/ng-file-upload/ng-file-upload.min.js"></script>
 
     <!-- ENV? -->
     <!-- <script type="text/javascript" src="configFile.js"></script> -->
@@ -45,7 +47,7 @@
     <!-- CSS -->
     <link href="stylesheets/style.css" rel="stylesheet">
 
-    <script>
+    <!-- <script>
       $(document).ready(function(){
           $("#addPhoto").click(function(){
               $("#p").append(" <b>Appended text</b>.");
@@ -53,6 +55,31 @@
 
           $("#btn2").click(function(){
               $("ol").append("<li>Appended item</li>");
+          });
+      });
+    </script> -->
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <script>
+      $(document).on('change', '.btn-file :file', function() {
+        var input = $(this),
+            numFiles = input.get(0).files ? input.get(0).files.length : 1,
+            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        input.trigger('fileselect', [numFiles, label]);
+      });
+
+      $(document).ready( function() {
+          $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+
+              var input = $(this).parents('.input-group').find(':text'),
+                  log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+              if( input.length ) {
+                  input.val(log);
+              } else {
+                  if( log ) alert(log);
+              }
+
           });
       });
     </script>
@@ -123,7 +150,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- CONTENTS -->
         <div class="container">
           <div ng-view></div>
