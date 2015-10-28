@@ -50,3 +50,5 @@ config/configFile.js
 privatekey.pem
 csr.pem
 server.crt
+
+.ebextensions
