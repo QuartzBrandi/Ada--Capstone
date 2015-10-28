@@ -118,6 +118,7 @@
 								// TODO: Show error if trying to upload image that isn't jpg or png
 		$scope.uploadPic = function (file, restaurantName, menuIndex, sectionIndex, subsectionIndex, itemIndex) {
 			console.log("GOT HERE 1")
+			console.log("file", file)
 			if (file.type == 'image/jpeg' || file.type == 'image/png') {
 				console.log("GOT HERE 2")
 

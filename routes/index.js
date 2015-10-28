@@ -29,11 +29,6 @@ var root_dir = require('../root_dir.js');
 // });
 //
 // var upload = multer({ storage: storage }).single('file');
-
-router.post('/api/photo', function (req, res) {
-  // console.log("THIS IS IT", req);
-  console.log("GOT HERE 4")
-
   var multer = require('multer');
   var mime = require('mime');
 
@@ -48,6 +43,11 @@ router.post('/api/photo', function (req, res) {
   });
 
   var upload = multer({ storage: storage }).single('file');
+
+router.post('/api/photo', function (req, res) {
+  // console.log("THIS IS IT", req);
+  console.log("GOT HERE 4")
+  console.log('req', req)
 
 console.log("got here 4.5")
 
