@@ -37,7 +37,8 @@
 		};
 	}]);
 
-	app.controller('theRestaurantController', ['$http', '$scope', '$route', function($http, $scope, $route) {
+	// app.controller('theRestaurantController', ['$http', '$scope', '$route', function($http, $scope, $route) {
+	app.controller('theRestaurantController', ['$scope', 'Upload', '$timeout', '$http', '$route', function($scope, Upload, $timeout, $http, $route) {
 		$scope.loading      = false;
 		$scope.loadingImage = false;
 		var uriRoute = "api/restaurants/";
@@ -78,46 +79,10 @@
 					$scope.loadingImage = false;
 				});
 		};
-	}]);
 
-	app.controller('menuIndexController', function() {
-		var ctrl = this;
-		ctrl.menu = 0;
-		ctrl.section = 0;
-		ctrl.subsection = 0;
 
-		ctrl.changeMenu = function(index) {
-			ctrl.menu = index;
-			ctrl.section = 0;
-			ctrl.subsection = 0;
-		}
 
-		ctrl.changeSection = function(index) {
-			ctrl.section = index;
-			ctrl.subsection = 0;
-		}
 
-		ctrl.changeSubsection = function(index) {
-			ctrl.subsection = index;
-		}
-	});
-
-	// app.controller('photoUploadController', function() {
-	// 	var photoCtrl = this;
-	// 	photoCtrl.showUpload = false;
-	//
-	// 	photoCtrl.showAddPhotos = function() {
-	// 		console.log("HIELL?")
-	// 		photoCtrl.showUpload = true;
-	// 		// $scope.$digest;
-	// 	};
-	//
-	// 	photoCtrl.addPhoto = function() {
-	//
-	// 	};
-	// })
-
-	app.controller('photoUploadController', ['$scope', 'Upload', '$timeout', '$http', function($scope, Upload, $timeout, $http) {
 		// $scope.showUpload = false;
 		// $scope.filePhoto = {};
 		//
@@ -134,7 +99,7 @@
 		$scope.username = "NOMAN";
 		$scope.picFile = null;
 
-		var uriRoute = "api/restaurants/";
+		// var uriRoute = "api/restaurants/";
 
 		// $scope.uploadPic = function (file) {
     //     Upload.upload({
@@ -187,8 +152,8 @@
 					console.log("user", $scope.username)
 						// file is uploaded successfully
 						console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
-						// $scope.picFile = null;
 					associateImage(data, restaurantName, menuIndex, sectionIndex, subsectionIndex, itemIndex);
+					$scope.picFile = null;
 				});
 			}
 		}
@@ -223,7 +188,7 @@
 				$http(req)
 					.success(function(data) {
 						console.log("SUCCESSFULLY SAVED")
-						// $scope.menus[menuIndex].sections[sectionIndex].subsections[subsectionIndex].items[itemIndex] = data;
+						$scope.menus[menuIndex].sections[sectionIndex].subsections[subsectionIndex].items[itemIndex] = data;
 					});
 
 
@@ -234,6 +199,47 @@
 				// 		$scope.loadingImage = false;
 				// 	});
 			};
+	}]);
+
+	app.controller('menuIndexController', function() {
+		var ctrl = this;
+		ctrl.menu = 0;
+		ctrl.section = 0;
+		ctrl.subsection = 0;
+
+		ctrl.changeMenu = function(index) {
+			ctrl.menu = index;
+			ctrl.section = 0;
+			ctrl.subsection = 0;
+		}
+
+		ctrl.changeSection = function(index) {
+			ctrl.section = index;
+			ctrl.subsection = 0;
+		}
+
+		ctrl.changeSubsection = function(index) {
+			ctrl.subsection = index;
+		}
+	});
+
+	// app.controller('photoUploadController', function() {
+	// 	var photoCtrl = this;
+	// 	photoCtrl.showUpload = false;
+	//
+	// 	photoCtrl.showAddPhotos = function() {
+	// 		console.log("HIELL?")
+	// 		photoCtrl.showUpload = true;
+	// 		// $scope.$digest;
+	// 	};
+	//
+	// 	photoCtrl.addPhoto = function() {
+	//
+	// 	};
+	// })
+
+	app.controller('photoUploadController', ['$scope', 'Upload', '$timeout', '$http', function($scope, Upload, $timeout, $http) {
+
 	}])
 
 	app.controller('carouselController', function ($scope) {

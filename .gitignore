@@ -35,6 +35,7 @@ config/.env
 *.env
 
 public/libs
+public/images/uploads
 
 config/configFile.js
 
