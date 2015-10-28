@@ -25,6 +25,7 @@ var restaurantSchema = new Schema({
             user: String,
             user_id: String,
             url: String,
+            file: String,
             date_created: Date,
             date_modified: Date
           }]

@@ -39,4 +39,9 @@ router.get('/menu', function(req, res, next) {
   return api.restaurantController.menu(req, res);
 });
 
+router.post('/menu/images', function(req, res, next) {
+  console.log("READ", req)
+  return api.restaurantController.associateImage(req, res);
+});
+
 module.exports = router;

@@ -24,7 +24,6 @@ var storage = multer.diskStorage({
     cb(null, './public/images/uploads/')
   },
   filename: function (req, file, cb) {
-    console.log(file.mimetype)
     cb(null, file.fieldname + '-' + Date.now() + '.' + mime.extension(file.mimetype))
   }
 });
@@ -43,7 +42,8 @@ router.post('/api/photo', function (req, res) {
     console.log("req", req)
     // console.log("res", res)
     console.log("NO ERROR")
-    return res.json({ a: 1 });
+    console.log("the thing", req.file.filename)
+    return res.json(req.file);
     // Everything went fine
     }
   })

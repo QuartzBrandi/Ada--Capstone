@@ -7,13 +7,18 @@ body {
 }
 /* Background pattern from subtlepatterns.com */
 
+
 div.thing {
   position: fixed;
   width: 100%
   top: 0px;
   left: 5px;
   height: 1rem;
-  z-index: 1;
+  z-index: 100;
+}
+
+input.form-control.file-input-field {
+  z-index: 0;
 }
 
 li.menuitems {
@@ -79,12 +84,27 @@ h1 {
   text-align: center;
   display: inline-block;
 }
-h1 a {
+
+h1 a, h2 a, h3 a, h4 a {
   color: #1A1A1A;
 }
 
-h1:hover a:hover {
+h1:hover a:hover, a:hover h2:hover, a:hover h3:hover, a:hover h4:hover {
   color: #5A0000;
+  text-decoration: none;
+}
+
+h2.ng-binding, h3.ng-binding, h4.ng-binding {
+  color: black;
+  text-decoration: none;
+}
+
+a.dropdown-toggle:hover h2.ng-binding:hover, a.dropdown-toggle:hover h3.ng-binding:hover, a:hover h4.ng-binding:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a.dropdown-toggle:hover {
   text-decoration: none;
 }
 
@@ -102,6 +122,20 @@ a:visited {
 
 a:focus {
   text-decoration: none;
+}
+
+a.restaurant-results:hover {
+  text-decoration: none;
+}
+
+div.search-results.results {
+  color: black;
+}
+
+div.search-results.results:hover {
+  background-color: rgba(194, 194, 194, 0.5);
+
+  /*background-color: rgba(128, 128, 128, 0.5);*/
 }
 
 p {
@@ -286,7 +320,8 @@ ul {
 }
 
 .search-results.results:active {
-  background: #E6E6E6;
+  background-color: rgba(128, 128, 128, 0.5);
+  /*background: #E6E6E6;*/
 }
 
 .search-results.back:active {
@@ -409,7 +444,8 @@ div.themResults {
 }
 
 input.form-control.file-input-field {
-  width: 50%;
+  width: 75%;
+  /*display: inline;*/
 }
 
 .input-group {
@@ -418,4 +454,26 @@ input.form-control.file-input-field {
 
 .submitphoto {
   padding-left: 10px;
+}
+
+button.submitphoto {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  height: 34px;
+}
+
+span.btn-file {
+  height: 34px;
+}
+
+div.input-group {
+  /*margin: auto;
+  text-align: center;*/
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-bottom: 5px;
+}
+
+h4.picture-caption {
+  color: white;
 }

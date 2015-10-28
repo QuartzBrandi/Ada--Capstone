@@ -3,7 +3,7 @@
 <div class="row why-give-negative-margin">
   <div class="col-xs-12 col-md-6 col-md-offset-3 remove-col-padding">
     <div ng-controller="photoUploadController">
-      <form accept-charset="UTF-8" ng-submit="uploadPic(picFile)" name="uploadPhotoForm">
+      <form accept-charset="UTF-8" ng-submit="uploadPic(picFile, name, menuCtrl.menu, menuCtrl.section, menuCtrl.subsection, $index)" name="uploadPhotoForm">
         <div class="input-group">
           <span class="input-group-btn">
             <span class="btn btn-primary btn-file">
@@ -12,7 +12,7 @@
           </span>
           <input type="text" value="{{picFile.name}}" class="form-control file-input-field" readonly>
           <!-- <span class="btn-file"> -->
-            <button class="btn btn-info inline-stuff submitphoto" type="submit">Upload <i class='fa fa-upload'></i></button>
+            <button class="btn btn-primary inline-stuff submitphoto" type="submit"><i class='fa fa-upload'></i></button>
           <!-- </span> -->
         </div>
 

@@ -81,7 +81,7 @@
             <uib-slide ng-repeat="image in item.images" active="image.active">
               <img ng-src="{{image.url}}" style="margin:auto;">
               <div class="carousel-caption">
-                <h4>{{item.item}}</h4>
+                <h4 class="picture-caption">{{item.item}}</h4>
                 <p ng-show="image.origin == 'Google'"><i class="fa fa-google"></i></p>
               </div>
             </uib-slide>
@@ -92,8 +92,8 @@
       <div ng-controller="noCarouselController" class="no-image">
         <p ng-show="item.images.length == 0">{{noImageMessage}}</p>
         <!-- <button ng-click="showAddPhoto()">Add Photo?</button> -->
-        <add-photo></add-photo>
       </div>
+      <add-photo></add-photo>
       <!-- <button ng-show="item.images.length == 0" ng-click="imageUpdate(menuCtrl.menu, menuCtrl.section, menuCtrl.subsection, $index)" class="btn btn-default">Call the Google</button> -->
       <div ng-show="loadingImage && $index == loadingIndex" class="fa fa-spinner fa-spin fa-3x"></div>
     </div>

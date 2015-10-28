@@ -338,5 +338,49 @@ exports.restaurantController = {
     });
 
     // googleImage(req.query.restaurant, req.query.menuitem);
+  },
+
+  associateImage: function(req, res) {
+    var fileName       = req.body.file;
+    var filePath       = req.body.url.slice(7); // taking off the 'public/'
+    var restaurantName = req.body.restaurant;
+    var menu           = parseInt(req.body.menu);
+    var section        = parseInt(req.body.section);
+    var subsection     = parseInt(req.body.subsection);
+    var item           = parseInt(req.body.item);
+
+    mongoose.connect(databaseLocation);
+    var db = mongoose.connection;
+    db.on('error', function() {
+      console.error.bind(console, 'Connection Error:');
+      db.close();
+      return res.status(500).json({});
+    });
+    db.once('open', function (callback) {
+      Restaurant.findOne(
+        { 'name': restaurantName },
+        function(err, restaurant) {
+          if (!restaurant) {
+            db.close();
+            return res.status(200).json({"error": "no restaurant"});
+          } else {
+            var theItem = restaurant.menus[menu].sections[section].subsections[subsection].items[item];
+
+            var imageInfo = {
+              origin: "Picto-Menu",
+              url: filePath,
+              file: fileName,
+              date_created: new Date()
+            }
+            theItem.images.push(imageInfo);
+
+            restaurant.save(function(err) {
+              db.close();
+              return res.status(200).json(theItem);
+            });
+          }
+        }
+      );
+    });
   }
 };

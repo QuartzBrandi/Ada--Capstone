@@ -8,8 +8,8 @@
 
 	// var uriSite = process.env.NODE_ENV == "production" ? "http://ada-capstone-production.elasticbeanstalk.com/" : "http://localhost:3000/"
 	// var uriSite = "http://ada-capstone-production.elasticbeanstalk.com/";
-	// var uriSite = "http://www.picto-menu.com/";
-	var uriSite = "http://localhost:3000/";
+	var uriSite = "http://www.picto-menu.com/";
+	// var uriSite = "http://localhost:3000/";
 
 	app.controller('searchController', ['$scope', '$http', function($scope, $http) {
 		$scope.searchName = "";
@@ -117,7 +117,7 @@
 	// 	};
 	// })
 
-	app.controller('photoUploadController', ['$scope', 'Upload', '$timeout', function($scope, Upload, $timeout) {
+	app.controller('photoUploadController', ['$scope', 'Upload', '$timeout', '$http', function($scope, Upload, $timeout, $http) {
 		// $scope.showUpload = false;
 		// $scope.filePhoto = {};
 		//
@@ -134,6 +134,8 @@
 		$scope.username = "NOMAN";
 		$scope.picFile = null;
 
+		var uriRoute = "api/restaurants/";
+
 		// $scope.uploadPic = function (file) {
     //     Upload.upload({
     //         url: '/uploads',
@@ -148,43 +150,90 @@
     //     });
     // };
 								//
-		$scope.uploadPic = function (file) {
-console.log("DAFILE", file)
-			file.upload = Upload.upload({
-					url: '/api/photo',
-					method: 'POST',
-					fields: {
-							username: $scope.username
-					},
-					file: file,
-					fileFormDataName: 'photo'
-			});
+								// TODO: Show error if trying to upload image that isn't jpg or png
+		$scope.uploadPic = function (file, restaurantName, menuIndex, sectionIndex, subsectionIndex, itemIndex) {
+			if (file.type == 'image/jpeg' || file.type == 'image/png') {
 
-			file.upload.then(function (response) {
-					console.log("Postcontroller: upload then ");
-					$timeout(function () {
-							file.result = response.data;
-					});
-			}, function (response) {
-					if (response.status > 0)
-							$scope.errorMsg = response.status + ': ' + response.data;
-			});
+				file.upload = Upload.upload({
+						url: '/api/photo',
+						method: 'POST',
+						fields: {
+								username: $scope.username
+						},
+						file: file,
+						fileFormDataName: 'photo'
+				});
 
-			file.upload.progress(function (evt) {
-				console.log("ping?")
-					// Math.min is to fix IE which reports 200% sometimes
-					file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-					console.log("PostController: upload progress " + file.progress);
-			});
+				file.upload.then(function (response) {
+						console.log("Postcontroller: upload then ");
+						$timeout(function () {
+								file.result = response.data;
+						});
+				}, function (response) {
+						if (response.status > 0)
+								$scope.errorMsg = response.status + ': ' + response.data;
+				});
 
-			file.upload.success(function (data, status, headers, config) {
-				console.log("DONETOTALLY")
-				console.log("user", $scope.username)
-					// file is uploaded successfully
-					console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
-					// $scope.picFile = null;
-			});
+				file.upload.progress(function (evt) {
+					console.log("ping?")
+						// Math.min is to fix IE which reports 200% sometimes
+						file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+						console.log("PostController: upload progress " + file.progress);
+				});
+
+				file.upload.success(function (data, status, headers, config) {
+					console.log("DONETOTALLY")
+					console.log("DDDATA", data.filename)
+					console.log("user", $scope.username)
+						// file is uploaded successfully
+						console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
+						// $scope.picFile = null;
+					associateImage(data, restaurantName, menuIndex, sectionIndex, subsectionIndex, itemIndex);
+				});
+			}
 		}
+
+					// $http(req)
+					// data.filename
+
+			var associateImage = function(fileData, restaurantName, menuIndex, sectionIndex, subsectionIndex, itemIndex) {
+				// var url = uriSite + uriRoute + "menu/images"
+				// "?menu=" + menuIndex +
+				// "&section=" + sectionIndex +
+				// "&subsection=" + subsectionIndex +
+				// "&item=" + itemIndex +
+				// "&restaurant=" + restaurantName;
+				var req = {
+				  method: 'POST',
+				  url: uriSite + uriRoute + "menu/images/",
+				//  headers: {
+				// 	 'Content-Type': undefined
+				//  },
+				  data: {
+					  file: fileData.filename,
+						url: fileData.path,
+						restaurant: restaurantName,
+						menu: menuIndex,
+						section: sectionIndex,
+						subsection: subsectionIndex,
+						item: itemIndex
+				  }
+				}
+
+				$http(req)
+					.success(function(data) {
+						console.log("SUCCESSFULLY SAVED")
+						// $scope.menus[menuIndex].sections[sectionIndex].subsections[subsectionIndex].items[itemIndex] = data;
+					});
+
+
+
+				// $http.get(url)
+				// 	.success(function(data) {
+				// 		$scope.menus[menuIndex].sections[sectionIndex].subsections[subsectionIndex].items[itemIndex] = data;
+				// 		$scope.loadingImage = false;
+				// 	});
+			};
 	}])
 
 	app.controller('carouselController', function ($scope) {
