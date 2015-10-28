@@ -31,18 +31,20 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage }).single('file');
 
 router.post('/api/photo', function (req, res) {
-  console.log("THIS IS IT", req);
+  // console.log("THIS IS IT", req);
+  console.log("GOT HERE 4")
   upload(req, res, function (err) {
     if (err) {
       // an error occurred when uploading
-      console.log("ERROR", err)
+      // console.log("ERROR", err)
+      console.log("ERROR")
       return
     } else {
 
-    console.log("req", req)
+    // console.log("req", req)
     // console.log("res", res)
     console.log("NO ERROR")
-    console.log("the thing", req.file.filename)
+    // console.log("the thing", req.file.filename)
     return res.json(req.file);
     // Everything went fine
     }

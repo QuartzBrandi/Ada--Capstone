@@ -117,7 +117,9 @@
 								//
 								// TODO: Show error if trying to upload image that isn't jpg or png
 		$scope.uploadPic = function (file, restaurantName, menuIndex, sectionIndex, subsectionIndex, itemIndex) {
+			console.log("GOT HERE 1")
 			if (file.type == 'image/jpeg' || file.type == 'image/png') {
+				console.log("GOT HERE 2")
 
 				file.upload = Upload.upload({
 						url: '/api/photo',
@@ -130,6 +132,7 @@
 				});
 
 				file.upload.then(function (response) {
+					console.log("GOT HERE 3")
 						console.log("Postcontroller: upload then ");
 						$timeout(function () {
 								file.result = response.data;
