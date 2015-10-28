@@ -59,7 +59,7 @@ console.log("got here 4.5")
     console.log("GOT HERE 5")
     if (err) {
       // an error occurred when uploading
-      // console.log("ERROR", err)
+      console.log("ERROR", err)
       console.log("ERROR")
       return
     } else {
