@@ -29,9 +29,27 @@ var root_dir = require('../root_dir.js');
 // });
 //
 // var upload = multer({ storage: storage }).single('file');
-  var multer = require('multer');
-  var mime = require('mime');
+if (process.env.NODE_ENV != "production") {
+  var env = require('node-env-file');
+  env('./.env');
+}
 
+var multer = require('multer');
+var mime = require('mime');
+var s3 = require('multer-s3');
+
+if (process.env.NODE_ENV == "production") {
+  var storage = s3({
+    dirname: 'photos/uploads',
+    bucket: 'ada-capstone-menu-photos',
+    secretAccessKey: process.env.AWS_ACCESS_KEY,
+    accessKeyId: process.env.AWS_SECRET_ACCESS_KEY,
+    region: 'us-west-2',
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now() + '.' + mime.extension(file.mimetype))
+    }
+  });
+} else {
   // TODO: Whitelist certain extensions (jpg, png).
   var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -41,8 +59,9 @@ var root_dir = require('../root_dir.js');
       cb(null, file.fieldname + '-' + Date.now() + '.' + mime.extension(file.mimetype))
     }
   });
+}
 
-  var upload = multer({ storage: storage });
+var upload = multer({ storage: storage });
 
 router.post('/api/photo', upload.single('file'), function (req, res, next) {
   // console.log("THIS IS IT", req);

@@ -35,7 +35,8 @@ config/.env
 *.env
 
 public/libs
-public/images/uploads/*
+public/images/uploads/*.jpeg
+public/images/uploads/*.png
 
 config/configFile.js
 
@@ -45,3 +46,7 @@ config/configFile.js
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+privatekey.pem
+csr.pem
+server.crt
