@@ -143,6 +143,7 @@
 				});
 
 				file.upload.progress(function (evt) {
+					console.log("GOT HERE 3.5")
 					console.log("ping?")
 						// Math.min is to fix IE which reports 200% sometimes
 						file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
@@ -150,6 +151,7 @@
 				});
 
 				file.upload.success(function (data, status, headers, config) {
+					console.log("GOT HERE 6")
 					console.log("DONETOTALLY")
 					console.log("DDDATA", data.filename)
 					console.log("user", $scope.username)
@@ -165,6 +167,7 @@
 					// data.filename
 
 			var associateImage = function(fileData, restaurantName, menuIndex, sectionIndex, subsectionIndex, itemIndex) {
+				console.log("GOT HERE 7")
 				// var url = uriSite + uriRoute + "menu/images"
 				// "?menu=" + menuIndex +
 				// "&section=" + sectionIndex +

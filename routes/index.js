@@ -34,6 +34,7 @@ router.post('/api/photo', function (req, res) {
   // console.log("THIS IS IT", req);
   console.log("GOT HERE 4")
   upload(req, res, function (err) {
+    console.log("GOT HERE 5")
     if (err) {
       // an error occurred when uploading
       // console.log("ERROR", err)
