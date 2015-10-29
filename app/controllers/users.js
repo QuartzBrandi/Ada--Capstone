@@ -19,29 +19,27 @@ var mongoose = require('mongoose');
 var User = require('../models/user');
 
 
-function checkUser(res, id_token, email) {
+function checkUser(res, google_id) {
   // var environment = process.env.NODE_ENV == "production" ? config.production : config.development;
   // mongoose.connect(environment.database);
   mongoose.connect(databaseLocation);
   var db = mongoose.connection;
-  console.log(id_token);
+  console.log(google_id);
   db.on('error', console.error.bind(console, 'connection error:'));
   db.once('open', function (callback) {
-    User.findOne({ email: email }, function(err, user) {
-      var new_user = new User;
-      // new_user.google_id_token = id_token;
-      new_user.email = email;
-      // TODO: hella unsecure, need to figure out how to make more secure
+    User.findOne({ google_id: google_id }, function(err, user) {
 
       if (!user) {
-        new_user.save(function(err) {
+        var newUser = new User;
+        newUser.google_id = google_id;
+        newUser.save(function(err) {
           db.close();
           console.log("User not in database.");
-          console.log(new_user);
-          console.log(new_user.email)
-          return res.status(200).json(new_user);
+          console.log(newUser);
+          return res.status(200).json(newUser);
         });
       }
+
       else {
         db.close();
         console.log('User in database.');
@@ -56,14 +54,15 @@ exports.userController = {
   login: function(req, res) {
     // checks validity of google id_token
     var id_token = req.query.id_token;
-    var email = req.query.email;
+    // var email = req.query.email;
     var url = 'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + id_token;
     request(url, function (error, response, body) {
       var jsonBody = JSON.parse(body);
+      console.log(jsonBody);
       // returns a 200 status code if valid
       // checks to make sure the client id matches
       if (response.statusCode == 200 && process.env.GOOGLE_OAUTH_CLIENT_ID == jsonBody.aud) {
-        checkUser(res, id_token, email);
+        checkUser(res, jsonBody.sub);
       } else {
         console.log("ERROR");
       }

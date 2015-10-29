@@ -4,7 +4,7 @@
 	//   env('./.env');
 	// }
 
-	var app = angular.module('visualMenuControllers', ['ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'ngFileUpload'])
+	var app = angular.module('visualMenuControllers', ['ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'ngFileUpload']);
 
 	// TODO: Figure out environment variables for Angular!!
 	// CURRENTLY: I have to uncomment when I deploy.
@@ -326,47 +326,5 @@
 			restaurant.menu_origin = "";
 		}
 	}]);
-
-	app.controller('userController', ['$http', '$scope', function($http, $scope) {
-		var user = this;
-		var uriRoute = "api/users/";
-		user.name = "";
-		user.logged_in = false;
-		user.information = {};
-		user.profile = false;
-
-		user.reset = function() {
-			user.name = "";
-			user.logged_in = false;
-			user.information = {};
-		}
-
-		// For Google OAuth:
-		function onSignIn(googleUser) {
-			var name = googleUser.getBasicProfile().getName();
-			var email = googleUser.getBasicProfile().getEmail();
-			var id_token = googleUser.getAuthResponse().id_token;
-			console.log(id_token);
-			console.log(typeof(id_token));
-			user.name = name;
-			var url = uriSite + uriRoute + "login";
-			$http({method: "GET", url: url, params: {
-				id_token: id_token,
-				name: name,
-				email: email
-			}})
-				.success(function(data) {
-					user.information = data;
-					user.logged_in = true;
-				});
-
-			$scope.$digest(); // refreshes two-way-biding? (without this there was a delay to update)
-			// OR USE...
-			// $scope.$apply();
-			// TODO: Figure out what the difference is between digest & apply.
-		}
-		window.onSignIn = onSignIn;
-	}]);
-
 
 })();
