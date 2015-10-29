@@ -26,7 +26,6 @@
       // route for the user profile page
 			.when('/profile', {
 				templateUrl: 'pages/profile.html',
-				controller: ''
 			})
 
 			// route for the visual menu about page

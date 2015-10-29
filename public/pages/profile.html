@@ -1,4 +1,17 @@
-<!-- USER OPTIONS PANEL -->
-<div id="panel-user">
-
+<div id="profile-panel">
+  <h2>Account</h2>
+  <form class="form-horizontal" role="form" name="profileForm" ng-controller="profileController as profile" ng-submit="profile.updateUser(product)">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="username">Username: </label>
+      <div class="col-sm-10">
+        <input ng-model="profile.username" type="text" class="form-control" id="username" placeholder="{{profile.username}}" title="Username">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-2"></div><!-- My offset is not working...-->
+      <div class="col-sm-10">
+        <button type="submit" class="btn btn-default" ng-submit="profile.updateUser()">Save</button>
+      </div>
+    </div>
+  </form>
 </div>

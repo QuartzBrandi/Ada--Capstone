@@ -489,3 +489,12 @@ div#contact-panel {
   margin: auto;
   text-align: center;
 }
+
+div#profile-panel div {
+  padding: 0;
+  margin: 0;
+}
+
+div#profile-panel div.form-group {
+  padding: 5px 0;
+}

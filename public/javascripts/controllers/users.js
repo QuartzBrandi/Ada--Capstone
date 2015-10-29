@@ -8,10 +8,11 @@
 	// var uriSite = "http://ada-capstone-production.elasticbeanstalk.com/";
 	// var uriSite = "http://www.picto-menu.com/";
 	var uriSite = "http://localhost:3000/";
+	var uriRoute = "api/users/";
+  var user;
 
 	app.controller('userController', ['$http', '$scope', function($http, $scope) {
-		var user = this;
-		var uriRoute = "api/users/";
+		user = this;
 		user.name = "";
 		user.logged_in = false;
 		user.information = {};
@@ -52,7 +53,25 @@
 		window.onSignIn = onSignIn;
 	}]);
 
-  app.controller('', ['$http', function($http) {
+  app.controller('profileController', ['$http', function($http) {
+    var profile = this;
+    profile.name = user.name;
+    profile.information = user.information;
+    profile.google_id = user.information.google_id;
+    profile.username = profile.information.username || "";
+    profile.photos = profile.information.images || [];
 
+    profile.updateUser = function() {
+      var url = uriSite + uriRoute + "update";
+      console.log("USERNAME", profile.username);
+      $http.put(url, {username: profile.username, google_id: profile.google_id})
+        .success(function(data) {
+          profile.information = data;
+          user.information = data;
+          console.log("UPDAED.")
+          user.username = user.information.username;
+          profile.username = profile.information.username;
+        });
+    };
   }]);
 })();

@@ -128,13 +128,13 @@
                   <i class="fa fa-cog fa-2x"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
-                  <li><a href="#profile">Profile</a></li>
+                  <li ng-show="user.logged_in"><a href="#profile">Profile</a></li>
                   <li><a href="#about">About</a></li>
                   <li><a href="#contact">Contact</a></li>
                   <li class="divider" ng-show="user.logged_in"></li>
                   <!-- SIGN OUT -->
                   <li>
-                    <a href="#" onclick="signOut();" ng-show="user.logged_in">Sign Out</a>
+                    <a href="#/" onclick="signOut();" ng-show="user.logged_in">Sign Out</a>
                     <script>
                       function signOut() {
                         var auth2 = gapi.auth2.getAuthInstance();

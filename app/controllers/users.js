@@ -18,6 +18,14 @@ var databaseLocation = process.env.NODE_ENV == "production" ? database.productio
 var mongoose = require('mongoose');
 var User = require('../models/user');
 
+function connectToMongoDB(callMeBack) {
+  mongoose.connect(databaseLocation);
+  var db = mongoose.connection;
+  db.on('error', console.error.bind(console, 'Connection Error:'));
+  db.once('open', function (callback) {
+    callMeBack(db);
+  });
+}
 
 function checkUser(res, google_id) {
   // var environment = process.env.NODE_ENV == "production" ? config.production : config.development;
@@ -69,6 +77,30 @@ exports.userController = {
     });
   },
 
+  update: function(req, res) {
+    var theUser = req.body;
+    connectToMongoDB(function(db) {
+      User.findOne({ google_id: theUser.google_id }, function(err, user) {
+
+        if (!user) {
+          // TODO: Some kind of error handling.
+          // WHY/HOW ARE YOU HERE?
+          db.close();
+          return res.status(200).json({"nope": "nope"});
+        }
+
+        else {
+          user.username = theUser.username;
+          user.save(function(err) {
+            console.log(user.username + " updated.");
+            db.close();
+            return res.status(200).json(user);
+          });
+        }
+      });
+    });
+  },
+
   user: function(req, res) {
     // fetch the restaurant from mongodb
     // create the restaurant if it's not in the db
@@ -102,5 +134,5 @@ exports.userController = {
         }
       });
     });
-  },
+  }
 };
