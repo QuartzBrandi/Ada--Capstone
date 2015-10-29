@@ -6,10 +6,12 @@
 
 	var app = angular.module('visualMenuControllers', ['ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'ngFileUpload'])
 
+	// TODO: Figure out environment variables for Angular!!
+	// CURRENTLY: I have to uncomment when I deploy.
 	// var uriSite = process.env.NODE_ENV == "production" ? "http://ada-capstone-production.elasticbeanstalk.com/" : "http://localhost:3000/"
-	var uriSite = "http://ada-capstone-production.elasticbeanstalk.com/";
+	// var uriSite = "http://ada-capstone-production.elasticbeanstalk.com/";
 	// var uriSite = "http://www.picto-menu.com/";
-	// var uriSite = "http://localhost:3000/";
+	var uriSite = "http://localhost:3000/";
 
 	app.controller('searchController', ['$scope', '$http', function($scope, $http) {
 		$scope.searchName = "";
@@ -280,9 +282,9 @@
 
 	app.controller('noCarouselController', function ($scope) {
 		var noImageMessages = [
-			"Sorry, there are no images for this menu item!",
-			"There are no images for this menu item!\n If you buy me please pay it forward and take a picture of your meal and post it here.",
-			"Sorry, there are no images available for this item. Take a picture change that!"
+			"Sorry, there are no images for this menu item!"
+			// "There are no images for this menu item!\n If you buy me please pay it forward and take a picture of your meal and post it here.",
+			// "Sorry, there are no images available for this item. Take a picture change that!"
 		];
 
 		var randomMessageIndex = Math.floor( Math.random() * noImageMessages.length );
