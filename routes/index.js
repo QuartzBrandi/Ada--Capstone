@@ -45,14 +45,18 @@ var secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
     storage: s3({
       dirname: 'photos/uploads',
       bucket: 'ada-capstone-menu-photos',
-      secretAccessKey: "" + accessKeyId,
-      accessKeyId: "" + secretAccessKey,
+      secretAccessKey: "" + secretAccessKey,
+      accessKeyId: "" + accessKeyId,
       region: 'us-west-2',
       filename: function (req, file, cb) {
+        console.log("GOT HERE1")
+
         cb(null, file.fieldname + '-' + Date.now() + '.' + mime.extension(file.mimetype))
       }
     })
-  });
+  }).single('file');
+
+  // console.log("GOT HERE2")
 // } else {
 //   // TODO: Whitelist certain extensions (jpg, png).
 //   var storage = multer.diskStorage({
@@ -69,34 +73,41 @@ var secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
 
 // var upload = multer({ storage: storage });
 
-router.post('/api/photo', upload.single('file'), function (req, res, next) {
+router.post('/api/photo', function (req, res, next) {
+  console.log("THANG", typeof(accessKeyId))
+  console.log("THNT", accessKeyId)
+
   // console.log("THIS IS IT", req);
+
+  // upload.single('file')
+
   console.log("GOT HERE 4")
-  console.log('req', req)
+  // console.log('req', req)
 
-console.log("got here 4.5")
 
+// console.log("got here 4.5")
+//
   console.log("req", req.file)
+//
+//   return res.json(req.file);
 
-  return res.json(req.file);
+  upload(req, res, function (err) {
+    console.log("GOT HERE 5")
+    if (err) {
+      // an error occurred when uploading
+      console.log("ERROR", err)
+      console.log("ERROR")
+      return
+    } else {
 
-  // upload(req, res, function (err) {
-  //   console.log("GOT HERE 5")
-  //   if (err) {
-  //     // an error occurred when uploading
-  //     console.log("ERROR", err)
-  //     console.log("ERROR")
-  //     return
-  //   } else {
-  //
-  //   // console.log("req", req)
-  //   // console.log("res", res)
-  //   console.log("NO ERROR")
-  //   // console.log("the thing", req.file.filename)
-  //   return res.json(req.file);
-  //   // Everything went fine
-  //   }
-  // })
+    // console.log("req", req)
+    // console.log("res", res)
+    console.log("NO ERROR")
+    // console.log("the thing", req.file.filename)
+    return res.json(req.file);
+    // Everything went fine
+    }
+  })
 })
 
 // var multer = require('multer');

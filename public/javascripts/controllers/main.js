@@ -7,9 +7,9 @@
 	var app = angular.module('visualMenuControllers', ['ngRoute', 'ngAnimate', 'ngTouch', 'ui.bootstrap', 'ngFileUpload'])
 
 	// var uriSite = process.env.NODE_ENV == "production" ? "http://ada-capstone-production.elasticbeanstalk.com/" : "http://localhost:3000/"
-	// var uriSite = "http://ada-capstone-production.elasticbeanstalk.com/";
+	var uriSite = "http://ada-capstone-production.elasticbeanstalk.com/";
 	// var uriSite = "http://www.picto-menu.com/";
-	var uriSite = "http://localhost:3000/";
+	// var uriSite = "http://localhost:3000/";
 
 	app.controller('searchController', ['$scope', '$http', function($scope, $http) {
 		$scope.searchName = "";
@@ -136,26 +136,27 @@
 
 				file.upload.then(function (response) {
 					console.log("GOT HERE 3")
-				// 		console.log("Postcontroller: upload then ");
-				// 		$timeout(function () {
-				// 				file.result = response.data;
-				// 		});
-				// }, function (response) {
-				// 		if (response.status > 0)
-				// 				$scope.errorMsg = response.status + ': ' + response.data;
+						console.log("Postcontroller: upload then ");
+						$timeout(function () {
+								file.result = response.data;
+						});
+				}, function (response) {
+						if (response.status > 0)
+								$scope.errorMsg = response.status + ': ' + response.data;
 				});
 
 				file.upload.progress(function (evt) {
 					console.log("GOT HERE 3.5")
 					// console.log("ping?")
-					// 	// Math.min is to fix IE which reports 200% sometimes
-					// 	file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-					// 	console.log("PostController: upload progress " + file.progress);
+						// Math.min is to fix IE which reports 200% sometimes
+						file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+						console.log("PostController: upload progress " + file.progress);
 				});
 
 				file.upload.success(function (data, status, headers, config) {
 					console.log("GOT HERE 6")
 					console.log("DONETOTALLY")
+					console.log("DDDATA", data.key)
 					console.log("DDDATA", data.filename)
 					console.log("user", $scope.username)
 						// file is uploaded successfully
@@ -171,6 +172,9 @@
 
 			var associateImage = function(fileData, restaurantName, menuIndex, sectionIndex, subsectionIndex, itemIndex) {
 				console.log("GOT HERE 7")
+				var theBucket = "https://s3-us-west-2.amazonaws.com/ada-capstone-menu-photos/"
+
+				console.log("DAFILE", fileData)
 				// var url = uriSite + uriRoute + "menu/images"
 				// "?menu=" + menuIndex +
 				// "&section=" + sectionIndex +
@@ -184,8 +188,9 @@
 				// 	 'Content-Type': undefined
 				//  },
 				  data: {
-					  file: fileData.filename,
-						url: fileData.path,
+					  file: "N/A",
+						url: theBucket + fileData.key,
+						// url: fileData.filename,
 						restaurant: restaurantName,
 						menu: menuIndex,
 						section: sectionIndex,

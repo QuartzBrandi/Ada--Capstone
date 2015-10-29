@@ -341,8 +341,10 @@ exports.restaurantController = {
   },
 
   associateImage: function(req, res) {
-    var fileName       = req.body.file;
-    var filePath       = req.body.url.slice(7); // taking off the 'public/'
+    // var fileName       = req.body.file;
+    // var filePath       = req.body.url.slice(7); // taking off the 'public/'
+    console.log(req.body.url);
+    var filePath       = req.body.url
     var restaurantName = req.body.restaurant;
     var menu           = parseInt(req.body.menu);
     var section        = parseInt(req.body.section);
@@ -369,7 +371,7 @@ exports.restaurantController = {
             var imageInfo = {
               origin: "Picto-Menu",
               url: filePath,
-              file: fileName,
+              // file: fileName,
               date_created: new Date()
             }
             theItem.images.push(imageInfo);
