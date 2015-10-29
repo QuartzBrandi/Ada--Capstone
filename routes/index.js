@@ -29,10 +29,10 @@ var root_dir = require('../root_dir.js');
 // });
 //
 // var upload = multer({ storage: storage }).single('file');
-// if (process.env.NODE_ENV != "production") {
+if (process.env.NODE_ENV != "production") {
   var env = require('node-env-file');
   env('./.env');
-// }
+}
 
 var multer = require('multer');
 var mime = require('mime');
