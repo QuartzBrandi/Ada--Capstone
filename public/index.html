@@ -185,47 +185,5 @@
       });
     </script>
 
-
-    <script>
-    $(document).ready(function() {
-      $('a.add-photo').click(function() {
-        var theDiv = $('div.collapsable-add-form');
-        console.log("ARE YOU GETTING THIS");
-
-        if (theDiv.length > 0) {
-          theDiv.empty();
-          $(this).text('+++');
-        } else {
-          var theForm1 = "<p>Add your own picture!</p>";
-          var theForm2 = "<add-photo></add-photo>";
-          theDiv.append(theForm1, theForm2);
-          $(this).text('---');
-        }
-
-      });
-    });
-
-      // var body = document.getElementById( 'slide-body' );
-      // if( body.className == 'expanded' ) {
-      //     body.className = '';
-      //     document.getElementById( 'more' ).textContent = 'more...';
-      // } else {
-      //     body.className = 'expanded';
-      //     document.getElementById( 'more' ).textContent = 'less...';
-      // };
-      //
-      // $('a.add-photo').click(function() {
-      //     var p = $('a').prev('p')
-      //     var lineheight = parseInt(p.css('line-height'))
-      //     if (parseInt(p.css('height')) == lineheight*3) {
-      //        p.css('height','auto');
-      //        $(this).text('Less')
-      //     } else {
-      //        p.css('height',lineheight*3+'px');
-      //        $(this).text('More')
-      //     }
-      // });
-    </script>
-
   </body>
 </html>

@@ -93,10 +93,16 @@
         <p ng-show="item.images.length == 0">{{noImageMessage}}</p>
         <!-- <button ng-click="showAddPhoto()">Add Photo?</button> -->
       </div>
-      <a class="add-photo">+++</a>
-      <div class="collapsable-add-form">
+
+      <div ng-controller="expandCollapseCtrl">
+        <a class="add-photo" ng-show="active" ng-click="active = !active"><i class="fa fa-plus"></i></a>
+        <a class="add-photo" ng-hide="active" ng-click="active = !active"><i class="fa fa-minus"></i></a>
+        <div ng-hide="active" class="collapsable-photo">
+          <p>Add your own picture!</p>
+          <add-photo></add-photo>
+        </div>
       </div>
-      <!-- <button ng-show="item.images.length == 0" ng-click="imageUpdate(menuCtrl.menu, menuCtrl.section, menuCtrl.subsection, $index)" class="btn btn-default">Call the Google</button> -->
+      <button ng-show="item.images.length == 0" ng-click="imageUpdate(menuCtrl.menu, menuCtrl.section, menuCtrl.subsection, $index)" class="btn btn-default">Call the Google</button>
       <div ng-show="loadingImage && $index == loadingIndex" class="fa fa-spinner fa-spin fa-3x"></div>
     </div>
 

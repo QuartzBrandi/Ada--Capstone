@@ -217,6 +217,10 @@
 			};
 	}]);
 
+	app.controller('expandCollapseCtrl', function ($scope) {
+    $scope.active = true;
+	});
+
 	app.controller('menuIndexController', function() {
 		var ctrl = this;
 		ctrl.menu = 0;
