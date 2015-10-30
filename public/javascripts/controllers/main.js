@@ -52,6 +52,10 @@
 			alert('Please signin to upload a photo.')
 		}
 
+		$scope.noUsername = function() {
+			alert("Please add a username in the options to uplaod a photo.")
+		}
+
 		function select(name, address) {
 			// get the restaurant info for the selected restaurant
 			// but, if not in database, create the restaurant
@@ -102,7 +106,7 @@
 		// 	console.log("GOT HERE");
 		// 	console.log($scope.filePhoto);
 		// };
-		$scope.username = "NOMAN";
+		// $scope.username = "NOMAN";
 		$scope.picFile = null;
 
 		// var uriRoute = "api/restaurants/";
@@ -122,7 +126,7 @@
     // };
 								//
 								// TODO: Show error if trying to upload image that isn't jpg or png
-		$scope.uploadPic = function (file, restaurantName, menuIndex, sectionIndex, subsectionIndex, itemIndex) {
+		$scope.uploadPic = function (file, restaurantName, menuIndex, sectionIndex, subsectionIndex, itemIndex, user) {
 			console.log("GOT HERE 1")
 			console.log("file", file)
 			if (file.type == 'image/jpeg' || file.type == 'image/png') {
@@ -167,7 +171,7 @@
 					console.log("user", $scope.username)
 						// file is uploaded successfully
 						console.log('file ' + config.file.name + 'is uploaded successfully. Response: ' + data);
-					associateImage(data, restaurantName, menuIndex, sectionIndex, subsectionIndex, itemIndex);
+					associateImage(data, restaurantName, menuIndex, sectionIndex, subsectionIndex, itemIndex, user);
 					$scope.picFile = null;
 				});
 			}
@@ -176,7 +180,7 @@
 					// $http(req)
 					// data.filename
 
-			var associateImage = function(fileData, restaurantName, menuIndex, sectionIndex, subsectionIndex, itemIndex) {
+			var associateImage = function(fileData, restaurantName, menuIndex, sectionIndex, subsectionIndex, itemIndex, username) {
 				console.log("GOT HERE 7")
 				var theBucket = "https://s3-us-west-2.amazonaws.com/ada-capstone-menu-photos/"
 
@@ -201,7 +205,8 @@
 						menu: menuIndex,
 						section: sectionIndex,
 						subsection: subsectionIndex,
-						item: itemIndex
+						item: itemIndex,
+						username: username
 				  }
 				}
 

@@ -6,14 +6,15 @@
 	// CURRENTLY: I have to uncomment when I deploy.
 	// var uriSite = process.env.NODE_ENV == "production" ? "http://ada-capstone-production.elasticbeanstalk.com/" : "http://localhost:3000/"
 	// var uriSite = "http://ada-capstone-production.elasticbeanstalk.com/";
-	// var uriSite = "http://www.picto-menu.com/";
-	var uriSite = "http://localhost:3000/";
+	var uriSite = "http://www.picto-menu.com/";
+	// var uriSite = "http://localhost:3000/";
 	var uriRoute = "api/users/";
   var user;
 
 	app.controller('userController', ['$http', '$scope', function($http, $scope) {
 		user = this;
 		user.name = "";
+		user.username = "";
 		user.logged_in = false;
 		user.information = {};
 		user.profile = false;
@@ -27,7 +28,7 @@
 		// For Google OAuth:
 		function onSignIn(googleUser) {
 			var name = googleUser.getBasicProfile().getName();
-			// var email = googleUser.getBasicProfile().getEmail();
+			var email = googleUser.getBasicProfile().getEmail();
 			var id_token = googleUser.getAuthResponse().id_token;
 			// console.log(id_token);
       console.log("LOGGING IN");
@@ -35,9 +36,9 @@
 			user.name = name;
 			var url = uriSite + uriRoute + "login";
 			$http({method: "GET", url: url, params: {
-				id_token: id_token
+				id_token: id_token,
 				// name: name
-				// email: email
+				email: email
 			}})
 				.success(function(data) {
 					user.information = data;

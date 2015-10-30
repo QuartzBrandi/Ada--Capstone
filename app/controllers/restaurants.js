@@ -350,6 +350,7 @@ exports.restaurantController = {
     var section        = parseInt(req.body.section);
     var subsection     = parseInt(req.body.subsection);
     var item           = parseInt(req.body.item);
+    var username       = req.body.username;
 
     mongoose.connect(databaseLocation);
     var db = mongoose.connection;
@@ -370,6 +371,7 @@ exports.restaurantController = {
 
             var imageInfo = {
               origin: "Picto-Menu",
+              user: username,
               url: filePath,
               // file: fileName,
               date_created: new Date()

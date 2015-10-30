@@ -62,19 +62,20 @@ exports.userController = {
   login: function(req, res) {
     // checks validity of google id_token
     var id_token = req.query.id_token;
-    // var email = req.query.email;
-    var url = 'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + id_token;
-    request(url, function (error, response, body) {
-      var jsonBody = JSON.parse(body);
-      console.log(jsonBody);
+    var email = req.query.email;
+    // var url = 'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' + id_token;
+    // request(url, function (error, response, body) {
+    //   var jsonBody = JSON.parse(body);
+    //   console.log(jsonBody);
       // returns a 200 status code if valid
       // checks to make sure the client id matches
-      if (response.statusCode == 200 && process.env.GOOGLE_OAUTH_CLIENT_ID == jsonBody.aud) {
-        checkUser(res, jsonBody.sub);
-      } else {
-        console.log("ERROR");
-      }
-    });
+      // if (response.statusCode == 200 && process.env.GOOGLE_OAUTH_CLIENT_ID == jsonBody.aud) {
+        // checkUser(res, jsonBody.sub);
+        checkUser(res, email);
+    //   } else {
+    //     console.log("ERROR");
+    //   }
+    // });
   },
 
   update: function(req, res) {

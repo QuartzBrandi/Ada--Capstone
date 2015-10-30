@@ -284,6 +284,7 @@ ul.menuitems {
   border-style: solid none;
   text-align: center;
   margin: auto;
+  margin-bottom: 5px;
 }
 
 input {
@@ -362,7 +363,7 @@ ul {
 .powered-by {
   float: right;
 }
-/*
+
 .carousel.ng-isolate-scope {
   border: 2px solid black;
 }
@@ -373,7 +374,7 @@ div.carousel h4 {
 
 div.carousel p {
   text-shadow: 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black;
-}*/
+}
 
 div.themResults {
   margin-top: 10px;
@@ -518,5 +519,9 @@ a:hover {
 }
 
 div.collapsable-photo {
+  text-align: left;
+}
+
+input#username {
   text-align: left;
 }

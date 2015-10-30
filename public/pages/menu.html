@@ -69,7 +69,7 @@
       </div>
     </div>
 
-    <div ng-show="menus[menuCtrl.menu].menu_name" class="line-divider"></div>
+    <!-- <div ng-show="menus[menuCtrl.menu].menu_name" class="line-divider"></div> -->
 
     <div ng-repeat="item in menus[menuCtrl.menu].sections[menuCtrl.section].subsections[menuCtrl.subsection].items">
       <!-- <p ng-hide="item.images.length > 0"><span class="caret itemname"></span>{{item.item}}<span class="caret itemname"></span></p> -->
@@ -84,6 +84,7 @@
               <div class="carousel-caption">
                 <h4 class="picture-caption">{{item.item}}</h4>
                 <p ng-show="image.origin == 'Google'"><i class="fa fa-google"></i></p>
+                <p ng-show="image.origin == 'Picto-Menu'">{{image.user}}</p>
               </div>
             </uib-slide>
           </uib-carousel>
@@ -97,7 +98,10 @@
 
       <div class="expandable" ng-controller="expandCollapseCtrl">
         <a class="add-photo" ng-hide="user.logged_in" ng-click="notLoggedInAlert()"><i class="fa fa-plus"></i> UPLOAD</a>
-        <div ng-show="user.logged_in">
+        <div ng-show="user.logged_in && user.username.length == 0">
+          <a class="add-photo" ng-click="noUsername()"><i class="fa fa-plus"></i> UPLOAD</a>
+        </div>
+        <div ng-show="user.logged_in && user.username">
           <a class="add-photo" ng-show="active" ng-click="active = !active"><i class="fa fa-plus"></i> UPLOAD</a>
           <a class="add-photo" ng-hide="active" ng-click="active = !active"><i class="fa fa-minus"></i> MINIMIZE</a>
           <div ng-hide="active" class="collapsable-photo">
