@@ -130,7 +130,6 @@ function findMenu(restaurant, callback) {
 
 exports.restaurantController = {
   // GET /api/restaurants/search?name=xxx&location=xxx
-  // TODO: Should add own authentication so it's a private API.
   search: function(req, res) {
     var rawName = req.query.name;
     var name = replaceSpacesWithPlusSign(rawName);
@@ -157,6 +156,7 @@ exports.restaurantController = {
       }
     });
   },
+  // TODO: Should add own authentication so it's a private API.
 
   // GET /api/restaurants/select (also send query params for the restaurant object)
   select: function(req, res) {

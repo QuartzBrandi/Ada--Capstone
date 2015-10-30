@@ -21,6 +21,7 @@
 
 		user.reset = function() {
 			user.name = "";
+			user.username = "";
 			user.logged_in = false;
 			user.information = {};
 		}
@@ -43,6 +44,7 @@
 				.success(function(data) {
 					user.information = data;
 					user.logged_in = true;
+					user.username = data.username;
           console.log("LOGGED IN.")
 				});
 

@@ -11,8 +11,6 @@
   <ul>
     <li ng-repeat="restaurant in results">
       <a class="restaurant-results" ng-href="#/menu/{{restaurant.name}}/{{restaurant.address}}">
-        <!-- TODO: Bug if restaurant or address has a slash...? -->
-        <!-- <div class="search-results results" ng-click="restaurants.select(restaurant)"> -->
         <div class="search-results results">
           <strong>{{restaurant.name}}</strong>
           <p>{{restaurant.address}}</p>
@@ -32,3 +30,5 @@
   </div>
   <img class="powered-by" src="images/powered_by_google_on_white.png">
 </div>
+        <!-- TODO: Bug if restaurant or address has a slash...? -->
+        <!-- <div class="search-results results" ng-click="restaurants.select(restaurant)"> -->

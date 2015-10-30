@@ -23,16 +23,16 @@
 
 		$scope.search = function() {
 			$scope.results = [];
-			var url = uriSite + uriRoute + "search?name=" + $scope.searchName + "&location=" + $scope.searchLocation;
-			console.log(url);
+			$scope.noResults = false;
+			var url = uriSite + uriRoute +
+			          "search?name=" + $scope.searchName +
+								"&location=" + $scope.searchLocation;
 			$http.get(url)
 				.success(function(data) {
-					console.log("success");
 					$scope.results = data;
 					if (data.length == 0) {
 						$scope.noResults = true;
 					}
-					console.log($scope.results.length);
 					// $scope.searchName = "";
 					// $scope.searchLocation = "";
 				});
