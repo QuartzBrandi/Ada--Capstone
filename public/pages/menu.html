@@ -72,7 +72,8 @@
     <div ng-show="menus[menuCtrl.menu].menu_name" class="line-divider"></div>
 
     <div ng-repeat="item in menus[menuCtrl.menu].sections[menuCtrl.section].subsections[menuCtrl.subsection].items">
-      <p><span class="caret itemname"></span>{{item.item}}<span class="caret itemname"></span></p>
+      <!-- <p ng-hide="item.images.length > 0"><span class="caret itemname"></span>{{item.item}}<span class="caret itemname"></span></p> -->
+      <p ng-hide="item.images.length > 0">{{item.item}}</p>
       <div ng-controller="carouselController" ng-init="carouselMenus(menus)">
         <!-- <div style="height: 305px"> -->
         <!-- TODO: HOW DO I GET RID OF THE INDICATORS?? -->
@@ -94,18 +95,20 @@
         <!-- <button ng-click="showAddPhoto()">Add Photo?</button> -->
       </div>
 
-      <div ng-controller="expandCollapseCtrl">
-        <a class="add-photo" ng-show="active" ng-click="active = !active"><i class="fa fa-plus"></i></a>
-        <a class="add-photo" ng-hide="active" ng-click="active = !active"><i class="fa fa-minus"></i></a>
-        <div ng-hide="active" class="collapsable-photo">
-          <p>Add your own picture!</p>
-          <add-photo></add-photo>
+      <div class="expandable" ng-controller="expandCollapseCtrl">
+        <a class="add-photo" ng-hide="user.logged_in" ng-click="notLoggedInAlert()"><i class="fa fa-plus"></i> UPLOAD</a>
+        <div ng-show="user.logged_in">
+          <a class="add-photo" ng-show="active" ng-click="active = !active"><i class="fa fa-plus"></i> UPLOAD</a>
+          <a class="add-photo" ng-hide="active" ng-click="active = !active"><i class="fa fa-minus"></i> MINIMIZE</a>
+          <div ng-hide="active" class="collapsable-photo">
+            <p>Add your own picture!</p>
+            <add-photo></add-photo>
+          </div>
         </div>
       </div>
-      <button ng-show="item.images.length == 0" ng-click="imageUpdate(menuCtrl.menu, menuCtrl.section, menuCtrl.subsection, $index)" class="btn btn-default">Call the Google</button>
+      <!-- <button ng-show="item.images.length == 0" ng-click="imageUpdate(menuCtrl.menu, menuCtrl.section, menuCtrl.subsection, $index)" class="btn btn-default">Call the Google</button> -->
       <div ng-show="loadingImage && $index == loadingIndex" class="fa fa-spinner fa-spin fa-3x"></div>
     </div>
-
 
   </div>
 

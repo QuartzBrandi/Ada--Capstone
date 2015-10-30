@@ -10,8 +10,8 @@
 	// CURRENTLY: I have to uncomment when I deploy.
 	// var uriSite = process.env.NODE_ENV == "production" ? "http://ada-capstone-production.elasticbeanstalk.com/" : "http://localhost:3000/"
 	// var uriSite = "http://ada-capstone-production.elasticbeanstalk.com/";
-	// var uriSite = "http://www.picto-menu.com/";
-	var uriSite = "http://localhost:3000/";
+	var uriSite = "http://www.picto-menu.com/";
+	// var uriSite = "http://localhost:3000/";
 
 	app.controller('searchController', ['$scope', '$http', function($scope, $http) {
 		$scope.searchName = "";
@@ -47,6 +47,10 @@
 		var name     = $route.current.params.name;
 		var address  = $route.current.params.address;
 		select(name, address);
+
+		$scope.notLoggedInAlert = function() {
+			alert('Please signin to upload a photo.')
+		}
 
 		function select(name, address) {
 			// get the restaurant info for the selected restaurant

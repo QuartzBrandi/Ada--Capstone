@@ -498,3 +498,25 @@ div#profile-panel div {
 div#profile-panel div.form-group {
   padding: 5px 0;
 }
+
+a.add-photo {
+  /*position: relative;
+  top: -20px;
+  right: -20px;
+  color: white;*/
+  /*float: right;*/
+}
+
+div.expandable {
+  text-align: right;
+  padding-bottom: 5px;
+}
+
+a:hover {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+div.collapsable-photo {
+  text-align: left;
+}
