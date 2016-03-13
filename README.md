@@ -1,3 +1,7 @@
-# Brandi's Ada Capstone
+# Brandi's Ada Capstone: Picto-Menu
 
-This is my Capstone project for Ada Developer's Academy (Cohort 3).
+I am a student at Ada Developer's Academy in Cohort 3. [Ada Developer's Academy](http://adadevelopersacademy.org/) is a year-long, intensive program with the focus of getting more women into the tech industry. Seven months are spent in the classroom learning how to code, and learning important web development concepts and CS fundamentals. As a culmination of our learning, our final project--our capstone project--was a self-driven app of our own design. I chose to create a mobile-optimized web app called Picto-Menu. Picto-Menu is a menu where each item is represented by user-generated photographs. Every time I go out to a restaurant, I'm always trying to find pictures of the items on the menu, but searching Google or Yelp for a specific dish is difficult to impossible. I wanted to create an easy way to browse a menu for delicious-looking dishes. This project is near to my heart as it's something I've always wished existed. I would love to return to working on Picto-Menu when I'm done with my Ada internship.
+
+Currently, Picto-Menu is not available online, but you can see the code for the project here.
+
+This project was done in the MEAN stack. Part of my capstone goals was to learn something new, and the MEAN stack was a the perfect opportunity to work on a single-page app, while learning Angular and MongoDB, and solidifying my knowledge of JavaScript and Node.
